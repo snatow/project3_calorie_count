@@ -36,7 +36,7 @@ var CalorieApp = React.createClass({
       return (
         <div>
         <SignUpComponent />
-        <LoginForm 
+        <LoginComponent
           initialLoginCheck={this.state.authenticatedUser} 
           onChange={this.changeLogin} />
         </div>
@@ -73,7 +73,7 @@ var LoginComponent = React.createClass({
   },
   logInState: function() {
     this.setState({needLogInForm: true})
-  }
+  },
   loginAJAX: function(username, password) {
     $.ajax({
       url: '/auth',
