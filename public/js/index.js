@@ -196,7 +196,6 @@ var SignUpComponent = React.createClass({
               type="text" 
               value={this.state.password} 
               onChange={this.handleSignupFormChange.bind(this, 'password')}/><br/>
-              <label htmlFor="password">Password</label>
             <label htmlFor="calories">Max Calories Per Day</label>
             <input 
               type="text" 
