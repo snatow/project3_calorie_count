@@ -1,5 +1,13 @@
 .link {
   color: blue;
+  display: inline-block;
+  float: left;
+  padding-left: 10px;
+}
+
+.log-in-link {
+  position: fixed;
+  margin-left: 65%;
 }
 
 .button {
@@ -14,4 +22,5 @@
 
 input {
   margin: 5px;
+  border: 1px solid black;
 }

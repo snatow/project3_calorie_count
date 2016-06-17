@@ -35,10 +35,10 @@ var CalorieApp = React.createClass({
     } else {
       return (
         <div>
-        <SignUpComponent />
-        <LoginComponent
+          <LoginComponent
           initialLoginCheck={this.state.authenticatedUser} 
           onChange={this.changeLogin} />
+          <SignUpComponent />
         </div>
       )
     }
@@ -97,9 +97,9 @@ var LoginComponent = React.createClass({
     if (!this.state.needLogInForm) {
       //this renders the log in link (or what will look like a link to the user)
       return(
-        <p 
-          className="link"
-          onClick={this.logInState}>Log In</p>)
+        <div className="link log-in-link">
+          <p onClick={this.logInState}>Log In</p>
+        </div>)
     } else {
       //This renders the log in form
       return (
@@ -107,10 +107,10 @@ var LoginComponent = React.createClass({
           <h3>Please Login</h3>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="username">Username</label>
-            <input className="username-login-form" type="text" value={this.state.username} onChange={this.handleLoginFormChange.bind(this, 'username')}/>
+            <input type="text" value={this.state.username} onChange={this.handleLoginFormChange.bind(this, 'username')}/>
             <br/>
             <label htmlFor="password">Password</label>
-            <input className="password-login-form" type="text" value={this.state.password} onChange={this.handleLoginFormChange.bind(this, 'password')}/>
+            <input type="password" value={this.state.password} onChange={this.handleLoginFormChange.bind(this, 'password')}/>
             <br/>
             <input className="button" type="submit"/>
           </form>
@@ -174,7 +174,9 @@ var SignUpComponent = React.createClass({
   render: function() {
     if (!this.state.signup) {
       return (
-        <p className="link" onClick={this.signUpState}>Sign Up</p>)
+        <div className="link">
+          <p onClick={this.signUpState}>Sign Up</p>
+        </div>)
     } else {
       //This renders the sign up form
       return (
@@ -193,7 +195,7 @@ var SignUpComponent = React.createClass({
               onChange={this.handleSignupFormChange.bind(this, 'email')}/><br/>
             <label htmlFor="password">Password</label>
             <input 
-              type="text" 
+              type="password" 
               value={this.state.password} 
               onChange={this.handleSignupFormChange.bind(this, 'password')}/><br/>
             <label htmlFor="calories">Max Calories Per Day</label>
