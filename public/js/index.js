@@ -39,6 +39,7 @@ var CalorieApp = React.createClass({
           initialLoginCheck={this.state.authenticatedUser} 
           onChange={this.changeLogin} />
           <SignUpComponent />
+          <Search />
         </div>
       )
     }
@@ -142,7 +143,8 @@ var SignUpComponent = React.createClass({
     var username = this.state.username.trim();
     var email = this.state.email.trim();
     var password = this.state.password.trim();
-    this.signupAJAX(username, email, password);
+    var calories = this.state.calories.trim();
+    this.signupAJAX(username, email, password, calories);
     this.setState({
       username: "",
       email: "",
@@ -154,14 +156,15 @@ var SignUpComponent = React.createClass({
   signUpState: function() {
     this.setState({signup: true})
   },
-  signupAJAX: function(username, email, password) {
+  signupAJAX: function(username, email, password, calories) {
     $.ajax({
       url: '/user',
       method: "POST",
       data: {
         username: username,
         email: email,
-        password: password
+        password: password,
+        calories: calories
       },
       success: function(data) {
         console.log('new user created');
@@ -201,7 +204,7 @@ var SignUpComponent = React.createClass({
               onChange={this.handleSignupFormChange.bind(this, 'password')}/><br/>
             <label htmlFor="calories">Max Calories Per Day</label>
             <input 
-              type="text" 
+              type="number" 
               value={this.state.calories} 
               onChange={this.handleSignupFormChange.bind(this, 'calories')}/><br/>
               <input className="button" type="submit"/>
@@ -210,6 +213,145 @@ var SignUpComponent = React.createClass({
     }
   }
 })
+
+//=========================================================================
+  //  These are the search elements
+//=========================================================================
+
+
+//Search bar
+var SearchBar = React.createClass({
+  getInitialState: function() {
+    return {
+      searchTerm: "",
+      data: null
+    }
+  },
+  searchChange: function(e) {
+    this.setState({searchTerm: e.target.value})
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var searchTerm = this.state.searchTerm.trim();
+    console.log(searchTerm);
+    this.searchTermAjax(searchTerm);
+    this.setState({searchTerm: ""})
+  },
+  //ajax to server get request for API
+  searchTermAjax: function(item) {
+    $.ajax({
+      url: "/user/search/" + item,
+      method: "GET",
+      success: function(data) {
+        console.log(data);
+        this.setState({data: data})
+        //need to render something with the data - send as props to a child component
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(status, err.toString());
+      }.bind(this)
+    })
+  },
+  render: function() {
+    //this renders the search bar
+    return(
+      <div className="search-bar">
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="search">Search</label>
+          <input 
+            type="text" 
+            placeholder="search term"
+            value={this.state.searchTerm} 
+            onChange={this.searchChange}/><br/>
+            <input className="button" type="submit"/>
+        </form>
+        <FirstList data={this.state.data}/>
+      </div>)
+  }
+})
+
+
+//Div to render initial search results - foods based on search term
+var FirstList = React.createClass({
+  render: function() {
+    if (this.props.data) {
+      var createItems = function(item) {
+        return(
+          <NamesItem ndbno={item.ndbno}>{item.name}</NamesItem>)
+      }
+      return(
+      <div className="first-results">
+        {this.props.data.map(createItems)}
+      </div>)
+    } else {
+      return(<div></div>)
+    }
+    
+  }
+})
+
+var NamesItem = React.createClass({
+  getInitialState: function() {
+    return{
+      click: false,
+      data: null
+    }
+  },
+  handleClick: function(e) {
+    e.preventDefault();
+    console.log(this.props.ndbno);
+    this.secondAjax(this.props.ndbno);
+  },
+  secondAjax: function(id) {
+    $.ajax({
+      url: "/user/search/item/" + id,
+      method: "GET",
+      success: function(data) {
+        console.log(data);
+        this.setState({data: data})
+      }.bind(this)
+      //need error handling
+    })
+  },
+  render: function() {
+    return(
+      <div>
+        <div>
+        <p onClick={this.handleClick}>{this.props.children}</p>
+        </div>
+        <div>
+        <RenderFoodContainer data={this.state.data} />
+        </div>
+      </div>)
+  }
+})
+
+//Div to render secondary search results - portions with calories
+var RenderFoodContainer = React.createClass({
+  render: function() {
+    if (this.props.data) {
+      var createFoods = function(food) {
+        <RenderFood>{food}</RenderFood>
+      }
+      return(
+        <div className="food-container">
+          {this.props.data.calories.map(createFoods)}
+        </div>)
+    } else {
+      return(<div></div>)
+    }
+  }
+})
+
+var RenderFood = React.createClass({
+  render: function() {
+    return(
+      <div>
+        <p>Something{this.props.children}</p>
+      </div>)
+  }
+})
+
 
 //=========================================================================
   //  These are other elements 
