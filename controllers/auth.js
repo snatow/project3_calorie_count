@@ -28,7 +28,7 @@ router.post('/', passport.authenticate('local', { session: false }), function(re
   });
 
   // console.log(token);
-  res.json({ token: token });
+  res.json({ token: token, username:req.user.username });
 });
 
 module.exports = router;

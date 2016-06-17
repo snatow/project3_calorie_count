@@ -156,7 +156,7 @@ var SignUpComponent = React.createClass({
   },
   signupAJAX: function(username, email, password) {
     $.ajax({
-      url: '/users',
+      url: '/user',
       method: "POST",
       data: {
         username: username,
