@@ -26,11 +26,16 @@ app.use(cookieParser());
 mongoose.connect(MONGO_URI);
 
 // Controllers
+var authController = require('./controllers/auth.js')
+app.use('/auth', authController);
+
+var seedController = require('./controllers/seed.js');
+app.use('/seed', seedController);
+
 var testController = require('./controllers/test.js');
 app.use('/', testController);
 
-var authController = require('./controllers/auth.js')
-app.use('/auth', authController);
+
 
 
 // Listener

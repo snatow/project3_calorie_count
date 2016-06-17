@@ -43,16 +43,20 @@ passport.use(new JwtStrategy(JwtOpts, function(jwt_payload, done) {
 passport.use( new LocalStrategy(
   function( username, password, done ) {
     User.findOne({ username: username }, function( err, dbUser ) {
-      if (err) { return done(err); }
+      if (err) { 
+        console.log('there was an error');
+        return done(err); 
+      }
       if (!dbUser) {
         // If we want to send back flash messages with a description of the error
         // We would need to install express-flash for this to work
-
+        console.log('incorect user')
         // return done(null, false, { message: 'Incorrect username.' });
         return done(null, false);
       }
 
       if (!dbUser.authenticate(password)) {
+        console.log('incorrect password');
         // return done(null, false, { message: 'Incorrect password.' });
         return done(null, false);
       }
