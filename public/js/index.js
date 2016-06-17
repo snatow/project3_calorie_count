@@ -147,7 +147,8 @@ var SignUpComponent = React.createClass({
       username: "",
       email: "",
       password: "",
-      calories: ""
+      calories: "",
+      signup: false
     })
   },
   signUpState: function() {
