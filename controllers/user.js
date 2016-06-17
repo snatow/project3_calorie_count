@@ -33,7 +33,7 @@ router.post('/', function(req, res) {
 router.get('/search/:item', function(req,res) {
   console.log('The search for an item works!')
   console.log(req.params.item);
-  request('http://api.nal.usda.gov/ndb/search/?format=json&q=' + req.params.item + '&sort=n&max=25&offset=0&api_key=' + process.env.DATA_GOV_KEY, //api call to USDA
+  request('http://api.nal.usda.gov/ndb/search/?format=json&q=' + req.params.item + '&sort=n&max=5&offset=0&api_key=' + process.env.DATA_GOV_KEY, //api call to USDA
     function(error, repsonse, body){
       if (!error && repsonse.statusCode == 200) {
         var food = JSON.parse(body) //parses the string to json

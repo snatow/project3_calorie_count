@@ -276,6 +276,7 @@ var FirstList = React.createClass({
   render: function() {
     if (this.props.data) {
       var createItems = function(item) {
+        // console.log(item);
         return(
           <NamesItem ndbno={item.ndbno}>{item.name}</NamesItem>)
       }
@@ -308,7 +309,9 @@ var NamesItem = React.createClass({
       method: "GET",
       success: function(data) {
         console.log(data);
+        console.log(typeof data);
         this.setState({data: data})
+        console.log(this.state);
       }.bind(this)
       //need error handling
     })
@@ -329,25 +332,39 @@ var NamesItem = React.createClass({
 //Div to render secondary search results - portions with calories
 var RenderFoodContainer = React.createClass({
   render: function() {
+    // console.log(this.props.data);
     if (this.props.data) {
-      var createFoods = function(food) {
-        <RenderFood>{food}</RenderFood>
-      }
-      return(
-        <div className="food-container">
-          {this.props.data.calories.map(createFoods)}
-        </div>)
+      console.log("inside render food container");
+      console.log(this.props.data);
+      return(<div><RenderFood food={this.props.data} /></div>)
+      // var createFoods = function(food) {
+      //   console.log(food);
+      //   return(<div><RenderFood food={food} /></div>)
+      // }
+      {/*return(
+              <div className="food-container">
+                {this.props.data.calories.map(createFoods)}
+              </div>)*/}
     } else {
-      return(<div></div>)
+      return(<div> doesn't work</div>)
     }
   }
 })
 
 var RenderFood = React.createClass({
   render: function() {
+    console.log('renderfood works')
+    console.log(this.props.food);
+    var calories = this.props.food.calories.map(function(measurement) {
+      console.log(measurement.qty)
+      return (<li>{measurement.qty} of {measurement.label} is {measurement.value} calories</li>)
+    })
     return(
       <div>
-        <p>Something{this.props.children}</p>
+        <p>Name: {this.props.food.name}</p>
+        <ul>
+        </ul>
+        <p>Calories: {calories} </p>
       </div>)
   }
 })
