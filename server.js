@@ -2,7 +2,10 @@
 var express = require('express');
 var app = express();
 var logger = require('morgan');
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var cookieParser = require('cookie-parser');
 var MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/calorie_count_app_dev";
 var port = process.env.PORT || 3000
 
@@ -25,6 +28,9 @@ mongoose.connect(MONGO_URI);
 // Controllers
 var testController = require('./controllers/test.js');
 app.use('/', testController);
+
+var seedController = require('./controllers/seed.js');
+app.use('/seed', seedController);
 
 // Listener
 app.listen(port, function() {
