@@ -224,8 +224,14 @@ var SearchBar = React.createClass({
   getInitialState: function() {
     return {
       searchTerm: "",
-      data: null
+      data: null,
+      foodList: null
     }
+  },
+  foodListStateChange: function(data) {
+    //console.log('hey we made it back to searchbar ');
+    //console.log(data);
+    this.setState({foodList: data})
   },
   searchChange: function(e) {
     this.setState({searchTerm: e.target.value})
@@ -245,7 +251,6 @@ var SearchBar = React.createClass({
       success: function(data) {
         console.log(data);
         this.setState({data: data})
-        //need to render something with the data - send as props to a child component
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(status, err.toString());
@@ -265,7 +270,10 @@ var SearchBar = React.createClass({
             onChange={this.searchChange}/><br/>
             <input className="button" type="submit"/>
         </form>
-        <FirstList data={this.state.data}/>
+        <FirstList 
+          data={this.state.data}
+          onSubmit={this.foodListStateChange}/>
+        <RenderFoodContainer data={this.state.foodList} />
       </div>)
   }
 })
@@ -273,12 +281,18 @@ var SearchBar = React.createClass({
 
 //Div to render initial search results - foods based on search term
 var FirstList = React.createClass({
+  sendDataToSearchBar: function(data) {
+    console.log('first list data is:')
+    console.log(data);
+    this.props.onSubmit(data)
+  },
   render: function() {
+    var self = this;
     if (this.props.data) {
       var createItems = function(item) {
         // console.log(item);
         return(
-          <NamesItem ndbno={item.ndbno}>{item.name}</NamesItem>)
+          <NamesItem onSubmit={self.sendDataToSearchBar} ndbno={item.ndbno}>{item.name}</NamesItem>)
       }
       return(
       <div className="first-results">
@@ -298,6 +312,10 @@ var NamesItem = React.createClass({
       data: null
     }
   },
+  sendDataToFirstList: function(data) {
+    console.log(data);
+    this.props.onSubmit(data)
+  },
   handleClick: function(e) {
     e.preventDefault();
     console.log(this.props.ndbno);
@@ -311,6 +329,7 @@ var NamesItem = React.createClass({
         console.log(data);
         console.log(typeof data);
         this.setState({data: data})
+        this.sendDataToFirstList(data);
         console.log(this.state);
       }.bind(this)
       //need error handling
@@ -322,9 +341,9 @@ var NamesItem = React.createClass({
         <div>
         <p onClick={this.handleClick}>{this.props.children}</p>
         </div>
-        <div>
+{/*        <div>
         <RenderFoodContainer data={this.state.data} />
-        </div>
+        </div>*/}
       </div>)
   }
 })
@@ -336,17 +355,9 @@ var RenderFoodContainer = React.createClass({
     if (this.props.data) {
       console.log("inside render food container");
       console.log(this.props.data);
-      return(<div><RenderFood food={this.props.data} /></div>)
-      // var createFoods = function(food) {
-      //   console.log(food);
-      //   return(<div><RenderFood food={food} /></div>)
-      // }
-      {/*return(
-              <div className="food-container">
-                {this.props.data.calories.map(createFoods)}
-              </div>)*/}
+      return(<div className="Food-container"><RenderFood food={this.props.data} /></div>)
     } else {
-      return(<div> doesn't work</div>)
+      return(<div></div>)
     }
   }
 })
@@ -356,8 +367,8 @@ var RenderFood = React.createClass({
     console.log('renderfood works')
     console.log(this.props.food);
     var calories = this.props.food.calories.map(function(measurement) {
-      console.log(measurement.qty)
-      return (<li>{measurement.qty} of {measurement.label} is {measurement.value} calories</li>)
+      //console.log(measurement.qty)
+      return (<li>{measurement.qty} {measurement.label} is {measurement.value} calories</li>)
     })
     return(
       <div>

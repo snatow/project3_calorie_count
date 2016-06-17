@@ -33,3 +33,11 @@ input {
   display: block;
   margin-top: 100px;
 }
+
+.first-results{
+  border: 1px solid black;
+}
+
+.Food-container {
+  border: 1px solid black;
+}
