@@ -56,7 +56,8 @@ var LoginComponent = React.createClass({
     return {
       username: this.props.initialLoginCheck,
       password: this.props.initialLoginCheck,
-      loginStatus: this.props.initialLoginCheck
+      loginStatus: this.props.initialLoginCheck,
+      needLogInForm: false
     };
   },
   handleLoginFormChange: function(stateName, e) {
@@ -70,6 +71,9 @@ var LoginComponent = React.createClass({
     var password = this.state.password.trim();
     this.loginAJAX(username, password);
   },
+  logInState: function() {
+    this.setState({needLogInForm: true})
+  }
   loginAJAX: function(username, password) {
     $.ajax({
       url: '/auth',
@@ -90,20 +94,29 @@ var LoginComponent = React.createClass({
     });
   },
   render: function() {
-    return (
-      <div className="login-form" >
-        <h3>Please Login</h3>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="username">Username</label>
-          <input className="username-login-form" type="text" value={this.state.username} onChange={this.handleLoginFormChange.bind(this, 'username')}/>
-          <br/>
-          <label htmlFor="password">Password</label>
-          <input className="password-login-form" type="text" value={this.state.password} onChange={this.handleLoginFormChange.bind(this, 'password')}/>
-          <br/>
-          <input className="button" type="submit"/>
-        </form>
-      </div>
-    )
+    if (!this.state.needLogInForm) {
+      //this renders the log in link (or what will look like a link to the user)
+      return(
+        <p 
+          className="link"
+          onClick={this.logInState}>Log In</p>)
+    } else {
+      //This renders the log in form
+      return (
+        <div className="login-form" >
+          <h3>Please Login</h3>
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="username">Username</label>
+            <input className="username-login-form" type="text" value={this.state.username} onChange={this.handleLoginFormChange.bind(this, 'username')}/>
+            <br/>
+            <label htmlFor="password">Password</label>
+            <input className="password-login-form" type="text" value={this.state.password} onChange={this.handleLoginFormChange.bind(this, 'password')}/>
+            <br/>
+            <input className="button" type="submit"/>
+          </form>
+        </div>
+      )
+    } 
   }
 })
 
@@ -161,8 +174,9 @@ var SignUpComponent = React.createClass({
   render: function() {
     if (!this.state.signup) {
       return (
-        <p className="blue" onClick={this.signUpState}>Sign Up</p>)
+        <p className="link" onClick={this.signUpState}>Sign Up</p>)
     } else {
+      //This renders the sign up form
       return (
         <div className="signup-form">
           <h3>Sign Up</h3>
@@ -198,6 +212,7 @@ var SignUpComponent = React.createClass({
 //=========================================================================
   //  These are other elements 
 //=========================================================================
+
 //This is just for testing stuff right now
 var HelloUser = React.createClass({
   getInitialState: function() {
@@ -229,12 +244,6 @@ var HelloUser = React.createClass({
     }
   }
 })
-
-
-
-
-
-
 
 
 ReactDOM.render(<CalorieApp/>, document.getElementById('main-container'));
