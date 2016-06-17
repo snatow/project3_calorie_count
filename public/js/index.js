@@ -1,4 +1,6 @@
-//Main Component - this will render all of the react classes for the app
+//=========================================================================
+  //  Main Component - this will render all of the react classes for the app
+//=========================================================================
 var CalorieApp = React.createClass({
   //this is for user auth - it will check for the cookie in the browser
   getInitialState: function() {
@@ -27,6 +29,7 @@ var CalorieApp = React.createClass({
     // console.log('cookie:', document.cookie);
     if(this.state.authenticatedUser === true) {
       return (
+        //this is placeholder for now - used homework example
         <HelloUser username={this.state.username} />
       )
     } else {
@@ -46,7 +49,9 @@ var CalorieApp = React.createClass({
   //  These elements will handle user sign up and log in
 //=========================================================================
 
-var LoginForm = React.createClass({
+//This component will initially render a log in link on initial state and will
+//render a log in form once that link is clicked
+var LoginComponent = React.createClass({
   getInitialState: function() {
     return {
       username: this.props.initialLoginCheck,
@@ -102,12 +107,15 @@ var LoginForm = React.createClass({
   }
 })
 
+//This component will initially render a sign up link on initial state and will
+//render a sign up form once that link is clicked
 var SignUpComponent = React.createClass({
   getInitialState: function() {
     return {
       username: "",
       email: "",
       password: "",
+      calories: "",
       signup: false
     };
   },
@@ -125,7 +133,8 @@ var SignUpComponent = React.createClass({
     this.setState({
       username: "",
       email: "",
-      password: ""
+      password: "",
+      calories: ""
     })
   },
   signUpState: function() {
@@ -173,6 +182,12 @@ var SignUpComponent = React.createClass({
               type="text" 
               value={this.state.password} 
               onChange={this.handleSignupFormChange.bind(this, 'password')}/><br/>
+              <label htmlFor="password">Password</label>
+            <label htmlFor="calories">Max Calories Per Day</label>
+            <input 
+              type="text" 
+              value={this.state.calories} 
+              onChange={this.handleSignupFormChange.bind(this, 'calories')}/><br/>
               <input className="button" type="submit"/>
           </form>
         </div>)
@@ -183,7 +198,7 @@ var SignUpComponent = React.createClass({
 //=========================================================================
   //  These are other elements 
 //=========================================================================
-
+//This is just for testing stuff right now
 var HelloUser = React.createClass({
   getInitialState: function() {
     return {
