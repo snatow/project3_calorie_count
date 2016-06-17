@@ -67,7 +67,7 @@ router.get('/search/item/:id', function(req, res) {
 // -----------------------------------------------
 // ROUTES THAT REQUIRE AUTHENTICATION w/ JWT BELOW
 // -----------------------------------------------
-router.use(passport.authenticate('jwt', { session: false }));
+// router.use(passport.authenticate('jwt', { session: false }));
 
 // Test call to the USDA food API
 router.get('/', function(req, res) {
@@ -81,8 +81,30 @@ router.get('/', function(req, res) {
     })
 });
 
-// Gets user and get the meal
-router.get('/search/:id', function(req, res) {
+// Edit User Info
+router.put('/edit/:id', function(req, res) {
+  console.log('edit user info route reached');
+  User.findById(req.params.id).then(function(user) { //finds user by ID
+    console.log(user)
+    user.username = req.body.username;  //Changes username
+    user.password = req.body.password;  //Changes password might need hash
+    user.email = req.body.email;        //Changes email
+    user.calories = req.body.calories   //Changes calories
+  })
+});
+
+// Get user meals
+router.get('/user/:id', function(req, res) {
+  console.log('get the users meal');
+  User.findById(req.params.id).then(function(user) {
+    console.log(user);
+    res.send(user.meal);
+  })
+})
+
+// Gets user and get the specific meal by the date
+router.get('/user/:id/date/:date', function(req, res) {
+  console.log(req.params.date);
   var date1 = new Date("October 13, 2014"); // sample date for testing
   date1 = Date.parse(d); // parses date to string
   // console.log(d);
@@ -101,6 +123,21 @@ router.get('/search/:id', function(req, res) {
     // user.findOne({meal: })
   })
 });
+
+
+
+
+
+// Saving the meal to the user
+router.post('/savemeal/:id', function(req, res) {
+  console.log('saving meal to user route works')
+  // console.log(req.body)
+  User.findById(req.params.id).then(function(user) {
+    console.log(user);
+    // have to .create and save the food for user at given date
+    // have to push this food we created to the user array
+  })
+})
 
 
 
