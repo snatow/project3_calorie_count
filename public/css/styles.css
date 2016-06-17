@@ -1,5 +1,9 @@
+body {
+  background-color: #BDE8E8;
+}
+
 .link {
-  color: blue;
+  color: #1a4e7e;
   /*display: inline-block;*/
   /*float: left;*/
   padding-left: 10px;
@@ -12,17 +16,17 @@
 
 .button {
   color: white;
-  background-color: blue;
-  border: 1px solid black;
+  background-color: #2670B5;
+  border: 1px solid #2629b5;
 }
 
-.button:hover{
+/*.button:hover{
   background-color: green;
-}
+}*/
 
 input {
   margin: 5px;
-  border: 1px solid black;
+  border: 1px solid #2629b5;
 }
 
 .search-bar {

@@ -39,7 +39,7 @@ var CalorieApp = React.createClass({
           initialLoginCheck={this.state.authenticatedUser} 
           onChange={this.changeLogin} />
           <SignUpComponent />
-          <Search />
+          <SearchBar />
         </div>
       )
     }
