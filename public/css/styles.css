@@ -54,7 +54,13 @@ img {
 }
 
 button {
-  margin-left: -20px;
+  margin-left: 86%;
+}
+
+.meals-submit {
+  color: white;
+  background-color: #2670B5;
+  border: 1px solid #2629b5;
 }
 
 /*.button:hover{

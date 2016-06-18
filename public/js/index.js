@@ -833,19 +833,26 @@ var RenderFoodContainer = React.createClass({
 })
 
 var RenderFood = React.createClass({
+  appendMeal: function() {
+    console.log("adding to current meal");
+    console.log(self);
+  },
   render: function() {
     console.log('renderfood works')
     console.log(this.props.food);
+    var self = this;
     var calories = this.props.food.calories.map(function(measurement) {
       //console.log(measurement.qty)
-      return (<li>{measurement.qty} {measurement.label} is {measurement.value} calories</li>)
+      return (<li 
+                data-label={measurement.label} 
+                data-calories={measurement.calories}
+                onClick={self.appendMeal}
+              >{measurement.qty} {measurement.label} is {measurement.value} calories</li>)
     })
     return(
       <div>
         <p>Name: {this.props.food.name}</p>
-        <ul>
-        </ul>
-        <p>Calories: {calories} </p>
+        <p>Calories: <ul>{calories}</ul> </p>
       </div>)
   }
 })
