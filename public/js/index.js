@@ -266,6 +266,30 @@ var SignUpComponent = React.createClass({
 })
 
 //=========================================================================
+  //  This element will allow the user to edit his or her user account
+//=========================================================================
+
+var EditUser = React.createClass({
+  getInitialState: function() {
+    return {editForm: false}
+  },
+  showEditForm: function() {
+    this.setState({editForm: true})
+  },
+  render: function() {
+    if (this.state.editForm) {
+      return(
+        <div>something</div>)
+    } else {
+      return(
+        <div className="edit-link">
+          <h4 onClick={this.showEditForm}>Edit Your Account</h4>
+        </div>)
+    }
+  }
+})
+
+//=========================================================================
   //  These are the search elements
 //=========================================================================
 
