@@ -5,6 +5,7 @@ body {
 
 h3 {
   text-align: center;
+  margin-top: 0px;
 }
 
 h4 {
@@ -67,16 +68,56 @@ input {
 
 .search-bar {
   display: block;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .first-results{
   border: 1px solid black;
   background-color: white;
   z-index: 1;
+  height: 120px;
+  overflow: auto;
+  overflow-y:scroll; 
+  overflow-x:hidden;
+  margin-bottom: 10px;
 }
 
 .Food-container {
   border: 1px solid black;
   background-color: white;
+  height: 120px;
+  overflow: auto;
+  overflow-y:scroll; 
+  overflow-x:hidden;
+}
+
+p {
+  margin: 10px;
+}
+
+li {
+  list-style-image: url("../images/fork_button_small.png");
+}
+
+.meal-label {
+  display: inline-block;
+  margin-right: 53px;
+}
+
+.meal-snacks {
+  display: inline-block;
+}
+
+.meal-nav-bar {
+  margin-top: 20px;
+  border: 1px solid black;
+}
+
+.meal-display {
+  border: 1px solid black;
+  background-color: white;
+  height: 120px;
+  overflow: auto;
+  overflow-y:scroll; 
+  overflow-x:hidden;
 }

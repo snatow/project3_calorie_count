@@ -42,11 +42,12 @@ var CalorieApp = React.createClass({
           <EditUser logOutToggle={this.logOutToggle}/>
           <LogOutComponent 
             username={this.state.username}
-            logOutShow={this.state.logOutShow} />
+            logOutShow={this.state.logOutShow}
+            logOutSubmit={this.logOutSubmit} />
           {/*//this is placeholder for now - used homework example*/}
           <h3>The Best Fwoarking Calorie Counting App</h3>
-          <img src="./images/fork_logo.png"/>
           <Calories username={this.state.username} logOutToggle={this.logOutToggle}/>
+          <MealParentComponent />
           <SearchBar />
         </div>
       )
@@ -61,7 +62,6 @@ var CalorieApp = React.createClass({
                     initialLoginCheck={this.state.authenticatedUser} 
                     onChange={this.changeLogin} />*/}
           <h3 className="name">The Best Fwoarking Calorie Counting App</h3>
-          <img src="./images/fork_logo.png"/>
           <SearchBar />
         </div>
       )
@@ -450,6 +450,8 @@ var LogOutComponent = React.createClass({
         <div>
         </div>
       )
+    } else {
+      return(<div></div>)
     }
   }
 })
@@ -467,6 +469,138 @@ var LogOutComponent = React.createClass({
 
 
 
+//=========================================================================
+  //  Thes element will render a user's meals - they are only visable on
+  //if the user is logged in
+//=========================================================================
+
+var MealParentComponent = React.createClass({
+  getInitialState: function() {
+    return {
+      showBreakfast: false,
+      showLunch: false,
+      showDinner: false,
+      showSnacks: false
+    }
+  },
+  showBreakfastToggle: function() {
+    this.setState({
+      showBreakfast: true,
+      showLunch: false,
+      showDinner: false,
+      showSnacks: false
+    })
+  },
+  showLunchToggle: function() {
+    this.setState({
+      showBreakfast: false,
+      showLunch: true,
+      showDinner: false,
+      showSnacks: false
+    })
+  },
+  showDinnerToggle: function() {
+    this.setState({
+      showBreakfast: false,
+      showLunch: false,
+      showDinner: true,
+      showSnacks: false
+    })
+  },
+  showSnacksToggle: function() {
+    this.setState({
+      showBreakfast: false,
+      showLunch: false,
+      showDinner: false,
+      showSnacks: true
+    })
+  },
+  render: function() {
+    if (!this.state.showBreakfast && !this.state.showLunch && !this.state.showDinner && !this.state.showSnacks) {
+      return(
+        <div className="meals-all">
+          <div className="meal-nav-bar">
+            <div className="meal-label" onClick={this.showBreakfastToggle}>Breakfast</div>
+            <div className="meal-label" onClick={this.showLunchToggle}>Lunch</div>
+            <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
+            <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
+          </div>
+        </div>)
+    } else if (this.state.showBreakfast) {
+      return(
+        <div className="meals-all">
+          <div className="meal-nav-bar">
+            <div className="meal-label" onClick={this.showBreakfastToggle}>Breakfast</div>
+            <div className="meal-label" onClick={this.showLunchToggle}>Lunch</div>
+            <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
+            <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
+          </div>
+          <BreakfastComponent />
+        </div>)
+    } else if (this.state.showLunch) {
+      return(
+        <div className="meals-all">
+          <div className="meal-nav-bar">
+            <div className="meal-label" onClick={this.showBreakfastToggle}>Breakfast</div>
+            <div className="meal-label" onClick={this.showLunchToggle}>Lunch</div>
+            <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
+            <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
+          </div>
+          <LunchComponent />
+        </div>)
+    } else if (this.state.showDinner) {
+      return(
+        <div className="meals-all">
+          <div className="meal-nav-bar">
+            <div className="meal-label" onClick={this.showBreakfastToggle}>Breakfast</div>
+            <div className="meal-label" onClick={this.showLunchToggle}>Lunch</div>
+            <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
+            <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
+          </div>
+          <DinnerComponent />
+        </div>)
+    } else if (this.state.showSnacks) {
+      return(
+        <div className="meals-all">
+          <div className="meal-nav-bar">
+            <div className="meal-label" onClick={this.showBreakfastToggle}>Breakfast</div>
+            <div className="meal-label" onClick={this.showLunchToggle}>Lunch</div>
+            <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
+            <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
+          </div>
+          <SnacksComponent />
+        </div>)
+    }
+  }
+})
+
+var BreakfastComponent = React.createClass({
+  render: function() {
+    return(
+      <div className="meal-display">Breakfast List</div>)
+  }
+})
+
+var LunchComponent = React.createClass({
+  render: function() {
+    return(
+      <div className="meal-display">Lunch List</div>)
+  }
+})
+
+var DinnerComponent = React.createClass({
+  render: function() {
+    return(
+      <div className="meal-display">Dinner List</div>)
+  }
+})
+
+var SnacksComponent = React.createClass({
+  render: function() {
+    return(
+      <div className="meal-display">Snacks List</div>)
+  }
+})
 
 //=========================================================================
   //  These are the search elements
