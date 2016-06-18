@@ -842,10 +842,9 @@ var RenderFood = React.createClass({
     console.log(this.props.food);
     var self = this;
     var calories = this.props.food.calories.map(function(measurement) {
-      //console.log(measurement.qty)
+      console.log(measurement)
       return (<li 
                 data-label={measurement.label} 
-                data-calories={measurement.calories}
                 onClick={self.appendMeal}
               >{measurement.qty} {measurement.label} is {measurement.value} calories</li>)
     })
