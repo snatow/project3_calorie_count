@@ -47,9 +47,9 @@ var CalorieApp = React.createClass({
           {/*//this is placeholder for now - used homework example*/}
           <h3>The Best Fwoarking Calorie Counting App</h3>
           <Calories username={this.state.username} logOutToggle={this.logOutToggle}/>
+          <DatePicker />
           <MealParentComponent />
           <SearchBar />
-          <DatePicker />
         </div>
       )
     } else {
