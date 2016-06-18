@@ -33,6 +33,9 @@ var CalorieApp = React.createClass({
           {/*//this is placeholder for now - used homework example*/}
           <HelloUser username={this.state.username} />
           <Calories />
+          <h3>The Best Fwoarking Calorie Counting App</h3>
+          <img src="./images/fork_logo.png"/>
+          <SearchBar />
         </div>
       )
     } else {
@@ -82,8 +85,8 @@ var Calories = React.createClass({
   render: function() {
     if (this.state.calories !== null) {
       return (
-        <div>
-          {this.state.calories} {/*prints out the calories*/}
+        <div className='calories'>
+          Remaining calories for the day: {this.state.calories} {/*prints out the calories*/}
         </div>)
     }
     return (

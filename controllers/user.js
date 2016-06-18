@@ -110,12 +110,21 @@ router.put('/edit/:id', function(req, res) {
   })
 });
 
-// Get user meals
-router.get('/user/:id', function(req, res) {
+// Get User 
+router.get('/user', function(req, res) {
   console.log('get the users meal');
-  User.findById(req.params.id).then(function(user) {
+  User.findById(req.user.id).then(function(user) {
     console.log(user);
     res.send(user.meal);
+  })
+})
+
+// Get user meals
+router.get('/user/:id/meal', function(req, res) {
+  console.log('get the users meal');
+  User.findById(req.params.id).then(function(user) {
+    // console.log(user);
+    res.send(user);
   })
 })
 
