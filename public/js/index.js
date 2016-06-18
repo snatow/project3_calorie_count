@@ -74,24 +74,30 @@ var CalorieApp = React.createClass({
   //  This is the date picker
 //=========================================================================
 var DatePicker = React.createClass({
-  handleDate: function(e) {
+  getInitialState: function() {
+    return({month: 'January', day: '1', year: '2016'})
+  },
+  handleDateSubmit: function(e) {
     e.preventDefault()
     console.log('handling date');
-    console.log(e.target.value);
+    console.log(this.state);
   },
   handleMonthChange: function(e) {
     console.log(e.target.value)
+    this.setState({month: e.target.value})
   },
   handleDayChange: function(e) {
     console.log(e.target.value);
+    this.setState({day: e.target.value})
   },
   handleYearChange: function(e) {
     console.log(e.target.value)
+    this.setState({year: e.target.value})
   },
   render: function() {
     return(
       <div>
-        <form onSubmit={this.handleMonthChange}>
+        <form onSubmit={this.handleDateSubmit}>
           <select name="month" onChange={this.handleMonthChange}>
             <option value="January">January</option>
             <option value="February">February</option>
