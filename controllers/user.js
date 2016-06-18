@@ -67,7 +67,7 @@ router.get('/search/item/:id', function(req, res) {
 // -----------------------------------------------
 // ROUTES THAT REQUIRE AUTHENTICATION w/ JWT BELOW
 // -----------------------------------------------
-// router.use(passport.authenticate('jwt', { session: false }));
+router.use(passport.authenticate('jwt', { session: false }));
 
 // Test call to the USDA food API
 router.get('/', function(req, res) {
@@ -80,6 +80,23 @@ router.get('/', function(req, res) {
       }
     })
 });
+
+// Gets the calories of the user
+router.get('/user/calories', function(req, res) {
+  // console.log('getting calories');
+  // console.log(req.user.id) //we can get user iq through this with passport
+  User.findById(req.user.id).then(function(user, err) {
+    if (err) {
+      console.log('there is an error');
+      console.log(err);
+      res.send('error');
+    } else {
+      console.log('it works')
+      console.log(user.calories);
+      res.send({calories: user.calories});
+    }
+  })
+})
 
 // Edit User Info
 router.put('/edit/:id', function(req, res) {

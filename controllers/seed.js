@@ -11,6 +11,7 @@ router.get('/', function(req, res) {
     username: 'Joe Jung',
     email: 'joe@joe.com',
     password: 'password',
+    calories: 2500
   });
 
   var meal1 = new Meal({
@@ -32,8 +33,8 @@ router.get('/', function(req, res) {
   user1.save();
   meal1.save();
   meal2.save();
-  user1.meal.push(meal1);
-  user1.meal.push(meal2);
+  user1.meals.push(meal1);
+  user1.meals.push(meal2);
   user1.save();
 
   console.log('-----------------------');

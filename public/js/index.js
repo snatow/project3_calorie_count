@@ -29,8 +29,11 @@ var CalorieApp = React.createClass({
     // console.log('cookie:', document.cookie);
     if(this.state.authenticatedUser === true) {
       return (
-        //this is placeholder for now - used homework example
-        <HelloUser username={this.state.username} />
+        <div>
+          {/*//this is placeholder for now - used homework example*/}
+          <HelloUser username={this.state.username} />
+          <Calories />
+        </div>
       )
     } else {
       return (
@@ -47,6 +50,42 @@ var CalorieApp = React.createClass({
     }
   }
 });
+
+// This will render the calorie tracker that we get from our user.
+var Calories = React.createClass({
+  getInitialState: function() {
+    return {calories: null}
+  },
+  // test: function() {
+  //   console.log('test calories works');
+  // },
+  getCaloriesAJAX: function() {
+    $.ajax({
+      url: '/user/user/calories',
+      method: "get",
+      success: function(data) {
+        // console.log('success for getting calories');
+        console.log(data);
+        this.setState({calories: data.calories})
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(status, err.toString());
+      }.bind(this)
+    });
+  },
+  render: function() {
+    if (this.state.calories !== null) {
+      return (
+        <div>
+          {this.state.calories}
+        </div>)
+    }
+    return (
+      <div>
+        {this.getCaloriesAJAX()}
+      </div>)
+  }
+})
 
 //=========================================================================
   //  These elements will handle user sign up and log in
