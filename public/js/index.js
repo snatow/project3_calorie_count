@@ -33,6 +33,7 @@ var CalorieApp = React.createClass({
           {/*//this is placeholder for now - used homework example*/}
           <HelloUser username={this.state.username} />
           <Calories />
+          <EditUser />
           <h3>The Best Fwoarking Calorie Counting App</h3>
           <img src="./images/fork_logo.png"/>
           <SearchBar />
@@ -319,15 +320,96 @@ var SignUpComponent = React.createClass({
 
 var EditUser = React.createClass({
   getInitialState: function() {
-    return {editForm: false}
+    return {
+      editForm: false,
+      id: "",
+      username: "",
+      email: "",
+      calories: ""
+    }
+  },
+  handleSignupFormChange: function(stateName, e) {
+    var change = {};
+    change[stateName] = e.target.value;
+    this.setState(change);
+  },
+  handleFormSubmit: function(e) {
+    e.preventDefault();
+    var id = this.state.id;
+    console.log("this is id: " + id)
+    var username = this.state.username.trim();
+    var email = this.state.email.trim();
+    var calories = this.state.calories.trim();
+    this.editUserAJAX(username, email, calories);
+    this.setState({
+      username: "",
+      email: "",
+      calories: "",
+      editForm: false
+    })
+    return false;
+  },
+  editUserAJAX: function(username, email, calories) {
+    $.ajax({
+      url: '/user/edit/',
+      method: "PUT",
+      data: {
+        username: username,
+        email: email,
+        calories: calories
+      },
+      success: function(data) {
+        console.log('user updated');
+        console.log(data);
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(status, err.toString());
+      }.bind(this)
+    });
   },
   showEditForm: function() {
-    this.setState({editForm: true})
+    var self = this;
+    $.ajax({
+      url: "/user/user",
+      method: "GET",
+      success: function(data) {
+        console.log(data);
+        self.setState({
+          id: data.id,
+          username: data.username,
+          email: data.email,
+          calories: data.calories
+        })
+      }//.bind(this)
+    })
+    this.setState({editForm: true}) //should I put this in the ajax function?
+  },
+  handleSubmit: function() {
+    console.log("submit");
   },
   render: function() {
     if (this.state.editForm) {
       return(
-        <div>something</div>)
+        <div>
+          <form onSubmit={this.handleFormSubmit}>
+            <label htmlFor="username">Username</label>
+            <input 
+              type="text" 
+              value={this.state.username} 
+              onChange={this.handleSignupFormChange.bind(this, 'username')}/><br/>
+            <label htmlFor="email">Email</label>
+            <input 
+              type="text" 
+              value={this.state.email} 
+              onChange={this.handleSignupFormChange.bind(this, 'email')}/><br/>
+            <label htmlFor="calories">Max Calories Per Day</label>
+            <input 
+              type="number" 
+              value={this.state.calories} 
+              onChange={this.handleSignupFormChange.bind(this, 'calories')}/><br/>
+              <input className="button" type="submit"/>
+          </form>
+        </div>)
     } else {
       return(
         <div className="edit-link">

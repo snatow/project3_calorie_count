@@ -99,14 +99,24 @@ router.get('/user/calories', function(req, res) {
 })
 
 // Edit User Info
-router.put('/edit/:id', function(req, res) {
+router.put('/edit/', function(req, res) {
   console.log('edit user info route reached');
-  User.findById(req.params.id).then(function(user) { //finds user by ID
+  console.log(req.body)
+  User.findById(req.user.id).then(function(user) { //finds user by ID
     console.log(user)
     user.username = req.body.username;  //Changes username
-    user.password = req.body.password;  //Changes password might need hash
+    // user.password = req.body.password;  //Changes password might need hash
     user.email = req.body.email;        //Changes email
     user.calories = req.body.calories   //Changes calories
+    console.log(user);
+    user.save(function(err, user) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log('saved user')
+        console.log(user);
+      }
+    });
   })
 });
 
@@ -115,7 +125,7 @@ router.get('/user', function(req, res) {
   console.log('get the users meal');
   User.findById(req.user.id).then(function(user) {
     console.log(user);
-    res.send(user.meal);
+    res.send(user);
   })
 })
 
