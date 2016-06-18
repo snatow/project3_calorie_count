@@ -48,8 +48,8 @@ var CalorieApp = React.createClass({
           <h3>The Best Fwoarking Calorie Counting App</h3>
           <Calories username={this.state.username} logOutToggle={this.logOutToggle}/>
           <DatePicker />
-          <MealParentComponent />
-          <SearchBar />
+          {/*<MealParentComponent />*/}
+          <SearchBar user={this.state.username} />
         </div>
       )
     } else {
@@ -63,7 +63,7 @@ var CalorieApp = React.createClass({
                     initialLoginCheck={this.state.authenticatedUser} 
                     onChange={this.changeLogin} />*/}
           <h3 className="name">The Best Fwoarking Calorie Counting App</h3>
-          <SearchBar />
+          <SearchBar user={this.state.username} />
         </div>
       )
     }
@@ -209,7 +209,7 @@ var LogInSignUp = React.createClass({
     }
   },
   logInState: function() {
-    this.setState({needLogInForm: true})
+    this.setState({needLogInForm: true, signup: false})
   },
   signUpState: function() {
     this.setState({signup: true})
@@ -535,19 +535,6 @@ var LogOutComponent = React.createClass({
 })
 
 //=========================================================================
-  //  This element will manage user flow for edit user account and log out
-//=========================================================================
-
-// var EditUserLogOut = React.createClass({
-
-//   render: function() {
-
-//   }
-// })
-
-
-
-//=========================================================================
   //  Thes element will render a user's meals - they are only visable on
   //if the user is logged in
 //=========================================================================
@@ -729,22 +716,42 @@ var SearchBar = React.createClass({
   },
   render: function() {
     //this renders the search bar
-    return(
-      <div className="search-bar">
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="search">Search</label>
-          <input 
-            type="text" 
-            placeholder="search term"
-            value={this.state.searchTerm} 
-            onChange={this.searchChange}/>
-          <input className="button" type="submit"/>
-        </form>
-        <FirstList 
-          data={this.state.data}
-          onSubmit={this.foodListStateChange}/>
-        <RenderFoodContainer data={this.state.foodList} />
-      </div>)
+    if (this.props.user === "") {
+      return(
+        <div className="search-bar">
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="search">Search</label>
+            <input 
+              type="text" 
+              placeholder="search term"
+              value={this.state.searchTerm} 
+              onChange={this.searchChange}/>
+            <input className="button" type="submit"/>
+          </form>
+          <FirstList 
+            data={this.state.data}
+            onSubmit={this.foodListStateChange}/>
+          <RenderFoodContainer data={this.state.foodList} />
+        </div>)
+    } else {
+      return(
+        <div className="search-bar">
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="search">Search</label>
+            <input 
+              type="text" 
+              placeholder="search term"
+              value={this.state.searchTerm} 
+              onChange={this.searchChange}/>
+            <input className="button" type="submit"/>
+          </form>
+          <FirstList 
+            data={this.state.data}
+            onSubmit={this.foodListStateChange}/>
+          <RenderFoodContainer data={this.state.foodList} />
+          <MealParentComponent />
+        </div>)
+    }
   }
 })
 
@@ -835,7 +842,7 @@ var RenderFoodContainer = React.createClass({
 var RenderFood = React.createClass({
   appendMeal: function() {
     console.log("adding to current meal");
-    console.log(self);
+    //we need to invoke a callback here that goes to meal parent component
   },
   render: function() {
     console.log('renderfood works')
