@@ -54,7 +54,13 @@ img {
 }
 
 button {
-  margin-left: -20px;
+  margin-left: 86%;
+}
+
+.meals-submit {
+  color: white;
+  background-color: #2670B5;
+  border: 1px solid #2629b5;
 }
 
 /*.button:hover{
@@ -68,7 +74,8 @@ input {
 
 .search-bar {
   display: block;
-  margin-top: 10px;
+  position: fixed;
+  margin-top: 180px;
 }
 
 .first-results{
@@ -99,6 +106,11 @@ li {
   list-style-image: url("../images/fork_button_small.png");
 }
 
+.meals-all {
+  position: fixed;
+  margin-top: -220px;
+}
+
 .meal-label {
   display: inline-block;
   margin-right: 53px;
@@ -120,4 +132,8 @@ li {
   overflow: auto;
   overflow-y:scroll; 
   overflow-x:hidden;
+}
+
+select {
+  border: 1px solid black
 }
