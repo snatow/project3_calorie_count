@@ -336,6 +336,7 @@ var EditUser = React.createClass({
     var change = {};
     change[stateName] = e.target.value;
     this.setState(change);
+    console.log(this.state);
   },
   handleFormSubmit: function(e) {
     e.preventDefault();
@@ -379,11 +380,13 @@ var EditUser = React.createClass({
       method: "GET",
       success: function(data) {
         console.log(data);
+        var number = data.calories.toString();
+        console.log(number);
         self.setState({
           id: data.id,
           username: data.username,
           email: data.email,
-          calories: data.calories
+          calories: number
         })
       }//.bind(this)
     })
