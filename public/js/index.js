@@ -51,15 +51,21 @@ var CalorieApp = React.createClass({
   }
 });
 
+//=========================================================================
+  //  These elements handle the Calories
+//=========================================================================
 // This will render the calorie tracker that we get from our user.
 var Calories = React.createClass({
-  getInitialState: function() {
+  getInitialState: function() { //sets the calories to null
     return {calories: null}
+  },
+  changeCalories: function() {
+    //need to change the state of calories upon adding a food
   },
   // test: function() {
   //   console.log('test calories works');
   // },
-  getCaloriesAJAX: function() {
+  getCaloriesAJAX: function() { //sets the calories for our user
     $.ajax({
       url: '/user/user/calories',
       method: "get",
@@ -77,12 +83,12 @@ var Calories = React.createClass({
     if (this.state.calories !== null) {
       return (
         <div>
-          {this.state.calories}
+          {this.state.calories} {/*prints out the calories*/}
         </div>)
     }
     return (
       <div>
-        {this.getCaloriesAJAX()}
+        {this.getCaloriesAJAX()} {/*gets the calories upon render*/}
       </div>)
   }
 })
