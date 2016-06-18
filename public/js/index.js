@@ -11,9 +11,9 @@ var CalorieApp = React.createClass({
       cookieCheck = '';
     }
     return {
-      puppies: [],
       authenticatedUser: cookieCheck,
-      username: ""
+      username: "",
+      logOutShow: true
     };
   },
   //brings forward the username for user experience
@@ -28,6 +28,10 @@ var CalorieApp = React.createClass({
       authenticatedUser: "",
     })
   },
+  logOutToggle: function() {
+    var newLogOut = !this.state.logOutShow;
+    this.setState({logOutShow: newLogOut})
+  },
   render: function() {
     // console.log('authenticatedUser: ', this.state.authenticatedUser);
     // console.log('---------------------');
@@ -35,14 +39,14 @@ var CalorieApp = React.createClass({
     if(this.state.authenticatedUser === true) {
       return (
         <div>
+          <EditUser logOutToggle={this.logOutToggle}/>
+          <LogOutComponent 
+            username={this.state.username}
+            logOutShow={this.state.logOutShow} />
           {/*//this is placeholder for now - used homework example*/}
           <h3>The Best Fwoarking Calorie Counting App</h3>
           <img src="./images/fork_logo.png"/>
-          <LogOutComponent 
-            username={this.state.username}
-            logOutSubmit={this.logOutSubmit} />
           <Calories username={this.state.username} />
-          <EditUser />
           <SearchBar />
         </div>
       )
@@ -167,7 +171,6 @@ var LoginComponent = React.createClass({
       username: this.props.initialLoginCheck,
       password: this.props.initialLoginCheck,
       loginStatus: this.props.initialLoginCheck,
-      // needLogInForm: false
     };
   },
   handleLoginFormChange: function(stateName, e) {
@@ -181,9 +184,6 @@ var LoginComponent = React.createClass({
     var password = this.state.password.trim();
     this.loginAJAX(username, password);
   },
-  // logInState: function() {
-  //   this.setState({needLogInForm: true})
-  // },
   loginAJAX: function(username, password) {
     $.ajax({
       url: '/auth',
@@ -204,29 +204,20 @@ var LoginComponent = React.createClass({
     });
   },
   render: function() {
-    // if (!this.state.needLogInForm) {
-    //   //this renders the log in link (or what will look like a link to the user)
-    //   return(
-    //     <div className="link log-in-link">
-    //       <h4 onClick={this.logInState}>Log In</h4>
-    //     </div>)
-    // } else {
-      //This renders the log in form
-      return (
-        <div className="login-form" >
-          <h3>Please Login</h3>
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="username">Username</label>
-            <input type="text" value={this.state.username} onChange={this.handleLoginFormChange.bind(this, 'username')}/>
-            <br/>
-            <label htmlFor="password">Password</label>
-            <input type="password" value={this.state.password} onChange={this.handleLoginFormChange.bind(this, 'password')}/>
-            <br/>
-            <input className="button" type="submit"/>
-          </form>
-        </div>
-      )
-   // } 
+    return (
+      <div className="login-form" >
+        <h3>Please Login</h3>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="username">Username</label>
+          <input type="text" value={this.state.username} onChange={this.handleLoginFormChange.bind(this, 'username')}/>
+          <br/>
+          <label htmlFor="password">Password</label>
+          <input type="password" value={this.state.password} onChange={this.handleLoginFormChange.bind(this, 'password')}/>
+          <br/>
+          <input className="button" type="submit"/>
+        </form>
+      </div>
+    )
   }
 })
 
@@ -239,7 +230,6 @@ var SignUpComponent = React.createClass({
       email: "",
       password: "",
       calories: "",
-      // signup: false
     };
   },
   handleSignupFormChange: function(stateName, e) {
@@ -263,9 +253,6 @@ var SignUpComponent = React.createClass({
       signup: false
     })
   },
-  // signUpState: function() {
-  //   this.setState({signup: true})
-  // },
   signupAJAX: function(username, email, password, calories) {
     $.ajax({
       url: '/user',
@@ -286,42 +273,34 @@ var SignUpComponent = React.createClass({
     });
   },
   render: function() {
-    // if (!this.state.signup) {
-    //   return (
-    //     <div className="link">
-    //       <h4 onClick={this.signUpState}>Sign Up</h4>
-    //     </div>)
-    // } else {
-      //This renders the sign up form
-      return (
-        <div className="signup-form">
-          <h3>Sign Up</h3>
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="username">Username</label>
-            <input 
-              type="text" 
-              value={this.state.username} 
-              onChange={this.handleSignupFormChange.bind(this, 'username')}/><br/>
-            <label htmlFor="email">Email</label>
-            <input 
-              type="text" 
-              value={this.state.email} 
-              onChange={this.handleSignupFormChange.bind(this, 'email')}/><br/>
-            <label htmlFor="password">Password</label>
-            <input 
-              type="password" 
-              value={this.state.password} 
-              onChange={this.handleSignupFormChange.bind(this, 'password')}/><br/>
-            <label htmlFor="calories">Max Calories Per Day</label>
-            <input 
-              type="number" 
-              value={this.state.calories} 
-              onChange={this.handleSignupFormChange.bind(this, 'calories')}/><br/>
-              <input className="button" type="submit"/>
-          </form>
-        </div>)
-    }
- // }
+    return (
+      <div className="signup-form">
+        <h3>Sign Up</h3>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="username">Username</label>
+          <input 
+            type="text" 
+            value={this.state.username} 
+            onChange={this.handleSignupFormChange.bind(this, 'username')}/><br/>
+          <label htmlFor="email">Email</label>
+          <input 
+            type="text" 
+            value={this.state.email} 
+            onChange={this.handleSignupFormChange.bind(this, 'email')}/><br/>
+          <label htmlFor="password">Password</label>
+          <input 
+            type="password" 
+            value={this.state.password} 
+            onChange={this.handleSignupFormChange.bind(this, 'password')}/><br/>
+          <label htmlFor="calories">Max Calories Per Day</label>
+          <input 
+            type="number" 
+            value={this.state.calories} 
+            onChange={this.handleSignupFormChange.bind(this, 'calories')}/><br/>
+            <input className="button" type="submit"/>
+        </form>
+      </div>)
+  }
 })
 
 //=========================================================================
@@ -345,6 +324,7 @@ var EditUser = React.createClass({
   },
   handleFormSubmit: function(e) {
     e.preventDefault();
+    this.props.logOutToggle();
     var id = this.state.id;
     console.log("this is id: " + id)
     var username = this.state.username.trim();
@@ -378,17 +358,19 @@ var EditUser = React.createClass({
     });
   },
   showEditForm: function() {
+    this.props.logOutToggle();
     var self = this;
     $.ajax({
       url: "/user/user",
       method: "GET",
       success: function(data) {
         console.log(data);
+        var number = data.calories.toString();
         self.setState({
           id: data.id,
           username: data.username,
           email: data.email,
-          calories: data.calories
+          calories: number
         })
       }//.bind(this)
     })
@@ -401,6 +383,7 @@ var EditUser = React.createClass({
     if (this.state.editForm) {
       return(
         <div>
+          <h4>Edit</h4>
           <form onSubmit={this.handleFormSubmit}>
             <label htmlFor="username">Username</label>
             <input 
@@ -428,6 +411,55 @@ var EditUser = React.createClass({
     }
   }
 })
+
+//=========================================================================
+  //  This is the log out element
+//=========================================================================
+
+var LogOutComponent = React.createClass({
+  getInitialState: function() {
+    return {
+      loggedIn: true,
+      username: this.props.username
+    }
+  },
+  logOut: function() {
+    console.log("logout")
+    Cookies.remove("jwt_token")
+    this.setState({
+      loggedIn: false
+    })
+    this.props.logOutSubmit();
+  },
+  render: function() {
+    if (this.state.loggedIn && this.props.logOutShow) {
+      return (
+        <div className="log-out">
+          <h4 onClick={this.logOut}>Log Out</h4>
+        </div>
+      )
+    } else if (this.state.loggedIn && !this.props.logOutShow) {
+      return (
+        <div>
+        </div>
+      )
+    }
+  }
+})
+
+//=========================================================================
+  //  This element will manage user flow for edit user account and log out
+//=========================================================================
+
+// var EditUserLogOut = React.createClass({
+
+//   render: function() {
+
+//   }
+// })
+
+
+
 
 //=========================================================================
   //  These are the search elements
@@ -592,43 +624,6 @@ var RenderFood = React.createClass({
         </ul>
         <p>Calories: {calories} </p>
       </div>)
-  }
-})
-
-
-//=========================================================================
-  //  This is the log out element
-//=========================================================================
-
-//This is just for testing stuff right now
-var LogOutComponent = React.createClass({
-  getInitialState: function() {
-    return {
-      loggedIn: true,
-      username: this.props.username
-    }
-  },
-  logOut: function() {
-    console.log("logout")
-    Cookies.remove("jwt_token")
-    this.setState({
-      loggedIn: false
-    })
-    this.props.logOutSubmit();
-  },
-  render: function() {
-    if (this.state.loggedIn) {
-      return (
-        <div>
-          <h4 onClick={this.logOut}>Log Out</h4>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-        </div>
-      )
-    }
   }
 })
 

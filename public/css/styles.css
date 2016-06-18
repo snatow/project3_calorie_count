@@ -7,6 +7,10 @@ h3 {
   text-align: center;
 }
 
+h4 {
+  margin-top: 5px;
+}
+
 img {
   width: 30px;
 /*  margin-top: 30px;*/
@@ -26,6 +30,18 @@ img {
   margin-bottom: 20px;
 }
 
+.log-out {
+  display: inline-block;
+  margin-left: 51%;
+}
+
+.log-out-no {
+  display: none;
+}
+
+.edit-link {
+  display: inline-block;
+}
 .name {
   margin-top: 20px;
 }
