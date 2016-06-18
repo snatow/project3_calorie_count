@@ -23,6 +23,11 @@ var CalorieApp = React.createClass({
       username: data.username
     })
   },
+  logOutSubmit: function() {
+    this.setState({
+      authenticatedUser: "",
+    })
+  },
   render: function() {
     // console.log('authenticatedUser: ', this.state.authenticatedUser);
     // console.log('---------------------');
@@ -31,11 +36,13 @@ var CalorieApp = React.createClass({
       return (
         <div>
           {/*//this is placeholder for now - used homework example*/}
-          <HelloUser username={this.state.username} />
-          <Calories />
-          <EditUser />
           <h3>The Best Fwoarking Calorie Counting App</h3>
           <img src="./images/fork_logo.png"/>
+          <LogOutComponent 
+            username={this.state.username}
+            logOutSubmit={this.logOutSubmit} />
+          <Calories username={this.state.username} />
+          <EditUser />
           <SearchBar />
         </div>
       )
@@ -64,7 +71,8 @@ var CalorieApp = React.createClass({
 // This will render the calorie tracker that we get from our user.
 var Calories = React.createClass({
   getInitialState: function() { //sets the calories to null
-    return {calories: null}
+    return {calories: null,
+      username: ''}
   },
   changeCalories: function() {
     //need to change the state of calories upon adding a food
@@ -79,7 +87,9 @@ var Calories = React.createClass({
       success: function(data) {
         // console.log('success for getting calories');
         console.log(data);
-        this.setState({calories: data.calories})
+        this.setState({calories: data.calories,
+                      username: data.username});
+        console.log(this.state)
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(status, err.toString());
@@ -90,7 +100,7 @@ var Calories = React.createClass({
     if (this.state.calories !== null) {
       return (
         <div className='calories'>
-          Remaining calories for the day: {this.state.calories} {/*prints out the calories*/}
+          Hi {this.state.username}, you have {this.state.calories} calories remaining for the day. {/*prints out the calories*/}
         </div>)
     }
     return (
@@ -587,14 +597,15 @@ var RenderFood = React.createClass({
 
 
 //=========================================================================
-  //  These are other elements 
+  //  This is the log out element
 //=========================================================================
 
 //This is just for testing stuff right now
-var HelloUser = React.createClass({
+var LogOutComponent = React.createClass({
   getInitialState: function() {
     return {
-      loggedIn: true
+      loggedIn: true,
+      username: this.props.username
     }
   },
   logOut: function() {
@@ -603,19 +614,18 @@ var HelloUser = React.createClass({
     this.setState({
       loggedIn: false
     })
+    this.props.logOutSubmit();
   },
   render: function() {
     if (this.state.loggedIn) {
       return (
         <div>
-          <h1>Hello {this.props.username}</h1>
-          <button onClick={this.logOut}>Log Out</button>
+          <h4 onClick={this.logOut}>Log Out</h4>
         </div>
       )
     } else {
       return (
         <div>
-          <h1>Goodbye {this.props.username}</h1>
         </div>
       )
     }

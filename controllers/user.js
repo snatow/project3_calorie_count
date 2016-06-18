@@ -93,7 +93,7 @@ router.get('/user/calories', function(req, res) {
     } else {
       console.log('it works')
       console.log(user.calories);
-      res.send({calories: user.calories});
+      res.send({calories: user.calories, username: user.username});
     }
   })
 })
