@@ -620,6 +620,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <BreakfastComponent />
+          <button className="meals-submit">button</button>
         </div>)
     } else if (this.state.showLunch) {
       return(
@@ -631,6 +632,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <LunchComponent />
+          <button className="meals-submit">button</button>
         </div>)
     } else if (this.state.showDinner) {
       return(
@@ -642,6 +644,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <DinnerComponent />
+          <button className="meals-submit">button</button>
         </div>)
     } else if (this.state.showSnacks) {
       return(
@@ -653,6 +656,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <SnacksComponent />
+          <button className="meals-submit">button</button>
         </div>)
     }
   }
