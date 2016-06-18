@@ -81,6 +81,7 @@ var DatePicker = React.createClass({
     e.preventDefault()
     console.log('handling date');
     console.log(this.state);
+    this.getMealByDateAJAX();
   },
   handleMonthChange: function(e) {
     console.log(e.target.value)
@@ -93,6 +94,21 @@ var DatePicker = React.createClass({
   handleYearChange: function(e) {
     console.log(e.target.value)
     this.setState({year: e.target.value})
+  },
+  getMealByDateAJAX: function() {
+    $.ajax({
+      url: '/user/user/date',
+      method: "post",
+      data: this.state,
+      success: function(data) {
+        // console.log('success for getting calories');
+        console.log(data);
+        console.log(this.state)
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(status, err.toString());
+      }.bind(this)
+    });
   },
   render: function() {
     return(

@@ -139,7 +139,7 @@ router.get('/user/:id/meal', function(req, res) {
 })
 
 // Gets user and get the specific meal by the date
-router.get('/user/:id/date/', function(req, res) {
+router.get('/user/date/', function(req, res) {
   console.log(req.params.date);
   console.log(req.body)
 
@@ -163,27 +163,30 @@ router.get('/user/:id/date/', function(req, res) {
 });
 
 // Gets user and get the specific meal by the date
-router.post('/user/:id/date/', function(req, res) {
-  console.log(req.params.date);
+router.post('/user/date/', function(req, res) {
+  // console.log(req.params.date);
   console.log(req.body)
-  
+  var date = new Date(req.body.month + ' ' + req.body.day + ', ' + req.body.year);
+  console.log(date);
   // var date1 = new Date("October 13, 2014"); // sample date for testing
   // date1 = Date.parse(d); // parses date to string
   // console.log(d);
-  // User.findById(req.params.id).then(function(user) { //finds user by ID
-  //   // res.send(user);
-  //   // console.log(user);
-  //   user.meal.forEach(function(meal){ //searches through user meals
-  //     // console.log(meal);
-  //     // console.log(typeof meal.date);
-  //     // console.log(typeof d);
-  //     if(Date.parse(meal.date) == date1){ //compares the date
-  //       console.log('this is the meal ' + meal) 
-  //       // console.log(meal);
-  //     }
-  //   })
-  //   // user.findOne({meal: })
-  // })
+  User.findById(req.user.id).then(function(user) { //finds user by ID
+    // res.send(user);
+    console.log(user);
+    user.meals.forEach(function(meal){ //searches through user meals
+      console.log("this is the meal " + meal);
+      console.log(typeof meal.date);
+      console.log(typeof date);
+      console.log("date one is " + date);
+      console.log("date two is " + meal.date)
+      // console.log(typeof d);
+      if(meal.date = date){ //compares the date
+        console.log('this is the meal ' + meal) 
+        // console.log(meal);
+      }
+    })
+  })
 });
 
 

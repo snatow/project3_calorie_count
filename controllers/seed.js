@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
   });
 
   var meal1 = new Meal({
-    date: new Date("October 13, 2014"),
+    date: new Date("October 13, 2016"),
     breakfast: ["cat", "dog"],
     lunch: ["cat", "dog"],
     dinner: ["cat", "dog"],
@@ -23,7 +23,7 @@ router.get('/', function(req, res) {
   });
 
   var meal2 = new Meal({
-    date: new Date("October 14, 2014"),
+    date: new Date("January 1, 2017"),
     breakfast: ['dog', 'cat'],
     lunch: ['dog', 'cat'],
     dinner: ['dog', 'cat'],
