@@ -270,8 +270,7 @@ var SearchBar = React.createClass({
             placeholder="search term"
             value={this.state.searchTerm} 
             onChange={this.searchChange}/>
-          <button><img src="./images/fork_button.png"/></button>
-            {/*<input className="button" type="submit"/>*/}
+          <input className="button" type="submit"/>
         </form>
         <FirstList 
           data={this.state.data}
