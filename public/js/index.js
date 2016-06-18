@@ -82,10 +82,16 @@ var DatePicker = React.createClass({
   handleMonthChange: function(e) {
     console.log(e.target.value)
   },
+  handleDayChange: function(e) {
+    console.log(e.target.value);
+  },
+  handleYearChange: function(e) {
+    console.log(e.target.value)
+  },
   render: function() {
     return(
       <div>
-        <form onSubmit={this.handleDate}>
+        <form onSubmit={this.handleMonthChange}>
           <select name="month" onChange={this.handleMonthChange}>
             <option value="January">January</option>
             <option value="February">February</option>
@@ -101,7 +107,7 @@ var DatePicker = React.createClass({
             <option value="December">December</option>
           </select>
 
-           <select name="day" onChange={this.test}>
+           <select name="day" onChange={this.handleDayChange}>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -135,7 +141,7 @@ var DatePicker = React.createClass({
             <option value="31">31</option>
           </select>
 
-          <select name="year">
+          <select name="year" onChange={this.handleYearChange}>
             <option value="2016">2016</option>
             <option value="2017">2017</option>
             <option value="2018">2018</option>
