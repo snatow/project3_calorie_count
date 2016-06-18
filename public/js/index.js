@@ -29,8 +29,14 @@ var CalorieApp = React.createClass({
     // console.log('cookie:', document.cookie);
     if(this.state.authenticatedUser === true) {
       return (
-        //this is placeholder for now - used homework example
-        <HelloUser username={this.state.username} />
+        <div>
+          {/*//this is placeholder for now - used homework example*/}
+          <HelloUser username={this.state.username} />
+          <Calories />
+          <h3>The Best Fwoarking Calorie Counting App</h3>
+          <img src="./images/fork_logo.png"/>
+          <SearchBar />
+        </div>
       )
     } else {
       return (
@@ -50,6 +56,48 @@ var CalorieApp = React.createClass({
     }
   }
 });
+
+//=========================================================================
+  //  These elements handle the Calories
+//=========================================================================
+// This will render the calorie tracker that we get from our user.
+var Calories = React.createClass({
+  getInitialState: function() { //sets the calories to null
+    return {calories: null}
+  },
+  changeCalories: function() {
+    //need to change the state of calories upon adding a food
+  },
+  // test: function() {
+  //   console.log('test calories works');
+  // },
+  getCaloriesAJAX: function() { //sets the calories for our user
+    $.ajax({
+      url: '/user/user/calories',
+      method: "get",
+      success: function(data) {
+        // console.log('success for getting calories');
+        console.log(data);
+        this.setState({calories: data.calories})
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(status, err.toString());
+      }.bind(this)
+    });
+  },
+  render: function() {
+    if (this.state.calories !== null) {
+      return (
+        <div className='calories'>
+          Remaining calories for the day: {this.state.calories} {/*prints out the calories*/}
+        </div>)
+    }
+    return (
+      <div>
+        {this.getCaloriesAJAX()} {/*gets the calories upon render*/}
+      </div>)
+  }
+})
 
 //=========================================================================
   //  These elements will handle user sign up and log in
