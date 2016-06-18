@@ -22,7 +22,12 @@ img {
 
 .log-in-link {
   position: fixed;
-  margin-left: 70%;
+  margin-left: 78%;
+  margin-bottom: 20px;
+}
+
+.name {
+  margin-top: 20px;
 }
 
 .button {

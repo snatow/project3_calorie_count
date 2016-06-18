@@ -35,11 +35,14 @@ var CalorieApp = React.createClass({
     } else {
       return (
         <div>
-          <LoginComponent
-          initialLoginCheck={this.state.authenticatedUser} 
-          onChange={this.changeLogin} />
-          <SignUpComponent />
-          <h3>The Best Fwoarking Calorie Counting App</h3>
+          <LogInSignUp 
+            initialLoginCheck={this.state.authenticatedUser} 
+            onChange={this.changeLogin} />
+          {/*<SignUpComponent />
+                    <LoginComponent
+                    initialLoginCheck={this.state.authenticatedUser} 
+                    onChange={this.changeLogin} />*/}
+          <h3 className="name">The Best Fwoarking Calorie Counting App</h3>
           <img src="./images/fork_logo.png"/>
           <SearchBar />
         </div>
@@ -52,6 +55,51 @@ var CalorieApp = React.createClass({
   //  These elements will handle user sign up and log in
 //=========================================================================
 
+//This component will manage display of both log in and sign up related elements
+var LogInSignUp = React.createClass({
+  getInitialState: function() {
+    return {
+      signup: false,
+      needLogInForm: false
+    }
+  },
+  logInState: function() {
+    this.setState({needLogInForm: true})
+  },
+  signUpState: function() {
+    this.setState({signup: true})
+  },
+  signUpSubmit: function() {
+    this.setState({needLogInForm: true, signup: false})
+  },
+  render: function() {
+    if (!this.state.signup && !this.state.needLogInForm) {
+      return(
+        <div>
+          <div className="link log-in-link">
+            <h4 onClick={this.logInState}>Log In</h4>
+          </div>
+          <div className="link">
+          <h4 onClick={this.signUpState}>Sign Up</h4>
+        </div>
+        </div>)
+    } else if (this.state.signup && !this.state.needLogInForm) {
+      return(
+        <div>
+          <SignUpComponent signUpSubmit={this.signUpSubmit} />
+          <h4 onClick={this.logInState}>Log In</h4>
+        </div>)
+    } else if (!this.state.signup && this.state.needLogInForm) {
+      return(
+        <div>
+        <LoginComponent 
+          initialLoginCheck={this.props.initialLoginCheck}
+          onChange={this.props.onChange} />
+        </div>)
+    }
+  }
+})
+
 //This component will initially render a log in link on initial state and will
 //render a log in form once that link is clicked
 var LoginComponent = React.createClass({
@@ -60,7 +108,7 @@ var LoginComponent = React.createClass({
       username: this.props.initialLoginCheck,
       password: this.props.initialLoginCheck,
       loginStatus: this.props.initialLoginCheck,
-      needLogInForm: false
+      // needLogInForm: false
     };
   },
   handleLoginFormChange: function(stateName, e) {
@@ -74,9 +122,9 @@ var LoginComponent = React.createClass({
     var password = this.state.password.trim();
     this.loginAJAX(username, password);
   },
-  logInState: function() {
-    this.setState({needLogInForm: true})
-  },
+  // logInState: function() {
+  //   this.setState({needLogInForm: true})
+  // },
   loginAJAX: function(username, password) {
     $.ajax({
       url: '/auth',
@@ -97,13 +145,13 @@ var LoginComponent = React.createClass({
     });
   },
   render: function() {
-    if (!this.state.needLogInForm) {
-      //this renders the log in link (or what will look like a link to the user)
-      return(
-        <div className="link log-in-link">
-          <p onClick={this.logInState}>Log In</p>
-        </div>)
-    } else {
+    // if (!this.state.needLogInForm) {
+    //   //this renders the log in link (or what will look like a link to the user)
+    //   return(
+    //     <div className="link log-in-link">
+    //       <h4 onClick={this.logInState}>Log In</h4>
+    //     </div>)
+    // } else {
       //This renders the log in form
       return (
         <div className="login-form" >
@@ -119,7 +167,7 @@ var LoginComponent = React.createClass({
           </form>
         </div>
       )
-    } 
+   // } 
   }
 })
 
@@ -132,7 +180,7 @@ var SignUpComponent = React.createClass({
       email: "",
       password: "",
       calories: "",
-      signup: false
+      // signup: false
     };
   },
   handleSignupFormChange: function(stateName, e) {
@@ -147,6 +195,7 @@ var SignUpComponent = React.createClass({
     var password = this.state.password.trim();
     var calories = this.state.calories.trim();
     this.signupAJAX(username, email, password, calories);
+    this.props.signUpSubmit();
     this.setState({
       username: "",
       email: "",
@@ -155,9 +204,9 @@ var SignUpComponent = React.createClass({
       signup: false
     })
   },
-  signUpState: function() {
-    this.setState({signup: true})
-  },
+  // signUpState: function() {
+  //   this.setState({signup: true})
+  // },
   signupAJAX: function(username, email, password, calories) {
     $.ajax({
       url: '/user',
@@ -178,12 +227,12 @@ var SignUpComponent = React.createClass({
     });
   },
   render: function() {
-    if (!this.state.signup) {
-      return (
-        <div className="link">
-          <p onClick={this.signUpState}>Sign Up</p>
-        </div>)
-    } else {
+    // if (!this.state.signup) {
+    //   return (
+    //     <div className="link">
+    //       <h4 onClick={this.signUpState}>Sign Up</h4>
+    //     </div>)
+    // } else {
       //This renders the sign up form
       return (
         <div className="signup-form">
@@ -213,7 +262,7 @@ var SignUpComponent = React.createClass({
           </form>
         </div>)
     }
-  }
+ // }
 })
 
 //=========================================================================
