@@ -39,6 +39,8 @@ var CalorieApp = React.createClass({
           initialLoginCheck={this.state.authenticatedUser} 
           onChange={this.changeLogin} />
           <SignUpComponent />
+          <h3>The Best Fwoarking Calorie Counting App</h3>
+          <img src="./images/fork_logo.png"/>
           <SearchBar />
         </div>
       )
@@ -267,8 +269,9 @@ var SearchBar = React.createClass({
             type="text" 
             placeholder="search term"
             value={this.state.searchTerm} 
-            onChange={this.searchChange}/><br/>
-            <input className="button" type="submit"/>
+            onChange={this.searchChange}/>
+          <button><img src="./images/fork_button.png"/></button>
+            {/*<input className="button" type="submit"/>*/}
         </form>
         <FirstList 
           data={this.state.data}

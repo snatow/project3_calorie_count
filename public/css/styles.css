@@ -1,23 +1,38 @@
 body {
   background-color: #BDE8E8;
+  font-family: 'Cabin', sans-serif;
+}
+
+h3 {
+  text-align: center;
+}
+
+img {
+  width: 30px;
+/*  margin-top: 30px;*/
+  margin-left: 45%;
 }
 
 .link {
   color: #1a4e7e;
-  /*display: inline-block;*/
+  display: inline-block;
   /*float: left;*/
   padding-left: 10px;
 }
 
 .log-in-link {
-  /*position: fixed;*/
-  /*margin-left: 65%;*/
+  position: fixed;
+  margin-left: 70%;
 }
 
 .button {
   color: white;
   background-color: #2670B5;
   border: 1px solid #2629b5;
+}
+
+button {
+  margin-left: -20px;
 }
 
 /*.button:hover{
@@ -31,13 +46,16 @@ input {
 
 .search-bar {
   display: block;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .first-results{
   border: 1px solid black;
+  background-color: white;
+  z-index: 1;
 }
 
 .Food-container {
   border: 1px solid black;
+  background-color: white;
 }
