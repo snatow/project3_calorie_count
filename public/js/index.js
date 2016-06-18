@@ -46,7 +46,7 @@ var CalorieApp = React.createClass({
           {/*//this is placeholder for now - used homework example*/}
           <h3>The Best Fwoarking Calorie Counting App</h3>
           <img src="./images/fork_logo.png"/>
-          <Calories username={this.state.username} />
+          <Calories username={this.state.username} logOutToggle={this.logOutToggle}/>
           <SearchBar />
         </div>
       )
@@ -84,6 +84,10 @@ var Calories = React.createClass({
   // test: function() {
   //   console.log('test calories works');
   // },
+  editedCalories: function() {
+    console.log('edited calories works');
+    this.getCaloriesAJAX();
+  },
   getCaloriesAJAX: function() { //sets the calories for our user
     $.ajax({
       url: '/user/user/calories',
@@ -321,6 +325,7 @@ var EditUser = React.createClass({
     var change = {};
     change[stateName] = e.target.value;
     this.setState(change);
+    console.log(this.state);
   },
   handleFormSubmit: function(e) {
     e.preventDefault();
@@ -337,6 +342,7 @@ var EditUser = React.createClass({
       calories: "",
       editForm: false
     })
+    this.props.onEdit();
     return false;
   },
   editUserAJAX: function(username, email, calories) {
@@ -366,6 +372,7 @@ var EditUser = React.createClass({
       success: function(data) {
         console.log(data);
         var number = data.calories.toString();
+        console.log(number);
         self.setState({
           id: data.id,
           username: data.username,
