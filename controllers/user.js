@@ -306,7 +306,55 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
             user.save();
           }
         })
-      } 
+      } else if (mealName == "lunch") {
+        meal.lunch.forEach(function(foodItem) {
+          console.log("food Item");
+          console.log(foodItem);
+          if (req.body.food.food == foodItem.food) {
+            console.log("inside If statement")
+            console.log(foodItem);
+            console.log(meal.lunch);
+
+            var index = meal.lunch.indexOf(foodItem);
+            console.log("this is the index: ");
+            console.log(index);
+            meal.lunch.splice(index, 1)
+            user.save();
+          }
+        })
+      } else if (mealName == "dinner") {
+        meal.dinner.forEach(function(foodItem) {
+          console.log("food Item");
+          console.log(foodItem);
+          if (req.body.food.food == foodItem.food) {
+            console.log("inside If statement")
+            console.log(foodItem);
+            console.log(meal.dinner);
+
+            var index = meal.dinner.indexOf(foodItem);
+            console.log("this is the index: ");
+            console.log(index);
+            meal.dinner.splice(index, 1)
+            user.save();
+          }
+        })
+      } else if (mealName == "snacks") {
+        meal.snacks.forEach(function(foodItem) {
+          console.log("food Item");
+          console.log(foodItem);
+          if (req.body.food.food == foodItem.food) {
+            console.log("inside If statement")
+            console.log(foodItem);
+            console.log(meal.snacks);
+
+            var index = meal.snacks.indexOf(foodItem);
+            console.log("this is the index: ");
+            console.log(index);
+            meal.snacks.splice(index, 1)
+            user.save();
+          }
+        })
+      }
     })
   })
 })
