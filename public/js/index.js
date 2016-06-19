@@ -743,13 +743,27 @@ var LunchComponent = React.createClass({
 })
 
 var DinnerComponent = React.createClass({
+  getInitialState: function() {
+    return {refresh: true}
+  },
+  refresh: function() {
+    //console.log("refreshing");
+    // var refreshMeal = !this.state.refresh;
+    // console.log("refresh Meal: " + refreshMeal);
+    // console.log(this.state.refresh);
+    // this.setState({refresh: refreshMeal});
+    // console.log(this.state.refresh);
+    this.setState({refresh: false}) //this doesn't work, but I do not know why
+    console.log(this.state);
+  },
   render: function() {
     console.log("in the dinner component: ")
     console.log(this.props.meal);
     var mealList = this.props.meal
+    var self = this;
     var renderMealList = function(item) {
       return(
-        <MealList>{item}</MealList>)
+        <MealList refresh={self.refresh} >{item}</MealList>)
     }
     return (
       <div className="meal-display">
@@ -780,6 +794,7 @@ var MealList = React.createClass({
   removeFood: function() {
     console.log("removing");
     console.log(this.props.children);
+    this.props.refresh();
     $.ajax({
       url: '/user/removefood/' + month + '/' + day + '/' + year + '/' + meal,
       method: 'put',
