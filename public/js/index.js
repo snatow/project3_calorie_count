@@ -777,15 +777,23 @@ var SnacksComponent = React.createClass({
 })
 
 var MealList = React.createClass({
-  removeFood: function(foodItem) {
+  removeFood: function() {
     console.log("removing");
-    console.log(foodItem);
+    console.log(this.props.children);
+    $.ajax({
+      url: '/user/removefood/' + month + '/' + day + '/' + year + '/' + meal,
+      method: 'put',
+      data: {food: this.props.children},
+      success: function(){
+        console.log('success')
+      }
+    })
   },
   render: function() {
     var foodItem = this.props.children.food;
     return(
       <div>
-        <li onClick={this.removeFood(foodItem)}>Name: {this.props.children.food} calories: {this.props.children.calories}</li>
+        <li onClick={this.removeFood}>Name: {this.props.children.food} calories: {this.props.children.calories}</li>
       </div>)
   }
 })

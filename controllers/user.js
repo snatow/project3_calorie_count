@@ -278,6 +278,39 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
   })
 })
 
+//Removes food
+router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
+  console.log("inside put route to delete")
+  console.log(req.body.food);
+  var mealName = req.params.meal;
+  console.log(mealName);
+  User.findById(req.user.id).then(function(user) {
+    console.log("searching for the user")
+    console.log(user);
+    user.meals.forEach(function(meal){
+      console.log("meal");
+      console.log(meal);
+      if (mealName == "breakfast") {
+        meal.breakfast.forEach(function(foodItem) {
+          console.log("food Item");
+          console.log(foodItem);
+          if (req.body.food.food == foodItem.food) {
+            console.log("inside If statement")
+            console.log(foodItem);
+            console.log(meal.breakfast);
+
+            var index = meal.breakfast.indexOf(foodItem);
+            console.log("this is the index: ");
+            console.log(index);
+            meal.breakfast.splice(index, 1)
+            user.save();
+          }
+        })
+      } 
+    })
+  })
+})
+
 // Get User 
 router.get('/user', function(req, res) {
   console.log('get the users meal');
