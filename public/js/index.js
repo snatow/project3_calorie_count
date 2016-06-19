@@ -584,11 +584,12 @@ var MealParentComponent = React.createClass({
       showBreakfast: true,
       showLunch: false,
       showDinner: false,
-      showSnacks: false
+      showSnacks: false,
+      meal: []
     }
   },
   showBreakfastToggle: function() {
-    console.log('breakfast toggle')
+    //console.log('breakfast toggle')
     this.setState({
       showBreakfast: true,
       showLunch: false,
@@ -629,7 +630,8 @@ var MealParentComponent = React.createClass({
       url: '/user/user/meal/' + month + '/' + day + '/' + year + '/' + meal,
       method: "get",
       success: function(data) {
-        console.log(data);
+        console.log(data[0]);
+        this.setState({meal: data})
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(status, err.toString());
@@ -657,7 +659,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <BreakfastComponent />
+          <BreakfastComponent meal={this.state.meal} />
           <button className="meals-submit">button</button>
         </div>)
     } 
@@ -670,7 +672,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <LunchComponent />
+          <LunchComponent meal={this.state.meal} />
           <button className="meals-submit">button</button>
         </div>)
     } else if (this.state.showDinner) {
@@ -682,7 +684,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <DinnerComponent />
+          <DinnerComponent meal={this.state.meal} />
           <button className="meals-submit">button</button>
         </div>)
     } else if (this.state.showSnacks) {
@@ -694,7 +696,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <SnacksComponent />
+          <SnacksComponent meal={this.state.meal} />
           <button className="meals-submit">button</button>
         </div>)
     }
@@ -703,29 +705,78 @@ var MealParentComponent = React.createClass({
 
 var BreakfastComponent = React.createClass({
   render: function() {
-    return(
-      <div className="meal-display">Breakfast List</div>)
+    console.log("in the breakfast component: ");
+    console.log(this.props.meal);
+    var mealList = this.props.meal
+    var renderMealList = function(item) {
+      return(
+        <MealList>{item}</MealList>)
+    }
+    return (
+      <div className="meal-display">
+        <p>Breakfast List</p>
+        <ul>{mealList.map(renderMealList)}</ul>
+      </div>)
   }
 })
 
 var LunchComponent = React.createClass({
   render: function() {
-    return(
-      <div className="meal-display">Lunch List</div>)
+    console.log("in the lunch component: ")
+    console.log(this.props.meal);
+    var mealList = this.props.meal
+    var renderMealList = function(item) {
+      return(
+        <MealList>{item}</MealList>)
+    }
+    return (
+      <div className="meal-display">
+        <p>Breakfast List</p>
+        <ul>{mealList.map(renderMealList)}</ul>
+      </div>)
   }
 })
 
 var DinnerComponent = React.createClass({
   render: function() {
-    return(
-      <div className="meal-display">Dinner List</div>)
+    console.log("in the dinner component: ")
+    console.log(this.props.meal);
+    var mealList = this.props.meal
+    var renderMealList = function(item) {
+      return(
+        <MealList>{item}</MealList>)
+    }
+    return (
+      <div className="meal-display">
+        <p>Breakfast List</p>
+        <ul>{mealList.map(renderMealList)}</ul>
+      </div>)
   }
 })
 
 var SnacksComponent = React.createClass({
   render: function() {
+    console.log("in the snacks component: ")
+    console.log(this.props.meal);
+    var mealList = this.props.meal
+    var renderMealList = function(item) {
+      return(
+        <MealList>{item}</MealList>)
+    }
+    return (
+      <div className="meal-display">
+        <p>Breakfast List</p>
+        <ul>{mealList.map(renderMealList)}</ul>
+      </div>)
+  }
+})
+
+var MealList = React.createClass({
+  render: function() {
     return(
-      <div className="meal-display">Snacks List</div>)
+      <div>
+        <li>Name: {this.props.children.food} calories: {this.props.children.calories}</li>
+      </div>)
   }
 })
 
@@ -802,6 +853,7 @@ var SearchBar = React.createClass({
     } else {
       return(
         <div className="search-bar">
+        <MealParentComponent />
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="search">Search</label>
             <input 
@@ -815,7 +867,6 @@ var SearchBar = React.createClass({
             data={this.state.data}
             onSubmit={this.foodListStateChange}/>
           <RenderFoodContainer data={this.state.foodList} />
-          <MealParentComponent />
         </div>)
     }
   }
