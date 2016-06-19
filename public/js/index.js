@@ -70,7 +70,7 @@ var CalorieApp = React.createClass({
                     initialLoginCheck={this.state.authenticatedUser} 
                     onChange={this.changeLogin} />*/}
           <h3 className="name">The Best Fwoarking Calorie Counting App</h3>
-          <SearchBar user={this.state.username} />
+          {/*<SearchBar user={this.state.username} />*/}
         </div>
       )
     }
@@ -581,7 +581,7 @@ var LogOutComponent = React.createClass({
 var MealParentComponent = React.createClass({
   getInitialState: function() {
     return {
-      showBreakfast: false,
+      showBreakfast: true,
       showLunch: false,
       showDinner: false,
       showSnacks: false
@@ -637,17 +637,18 @@ var MealParentComponent = React.createClass({
     });
   },
   render: function() {
-    if (!this.state.showBreakfast && !this.state.showLunch && !this.state.showDinner && !this.state.showSnacks) {
-      return(
-        <div className="meals-all">
-          <div className="meal-nav-bar">
-            <div className="meal-label" onClick={this.showBreakfastToggle}>Breakfast</div>
-            <div className="meal-label" onClick={this.showLunchToggle}>Lunch</div>
-            <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
-            <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
-          </div>
-        </div>)
-    } else if (this.state.showBreakfast) {
+    // if (!this.state.showBreakfast && !this.state.showLunch && !this.state.showDinner && !this.state.showSnacks) {
+    //   return(
+    //     <div className="meals-all">
+    //       <div className="meal-nav-bar">
+    //         <div className="meal-label" onClick={this.showBreakfastToggle}>Breakfast</div>
+    //         <div className="meal-label" onClick={this.showLunchToggle}>Lunch</div>
+    //         <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
+    //         <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
+    //       </div>
+    //     </div>)
+    // } 
+    if (this.state.showBreakfast) {
       return(
         <div className="meals-all">
           <div className="meal-nav-bar">
@@ -659,7 +660,8 @@ var MealParentComponent = React.createClass({
           <BreakfastComponent />
           <button className="meals-submit">button</button>
         </div>)
-    } else if (this.state.showLunch) {
+    } 
+    else if (this.state.showLunch) {
       return(
         <div className="meals-all">
           <div className="meal-nav-bar">
@@ -738,8 +740,13 @@ var SearchBar = React.createClass({
     return {
       searchTerm: "",
       data: null,
-      foodList: null
+      foodList: null,
+      refresher: false,
     }
+  },
+  showMealParent: function() {
+    this.setState({refresher: true});
+    console.log(this.state)
   },
   foodListStateChange: function(data) {
     //console.log('hey we made it back to searchbar ');
@@ -771,10 +778,13 @@ var SearchBar = React.createClass({
     })
   },
   render: function() {
+    console.log('props of user ')
+    console.log(this.props.user);
     //this renders the search bar
-    if (this.props.user === "") {
+    if (this.state.refresher === false) {
       return(
         <div className="search-bar">
+         <button onClick={this.showMealParent}>click this to rerender</button>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="search">Search</label>
             <input 
