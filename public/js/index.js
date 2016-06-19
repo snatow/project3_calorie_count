@@ -1,4 +1,11 @@
 //=========================================================================
+//  Global Variables
+//=========================================================================
+var month = 'January'
+var day = '1'
+var year = '2016'
+
+//=========================================================================
   //  Main Component - this will render all of the react classes for the app
 //=========================================================================
 var CalorieApp = React.createClass({
@@ -81,7 +88,11 @@ var DatePicker = React.createClass({
     e.preventDefault()
     console.log('handling date');
     console.log(this.state);
-    this.getMealByDateAJAX();
+    day = this.state.day
+    month = this.state.month
+    year = this.state.year
+    console.log(day, year, month)
+    // this.getMealByDateAJAX();
   },
   handleMonthChange: function(e) {
     console.log(e.target.value)
@@ -95,21 +106,21 @@ var DatePicker = React.createClass({
     console.log(e.target.value)
     this.setState({year: e.target.value})
   },
-  getMealByDateAJAX: function() {
-    $.ajax({
-      url: '/user/user/date',
-      method: "post",
-      data: this.state,
-      success: function(data) {
-        // console.log('success for getting calories');
-        console.log(data);
-        console.log(this.state)
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(status, err.toString());
-      }.bind(this)
-    });
-  },
+  // getMealByDateAJAX: function() {
+  //   $.ajax({
+  //     url: '/user/user/date',
+  //     method: "post",
+  //     data: this.state,
+  //     success: function(data) {
+  //       // console.log('success for getting calories');
+  //       console.log(data);
+  //       console.log(this.state)
+  //     }.bind(this),
+  //     error: function(xhr, status, err) {
+  //       console.error(status, err.toString());
+  //     }.bind(this)
+  //   });
+  // },
   render: function() {
     return(
       <div>
@@ -577,12 +588,14 @@ var MealParentComponent = React.createClass({
     }
   },
   showBreakfastToggle: function() {
+    console.log('breakfast toggle')
     this.setState({
       showBreakfast: true,
       showLunch: false,
       showDinner: false,
       showSnacks: false
     })
+    this.getMealsAJAX('breakfast')
   },
   showLunchToggle: function() {
     this.setState({
@@ -591,6 +604,7 @@ var MealParentComponent = React.createClass({
       showDinner: false,
       showSnacks: false
     })
+    this.getMealsAJAX('lunch')
   },
   showDinnerToggle: function() {
     this.setState({
@@ -599,6 +613,7 @@ var MealParentComponent = React.createClass({
       showDinner: true,
       showSnacks: false
     })
+    this.getMealsAJAX('dinner')
   },
   showSnacksToggle: function() {
     this.setState({
@@ -607,6 +622,19 @@ var MealParentComponent = React.createClass({
       showDinner: false,
       showSnacks: true
     })
+    this.getMealsAJAX('snack')
+  },
+  getMealsAJAX: function(meal) {
+    $.ajax({
+      url: '/user/user/meal/' + month + '/' + day + '/' + year + '/' + meal,
+      method: "get",
+      success: function(data) {
+        console.log(data);
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(status, err.toString());
+      }.bind(this)
+    });
   },
   render: function() {
     if (!this.state.showBreakfast && !this.state.showLunch && !this.state.showDinner && !this.state.showSnacks) {
