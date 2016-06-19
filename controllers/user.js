@@ -138,52 +138,74 @@ router.get('/user/:id/meal', function(req, res) {
   })
 })
 
-// Gets user and get the specific meal by the date
-router.get('/user/:id/date/', function(req, res) {
-  console.log(req.params.date);
-  console.log(req.body)
-
+// Gets user and get the specific meal by the date and mealtime
+router.get('/user/meal/:month/:day/:year/:meal', function(req, res) {
+  // console.log(req.body)
+  var date = new Date(req.params.month + ' ' + req.params.day + ', ' + req.params.year);
+  // console.log(date);
   // var date1 = new Date("October 13, 2014"); // sample date for testing
   // date1 = Date.parse(d); // parses date to string
   // console.log(d);
-  // User.findById(req.params.id).then(function(user) { //finds user by ID
-  //   // res.send(user);
-  //   // console.log(user);
-  //   user.meal.forEach(function(meal){ //searches through user meals
-  //     // console.log(meal);
-  //     // console.log(typeof meal.date);
-  //     // console.log(typeof d);
-  //     if(Date.parse(meal.date) == date1){ //compares the date
-  //       console.log('this is the meal ' + meal) 
-  //       // console.log(meal);
-  //     }
-  //   })
-  //   // user.findOne({meal: })
-  // })
+  User.findById(req.user.id).then(function(user) { //finds user by ID
+    // res.send(user);
+    // console.log(user);
+    user.meals.forEach(function(meal){ //searches through user meals
+      // console.log("this is the meal " + meal);
+      // console.log(typeof meal.date);
+      // console.log(typeof date);
+      // console.log("date one is " + date);
+      // console.log("date two is " + meal.date)
+      var mealTime = req.params.meal;
+      console.log('This is the meal time ' + mealTime)
+      // console.log(mealTime);
+      // console.log(meal.breakfast)
+      // console.log(typeof d);
+      if(meal.date.getTime() == date.getTime() && mealTime === 'breakfast'){ //compares the date
+        console.log('this is breakfast ' + meal.breakfast)
+        res.send(meal.breakfast);
+        // console.log(meal);
+      } else if(meal.date.getTime() == date.getTime() && mealTime === 'lunch'){ //compares the date
+        console.log('this is lunch ' + meal.lunch) 
+        res.send(meal.lunch);
+        // console.log(meal);
+      } else if(meal.date.getTime() == date.getTime() && mealTime === 'dinner'){ //compares the date
+        console.log('this is dinner ' + meal.dinner)
+        res.send(meal.dinner); 
+        // console.log(meal);
+      } else if (meal.date.getTime() == date.getTime() && mealTime === 'snack'){ //compares the date
+        console.log('this is snack ' + meal.snacks) 
+        res.send(meal.snacks);
+        // console.log(meal);
+      }
+    })
+  })
 });
 
 // Gets user and get the specific meal by the date
-router.post('/user/:id/date/', function(req, res) {
-  console.log(req.params.date);
+router.post('/user/date/', function(req, res) {
+  // console.log(req.params.date);
   console.log(req.body)
-  
+  var date = new Date(req.body.month + ' ' + req.body.day + ', ' + req.body.year);
+  console.log(date);
   // var date1 = new Date("October 13, 2014"); // sample date for testing
   // date1 = Date.parse(d); // parses date to string
   // console.log(d);
-  // User.findById(req.params.id).then(function(user) { //finds user by ID
-  //   // res.send(user);
-  //   // console.log(user);
-  //   user.meal.forEach(function(meal){ //searches through user meals
-  //     // console.log(meal);
-  //     // console.log(typeof meal.date);
-  //     // console.log(typeof d);
-  //     if(Date.parse(meal.date) == date1){ //compares the date
-  //       console.log('this is the meal ' + meal) 
-  //       // console.log(meal);
-  //     }
-  //   })
-  //   // user.findOne({meal: })
-  // })
+  User.findById(req.user.id).then(function(user) { //finds user by ID
+    // res.send(user);
+    console.log(user);
+    user.meals.forEach(function(meal){ //searches through user meals
+      console.log("this is the meal " + meal);
+      console.log(typeof meal.date);
+      console.log(typeof date);
+      console.log("date one is " + date);
+      console.log("date two is " + meal.date)
+      // console.log(typeof d);
+      if(meal.date = date){ //compares the date
+        console.log('this is the meal ' + meal) 
+        // console.log(meal);
+      }
+    })
+  })
 });
 
 

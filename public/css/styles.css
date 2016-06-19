@@ -74,7 +74,8 @@ input {
 
 .search-bar {
   display: block;
-  margin-top: 10px;
+  position: fixed;
+  margin-top: 180px;
 }
 
 .first-results{
@@ -105,6 +106,11 @@ li {
   list-style-image: url("../images/fork_button_small.png");
 }
 
+.meals-all {
+  position: fixed;
+  margin-top: -190px;
+}
+
 .meal-label {
   display: inline-block;
   margin-right: 53px;
@@ -126,4 +132,8 @@ li {
   overflow: auto;
   overflow-y:scroll; 
   overflow-x:hidden;
+}
+
+select {
+  border: 1px solid black
 }
