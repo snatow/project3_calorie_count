@@ -770,7 +770,7 @@ var SnacksComponent = React.createClass({
     }
     return (
       <div className="meal-display">
-        <p>Breakfast List</p>
+        <p>Snacks List</p>
         <ul>{mealList.map(renderMealList)}</ul>
       </div>)
   }
