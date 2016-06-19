@@ -845,7 +845,7 @@ var SearchBar = React.createClass({
     if (this.state.refresher === false) {
       return(
         <div className="search-bar">
-         <button onClick={this.showMealParent}>click this to rerender</button>
+         <button className="rerender"onClick={this.showMealParent}>click this</button>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="search">Search</label>
             <input 
@@ -863,6 +863,7 @@ var SearchBar = React.createClass({
     } else {
       return(
         <div className="search-bar">
+        <button className="rerender"onClick={this.showMealParent}>click this</button>
         <MealParentComponent />
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="search">Search</label>
