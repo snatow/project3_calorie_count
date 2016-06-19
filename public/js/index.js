@@ -665,7 +665,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <BreakfastComponent meal={this.state.meal} />
-          <button className="meals-submit">button</button>
+          {/*<button className="meals-submit">button</button>*/}
         </div>)
     } 
     else if (this.state.showLunch) {
@@ -678,7 +678,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <LunchComponent meal={this.state.meal} />
-          <button className="meals-submit">button</button>
+          {/*<button className="meals-submit">button</button>*/}
         </div>)
     } else if (this.state.showDinner) {
       return(
@@ -690,7 +690,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <DinnerComponent meal={this.state.meal} />
-          <button className="meals-submit">button</button>
+          {/*<button className="meals-submit">button</button>*/}
         </div>)
     } else if (this.state.showSnacks) {
       return(
@@ -702,7 +702,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <SnacksComponent meal={this.state.meal} />
-          <button className="meals-submit">button</button>
+          {/*<button className="meals-submit">button</button>*/}
         </div>)
     }
   }
@@ -736,7 +736,7 @@ var LunchComponent = React.createClass({
     }
     return (
       <div className="meal-display">
-        <p>Breakfast List</p>
+        <p>Lunch List</p>
         <ul>{mealList.map(renderMealList)}</ul>
       </div>)
   }
@@ -753,7 +753,7 @@ var DinnerComponent = React.createClass({
     }
     return (
       <div className="meal-display">
-        <p>Breakfast List</p>
+        <p>Dinner List</p>
         <ul>{mealList.map(renderMealList)}</ul>
       </div>)
   }
