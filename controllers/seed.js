@@ -15,19 +15,45 @@ router.get('/', function(req, res) {
   });
 
   var meal1 = new Meal({
+    calories: 500,
     date: new Date("October 13, 2016"),
-    breakfast: ["cat", "dog"],
-    lunch: ["cat", "dog"],
-    dinner: ["cat", "dog"],
-    snacks: ["cat", "dog"]
+    breakfast: [{food: "cat",
+                 calories: 500}, 
+                {food: "dog",
+                 calories: 500}],
+    lunch: [{food: "cat",
+                 calories: 500}, 
+                {food: "dog",
+                 calories: 500}],
+    dinner: [{food: "cat",
+                 calories: 500}, 
+                {food: "dog",
+                 calories: 500}],
+    snacks: [{food: "cat",
+                 calories: 500}, 
+                {food: "dog",
+                 calories: 500}],
   });
 
   var meal2 = new Meal({
+    calories: 250,
     date: new Date("January 1, 2017"),
-    breakfast: ['dog', 'cat'],
-    lunch: ['dog', 'cat'],
-    dinner: ['dog', 'cat'],
-    snacks: ['dog', 'cat']
+    breakfast: [{food: "cat",
+                 calories: 500}, 
+                {food: "dog",
+                 calories: 500}],
+    lunch: [{food: "cat",
+                 calories: 500}, 
+                {food: "dog",
+                 calories: 500}],
+    dinner: [{food: "cat",
+                 calories: 500}, 
+                {food: "dog",
+                 calories: 500}],
+    snacks: [{food: "cat",
+                 calories: 500}, 
+                {food: "dog",
+                 calories: 500}]
   });
 
   user1.save();

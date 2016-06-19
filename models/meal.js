@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var MealSchema = mongoose.Schema({
   calorie: Number,
+  calorieMax: Number, 
   date: Date,
   breakfast: Array,
   lunch: Array,
