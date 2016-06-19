@@ -57,13 +57,6 @@ button {
   margin-left: 86%;
 }
 
-.rerender {
-  position: absolute;
-  top: -210px;
-  left: -59px;
-  z-index: -1;
-}
-
 .meals-submit {
   color: white;
   background-color: #2670B5;
