@@ -4,6 +4,7 @@
 var month = 'January'
 var day = '1'
 var year = '2016'
+var meal = 'breakfast'
 
 //=========================================================================
   //  Main Component - this will render all of the react classes for the app
@@ -92,7 +93,7 @@ var DatePicker = React.createClass({
     month = this.state.month
     year = this.state.year
     console.log(day, year, month)
-    // this.getMealByDateAJAX();
+    this.createDateAJAX();
   },
   handleMonthChange: function(e) {
     console.log(e.target.value)
@@ -106,21 +107,21 @@ var DatePicker = React.createClass({
     console.log(e.target.value)
     this.setState({year: e.target.value})
   },
-  // getMealByDateAJAX: function() {
-  //   $.ajax({
-  //     url: '/user/user/date',
-  //     method: "post",
-  //     data: this.state,
-  //     success: function(data) {
-  //       // console.log('success for getting calories');
-  //       console.log(data);
-  //       console.log(this.state)
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-  //       console.error(status, err.toString());
-  //     }.bind(this)
-  //   });
-  // },
+  createDateAJAX: function() {
+    $.ajax({
+      url: '/user/createdate/' + month + '/' + day + '/' + year, 
+      method: "post",
+      data: this.state,
+      success: function(data) {
+        // console.log('success for getting calories');
+        // console.log(data);
+        // console.log(this.state)
+      }.bind(this),
+      error: function(xhr, status, err) {
+        // console.error(status, err.toString());
+      }.bind(this)
+    });
+  },
   render: function() {
     return(
       <div>
@@ -596,7 +597,8 @@ var MealParentComponent = React.createClass({
       showDinner: false,
       showSnacks: false
     })
-    this.getMealsAJAX('breakfast')
+    meal = 'breakfast';
+    this.getMealsAJAX()
   },
   showLunchToggle: function() {
     this.setState({
@@ -605,7 +607,8 @@ var MealParentComponent = React.createClass({
       showDinner: false,
       showSnacks: false
     })
-    this.getMealsAJAX('lunch')
+    meal = 'lunch';
+    this.getMealsAJAX()
   },
   showDinnerToggle: function() {
     this.setState({
@@ -614,7 +617,8 @@ var MealParentComponent = React.createClass({
       showDinner: true,
       showSnacks: false
     })
-    this.getMealsAJAX('dinner')
+    meal = 'dinner'
+    this.getMealsAJAX()
   },
   showSnacksToggle: function() {
     this.setState({
@@ -623,9 +627,10 @@ var MealParentComponent = React.createClass({
       showDinner: false,
       showSnacks: true
     })
-    this.getMealsAJAX('snack')
+    meal = 'snack';
+    this.getMealsAJAX()
   },
-  getMealsAJAX: function(meal) {
+  getMealsAJAX: function() {
     $.ajax({
       url: '/user/user/meal/' + month + '/' + day + '/' + year + '/' + meal,
       method: "get",
@@ -772,10 +777,15 @@ var SnacksComponent = React.createClass({
 })
 
 var MealList = React.createClass({
+  removeFood: function(foodItem) {
+    console.log("removing");
+    console.log(foodItem);
+  },
   render: function() {
+    var foodItem = this.props.children.food;
     return(
       <div>
-        <li>Name: {this.props.children.food} calories: {this.props.children.calories}</li>
+        <li onClick={this.removeFood(foodItem)}>Name: {this.props.children.food} calories: {this.props.children.calories}</li>
       </div>)
   }
 })
@@ -957,8 +967,9 @@ var RenderFoodContainer = React.createClass({
 })
 
 var RenderFood = React.createClass({
-  appendMeal: function() {
+  appendMeal: function(qty) {
     console.log("adding to current meal");
+    // console.log(qty, label, calorie)
     //we need to invoke a callback here that goes to meal parent component
   },
   render: function() {
@@ -967,16 +978,40 @@ var RenderFood = React.createClass({
     var self = this;
     var calories = this.props.food.calories.map(function(measurement) {
       console.log(measurement)
-      return (<li 
-                data-label={measurement.label} 
-                onClick={self.appendMeal}
-              >{measurement.qty} {measurement.label} is {measurement.value} calories</li>)
+      return(
+        <RenderFood2 food={measurement} name={self.props.food.name} />)
+      // return (<li 
+      //           data-label={measurement.label} 
+      //           onClick={self.appendMeal}
+      //         >{measurement.qty} {measurement.label} is {measurement.value} calories</li>)
     })
     return(
       <div>
         <p>Name: {this.props.food.name}</p>
         <p>Calories: <ul>{calories}</ul> </p>
       </div>)
+  }
+})
+
+var RenderFood2 = React.createClass({
+  foodData: function() {
+    console.log(this.props.food);
+    $.ajax({
+      url: '/user/addfood/' + month + '/' + day + '/' + year + '/' + meal,
+      method: 'put',
+      data: {food: this.props.food, 
+            name: this.props.name},
+      success: function(data){
+        console.log('success')
+        console.log(data);
+      }
+    })
+  },
+  render: function() {
+    return(
+      <li onClick={this.foodData}>
+        {this.props.food.qty} {this.props.food.label} is {this.props.food.value} calories
+      </li>)
   }
 })
 
