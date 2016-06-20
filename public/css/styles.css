@@ -59,7 +59,7 @@ select {
 
 .log-in-link {
   position: fixed;
-  margin-left: 78%;
+  margin-left: 76%;
   margin-bottom: 20px;
 }
 
@@ -71,7 +71,7 @@ select {
 .name {
   margin-top: 20px;
 }
-/*
+
 button {
   margin-left: 86%;
 }
@@ -137,7 +137,7 @@ button {
   overflow: auto;
   overflow-y:scroll; 
   overflow-x:hidden;
-}*/
+}
 
 @media screen and (min-width: 370px) {
 
@@ -147,6 +147,10 @@ button {
 
   .log-out {
     margin-left: 50%;
+  }
+
+  .log-in-link {
+    margin-left: 79%;
   }
 
   .search-bar {
@@ -212,9 +216,14 @@ button {
   button {
     margin-left: 86%;
   }
+
   h3 {
     margin-top: 5px;
     margin-bottom: 10px;
+  }
+
+  .log-in-link {
+    margin-left: 81%;
   }
 
   .calories {
@@ -285,6 +294,10 @@ button {
 }
 
 @media screen and (min-width: 760px) {
+
+  .log-in-link {
+    margin-left: 87%;
+  }
 
   h4 {
     font-size: 1.5em;
@@ -391,6 +404,14 @@ button {
 
 @media screen and (min-width: 900px) {
 
+  .link {
+    margin-left: 3%;
+  }
+
+  .log-in-link {
+    margin-left: 87%;
+  }
+
   h4 {
     font-size: 1.5em;
   }
@@ -414,6 +435,18 @@ button {
   }
 
   input[type="text"] {
+    height: 20px;
+    font-size: 1em;
+    width: 200px;
+  }
+
+  input[type="number"] {
+    height: 20px;
+    font-size: 1em;
+    width: 200px;
+  }
+
+  input[type="password"] {
     height: 20px;
     font-size: 1em;
     width: 200px;
