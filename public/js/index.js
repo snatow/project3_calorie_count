@@ -58,12 +58,13 @@ var CalorieApp = React.createClass({
             username={this.state.username}
             logOutShow={this.state.logOutShow}
             logOutSubmit={this.logOutSubmit} />
+          <img src="./images/fork_logo.png"/>
           <h3>The Best Fwoarking Calorie Counting App</h3>
           <Calories username={this.state.username} logOutToggle={this.logOutToggle}/>
           <div className="activity-div">
             <DatePicker />
+            <MealParentComponent user={this.state.username} />
           </div>
-          <MealParentComponent user={this.state.username} />
           {/*<div className="activity-div">
                       <SearchBar user={this.state.username} /> 
                     </div>*/}
@@ -75,6 +76,7 @@ var CalorieApp = React.createClass({
           <LogInSignUp 
             initialLoginCheck={this.state.authenticatedUser} 
             onChange={this.changeLogin} />
+          <img src="./images/fork_logo.png"/>
           <h3 className="name">The Best Fwoarking Calorie Counting App</h3>
           <SearchBarPublic />
         </div>
@@ -968,13 +970,13 @@ var SearchBar = React.createClass({
         <div className="search-bar">
          {/*<MealParentComponent toggle={this.state.refresher}/>*/}
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="search">Search Foods</label>
+            <label className="search-label"htmlFor="search">Search Foods</label>
             <input 
               type="text" 
               placeholder="search term"
               value={this.state.searchTerm} 
               onChange={this.searchChange}/>
-            <input className="button" type="submit"/>
+            <input className="search-button" type="submit"/>
           </form>
           <FirstList 
             data={this.state.data}
@@ -995,7 +997,7 @@ var SearchBar = React.createClass({
               placeholder="search term"
               value={this.state.searchTerm} 
               onChange={this.searchChange}/>
-            <input className="button" type="submit"/>
+            <input className="search-button" type="submit"/>
           </form>
           <FirstList 
             data={this.state.data}

@@ -15,7 +15,7 @@ h4 {
 
 img {
   width: 30px;
-/*  margin-top: 30px;*/
+  margin-top: -15px;
   margin-left: 45%;
 }
 
@@ -23,11 +23,22 @@ img {
   display: none;
 }
 
+.calories{ 
+  text-align: center;
+ }
+
 .edit-link {
   display: inline-block;
+  color: #1a4e7e;
 }
 
 .button {
+  color: white;
+  background-color: #2670B5;
+  border: 1px solid #2629b5;
+}
+
+.search-button {
   color: white;
   background-color: #2670B5;
   border: 1px solid #2629b5;
@@ -66,6 +77,7 @@ select {
 .log-out {
   display: inline-block;
   margin-left: 42%;
+  color: #1a4e7e;
 }
 
 .name {
@@ -116,7 +128,7 @@ button {
 
 .meals-all {
   width: 302px;
-  /*margin-top: -150px;*/
+  margin-top: -15px;
 }
 
 .meal-label {
@@ -130,7 +142,9 @@ button {
 
 .meal-nav-bar {
   margin-top: 20px;
-  border: 1px solid black;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
 }
 
 .meal-display {
@@ -183,6 +197,10 @@ button {
     overflow-x:hidden;
   }
 
+  .calories {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
   .meals-all {
     width: 357px;
 /*    margin-top: -190px;*/
@@ -199,7 +217,9 @@ button {
 
   .meal-nav-bar {
     margin-top: 20px;
-    border: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
   }
 
   .meal-display {
@@ -279,7 +299,9 @@ button {
 
   .meal-nav-bar {
     margin-top: 20px;
-    border: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
   }
 
   .meal-display {
@@ -296,6 +318,11 @@ button {
 
   body {
     height: 1000px;
+  }
+
+  img {
+    width: 45px;
+    margin-left: 48%;
   }
 
   .log-in-link {
@@ -320,7 +347,7 @@ button {
     font-size: 1.2em;
   }
 
-  input[type="submit"] {
+  .button {
     font-size: 1em;
   }
 
@@ -330,8 +357,28 @@ button {
     width: 200px;
   }
 
-  label {
+  input[type="number"] {
+    height: 20px;
     font-size: 1em;
+    width: 200px;
+  }
+
+  input[type="password"] {
+    height: 20px;
+    font-size: 1em;
+    width: 200px;
+  }
+
+  label {
+    font-size: 1.5em;
+  }
+
+  .search-label {
+    font-size: 18pt;
+  }
+
+  .search-button {
+    font-size: .7em;
   }
 
   .calories {
@@ -350,7 +397,7 @@ button {
   }
 
   .first-results{
-    border: 1px solid black;
+    border: 3px solid black;
     background-color: white;
     z-index: 1;
     width: 750px;
@@ -363,7 +410,7 @@ button {
   }
 
   .Food-container {
-    border: 1px solid black;
+    border: 3px solid black;
     background-color: white;
     width: 750px;
     height: 200px;
@@ -379,6 +426,10 @@ button {
     font-size: 1.5em;
   }
 
+  p {
+    font-size: 16pt;
+  }
+
   .meal-label {
     display: inline-block;
     margin-right: 150px;
@@ -390,16 +441,23 @@ button {
 
   .meal-nav-bar {
     margin-top: 20px;
-    border: 1px solid black;
+    border-top: 3px solid black;
+    border-right: 3px solid black;
+    border-left: 3px solid black;
   }
 
   .meal-display {
-    border: 1px solid black;
+    border: 3px solid black;
     background-color: white;
     height: 200px;
     overflow: auto;
     overflow-y:scroll; 
     overflow-x:hidden;
+  }
+
+  .activity-div {
+    width: 760px;
+    margin: 0 auto;
   }
 }
 
@@ -431,7 +489,7 @@ button {
     font-size: 1.2em;
   }
 
-  input[type="submit"] {
+  .button {
     font-size: 1em;
   }
 
@@ -443,6 +501,14 @@ button {
 
   label {
     font-size: 1em;
+  }
+
+  .search-label {
+    font-size: 18pt;
+  }
+
+  .search-button {
+    font-size: .7em;
   }
 
   .calories {
@@ -461,7 +527,7 @@ button {
   }
 
   .first-results{
-    border: 1px solid black;
+    border: 3px solid black;
     background-color: white;
     z-index: 1;
     width: 750px;
@@ -474,7 +540,7 @@ button {
   }
 
   .Food-container {
-    border: 1px solid black;
+    border: 3px solid black;
     background-color: white;
     width: 750px;
     height: 200px;
@@ -490,6 +556,10 @@ button {
     font-size: 1.5em;
   }
 
+  p {
+    font-size: 16pt;
+  }
+
   .meal-label {
     display: inline-block;
     margin-right: 150px;
@@ -501,16 +571,23 @@ button {
 
   .meal-nav-bar {
     margin-top: 20px;
-    border: 1px solid black;
+    border-top: 3px solid black;
+    border-right: 3px solid black;
+    border-left: 3px solid black;
   }
 
   .meal-display {
-    border: 1px solid black;
+    border: 3px solid black;
     background-color: white;
     height: 200px;
     overflow: auto;
     overflow-y:scroll; 
     overflow-x:hidden;
+  }
+
+  .activity-div {
+    width: 760px;
+    margin: 0 auto;
   }
 }
 
@@ -526,6 +603,10 @@ button {
 
   .log-in-link {
     margin-left: 87%;
+  }
+
+  label {
+    font-size: 1.5em;
   }
 
   h4 {
@@ -546,7 +627,7 @@ button {
     font-size: 1.2em;
   }
 
-  input[type="submit"] {
+  .button {
     font-size: 1em;
   }
 
@@ -566,10 +647,6 @@ button {
     height: 20px;
     font-size: 1em;
     width: 200px;
-  }
-
-  label {
-    font-size: 1em;
   }
 
   .edit-link {
@@ -594,8 +671,12 @@ button {
     margin-left: 460px;
   }
 
+  .search-button {
+    font-size: .7em;
+  }
+
   .first-results{
-    border: 1px solid black;
+    border: 3px solid black;
     background-color: white;
     z-index: 1;
     width: 440px;
@@ -608,7 +689,7 @@ button {
   }
 
   .Food-container {
-    border: 1px solid black;
+    border: 3px solid black;
     background-color: white;
     width: 440px;
     height: 200px;
@@ -626,6 +707,10 @@ button {
     font-size: 1.5em;
   }
 
+  p {
+    font-size: 16pt;
+  }
+
   .meal-label {
     display: inline-block;
     margin-right: 46px;
@@ -637,11 +722,13 @@ button {
 
   .meal-nav-bar {
     margin-top: 20px;
-    border: 1px solid black;
+    border-top: 3px solid black;
+    border-right: 3px solid black;
+    border-left: 3px solid black;
   }
 
   .meal-display {
-    border: 1px solid black;
+    border: 3px solid black;
     background-color: white;
     height: 205px;
     overflow: auto;
