@@ -627,7 +627,7 @@ var MealParentComponent = React.createClass({
       showDinner: false,
       showSnacks: true
     })
-    meal = 'snack';
+    meal = 'snacks';
     this.getMealsAJAX()
   },
   getMealsAJAX: function() {

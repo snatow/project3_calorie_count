@@ -174,9 +174,11 @@ router.post('/createdate/:month/:day/:year', function(req, res) {
 
 // Adds food
 router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
-  // console.log('add food route reached');
+  console.log('add food route reached');
   // res.send('it works');
   // console.log(req.body);
+  console.log(req.params.month)
+  console.log(req.params.year)
   var newMeal = {
             food: req.body.name,
             calories: req.body.food.value,
@@ -197,16 +199,17 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
       // console.log("this is the meal " + meal);
       // console.log(typeof meal.date);
       // console.log(typeof date);
-      // console.log("date one is " + date);
-      // console.log("date two is " + meal.date)
+      console.log("date one is " + date.getTime());
+      console.log("date two is " + meal.date.getTime())
       var mealTime = req.params.meal;
       // console.log('This is the meal time ' + mealTime)
       // console.log(mealTime);
       // console.log(meal.breakfast)
       // console.log(typeof d);
       if(meal.date.getTime() == date.getTime() && mealTime === 'breakfast'){ //compares the date
-        console.log('this is breakfast ' + meal.breakfast)
-        console.log(meal.breakfast)
+        // console.log('this is breakfast ' + meal.breakfast)
+        // console.log(meal.breakfast)
+        console.log('we hit the breakfast save route')
         meal.breakfast.push(newMeal)
         console.log(meal);
         meal.save();
@@ -223,7 +226,8 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
         res.send(meal.breakfast);
         // console.log(meal);
       } else if(meal.date.getTime() == date.getTime() && mealTime === 'lunch'){ //compares the date
-        console.log(meal.lunch)
+        // console.log(meal.lunch)
+        console.log('we hit the lunch save route')
         meal.lunch.push(newMeal)
         console.log(meal);
         meal.save();
@@ -240,7 +244,8 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
         res.send(meal.lunch);
         // console.log(meal);
       } else if(meal.date.getTime() == date.getTime() && mealTime === 'dinner'){ //compares the date
-        console.log(meal.dinner)
+        // console.log(meal.dinner)
+        console.log('we hit the dinner save route')
         meal.dinner.push(newMeal)
         console.log(meal);
         meal.save();
@@ -256,8 +261,9 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
         });
         res.send(meal.dinner);
         // console.log(meal);
-      } else if (meal.date.getTime() == date.getTime() && mealTime === 'snack'){ //compares the date
-        console.log(meal.snacks)
+      } else if (meal.date.getTime() == date.getTime() && mealTime === 'snacks'){ //compares the date
+        // console.log(meal.snacks)
+        console.log('we hit the snacks save route')
         meal.snacks.push(newMeal)
         console.log(meal);
         meal.save();
@@ -281,15 +287,15 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
 //Removes food
 router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
   console.log("inside put route to delete")
-  console.log(req.body.food);
+  console.log(req.body.food.food);
   var mealName = req.params.meal;
-  console.log(mealName);
+  // console.log(mealName);
   User.findById(req.user.id).then(function(user) {
     console.log("searching for the user")
-    console.log(user);
+    // console.log(user);
     user.meals.forEach(function(meal){
-      console.log("meal");
-      console.log(meal);
+      // console.log("meal");
+      // console.log(meal);
       if (mealName == "breakfast") {
         meal.breakfast.forEach(function(foodItem) {
           console.log("food Item");
@@ -340,10 +346,10 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
         })
       } else if (mealName == "snacks") {
         meal.snacks.forEach(function(foodItem) {
-          console.log("food Item");
+          console.log("food snacks Item");
           console.log(foodItem);
           if (req.body.food.food == foodItem.food) {
-            console.log("inside If statement")
+            console.log("inside If snacks statement")
             console.log(foodItem);
             console.log(meal.snacks);
 
@@ -395,7 +401,7 @@ router.get('/user/meal/:month/:day/:year/:meal', function(req, res) {
       // console.log("date one is " + date);
       // console.log("date two is " + meal.date)
       var mealTime = req.params.meal;
-      console.log('This is the meal time ' + mealTime)
+      // console.log('This is the meal time ' + mealTime)
       // console.log(mealTime);
       // console.log(meal.breakfast)
       // console.log(typeof d);
@@ -411,7 +417,7 @@ router.get('/user/meal/:month/:day/:year/:meal', function(req, res) {
         console.log('this is dinner ' + meal.dinner)
         res.send(meal.dinner); 
         // console.log(meal);
-      } else if (meal.date.getTime() == date.getTime() && mealTime === 'snack'){ //compares the date
+      } else if (meal.date.getTime() == date.getTime() && mealTime === 'snacks'){ //compares the date
         console.log('this is snack ' + meal.snacks) 
         res.send(meal.snacks);
         // console.log(meal);
