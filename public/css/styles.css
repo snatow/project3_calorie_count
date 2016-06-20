@@ -44,6 +44,10 @@ img {
   border: 1px solid #2629b5;
 }
 
+.search-empty {
+  margin-top: 210px;
+}
+
 input {
   margin: 5px;
   border: 1px solid #2629b5;
@@ -142,13 +146,14 @@ button {
 
 .meal-nav-bar {
   margin-top: 20px;
-  border-top: 1px solid black;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
+  border: 1px solid black;
 }
 
 .meal-display {
-  border: 1px solid black;
+  
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
   background-color: white;
   height: 100px;
   overflow: auto;
@@ -217,13 +222,14 @@ button {
 
   .meal-nav-bar {
     margin-top: 20px;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
+    border: 1px solid black;
   }
 
   .meal-display {
-    border: 1px solid black;
+
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
     background-color: white;
     height: 120px;
     overflow: auto;
@@ -299,13 +305,13 @@ button {
 
   .meal-nav-bar {
     margin-top: 20px;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
+    border: 1px solid black;
   }
 
   .meal-display {
-    border: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
     background-color: white;
     height: 165px;
     overflow: auto;
@@ -393,7 +399,7 @@ button {
 
   .search-bar {
     display: block;
-    /*margin-top: 270px;*/
+    margin-top: 10px;
   }
 
   .first-results{
@@ -441,13 +447,13 @@ button {
 
   .meal-nav-bar {
     margin-top: 20px;
-    border-top: 3px solid black;
-    border-right: 3px solid black;
-    border-left: 3px solid black;
+    border: 3px solid black;
   }
 
   .meal-display {
-    border: 3px solid black;
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+    border-left: 3px solid black;
     background-color: white;
     height: 200px;
     overflow: auto;
@@ -571,13 +577,14 @@ button {
 
   .meal-nav-bar {
     margin-top: 20px;
-    border-top: 3px solid black;
-    border-right: 3px solid black;
-    border-left: 3px solid black;
+    border: 3px solid black;
   }
 
   .meal-display {
-    border: 3px solid black;
+    
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+    border-left: 3px solid black;
     background-color: white;
     height: 200px;
     overflow: auto;
@@ -664,10 +671,18 @@ button {
     margin-left: 65%;
   }
 
+  .search-empty {
+    margin-top: 0px;
+  }
+
+  .empty {
+    height: 428px;
+  }
+
   .search-bar {
     display: block;
     position: fixed;
-    margin-top: -244px;
+    margin-top: -460px;
     margin-left: 460px;
   }
 
@@ -679,7 +694,7 @@ button {
     border: 3px solid black;
     background-color: white;
     z-index: 1;
-    width: 440px;
+    width: 430px;
     height: 200px;
     overflow: auto;
     overflow-y:scroll; 
@@ -691,7 +706,7 @@ button {
   .Food-container {
     border: 3px solid black;
     background-color: white;
-    width: 440px;
+    width: 430px;
     height: 200px;
     overflow: auto;
     overflow-y:scroll; 
@@ -722,15 +737,15 @@ button {
 
   .meal-nav-bar {
     margin-top: 20px;
-    border-top: 3px solid black;
-    border-right: 3px solid black;
-    border-left: 3px solid black;
+    border: 3px solid black;
   }
 
   .meal-display {
-    border: 3px solid black;
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+    border-left: 3px solid black;
     background-color: white;
-    height: 205px;
+    height: 425px;
     overflow: auto;
     overflow-y:scroll; 
     overflow-x:hidden;

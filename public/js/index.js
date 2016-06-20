@@ -724,6 +724,12 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
+          <div className="search-empty">
+            <div className="empty"></div>
+            <SearchBar 
+              user={this.props.username}
+              callback={this.callback} />
+          </div>
         </div>)
     } 
     else if (this.state.showBreakfast) {
