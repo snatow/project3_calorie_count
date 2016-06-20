@@ -33,7 +33,7 @@ router.post('/', function(req, res) {
 router.get('/search/:item', function(req,res) {
   console.log('The search for an item works!')
   console.log(req.params.item);
-  request('http://api.nal.usda.gov/ndb/search/?format=json&q=' + req.params.item + '&sort=n&max=5&offset=0&api_key=' + process.env.DATA_GOV_KEY, //api call to USDA
+  request('http://api.nal.usda.gov/ndb/search/?format=json&q=' + req.params.item + '&sort=r&max=10&offset=0&api_key=' + process.env.DATA_GOV_KEY, //api call to USDA
     function(error, repsonse, body){
       if (!error && repsonse.statusCode == 200) {
         var food = JSON.parse(body) //parses the string to json
@@ -306,7 +306,55 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
             user.save();
           }
         })
-      } 
+      } else if (mealName == "lunch") {
+        meal.lunch.forEach(function(foodItem) {
+          console.log("food Item");
+          console.log(foodItem);
+          if (req.body.food.food == foodItem.food) {
+            console.log("inside If statement")
+            console.log(foodItem);
+            console.log(meal.lunch);
+
+            var index = meal.lunch.indexOf(foodItem);
+            console.log("this is the index: ");
+            console.log(index);
+            meal.lunch.splice(index, 1)
+            user.save();
+          }
+        })
+      } else if (mealName == "dinner") {
+        meal.dinner.forEach(function(foodItem) {
+          console.log("food Item");
+          console.log(foodItem);
+          if (req.body.food.food == foodItem.food) {
+            console.log("inside If statement")
+            console.log(foodItem);
+            console.log(meal.dinner);
+
+            var index = meal.dinner.indexOf(foodItem);
+            console.log("this is the index: ");
+            console.log(index);
+            meal.dinner.splice(index, 1)
+            user.save();
+          }
+        })
+      } else if (mealName == "snacks") {
+        meal.snacks.forEach(function(foodItem) {
+          console.log("food Item");
+          console.log(foodItem);
+          if (req.body.food.food == foodItem.food) {
+            console.log("inside If statement")
+            console.log(foodItem);
+            console.log(meal.snacks);
+
+            var index = meal.snacks.indexOf(foodItem);
+            console.log("this is the index: ");
+            console.log(index);
+            meal.snacks.splice(index, 1)
+            user.save();
+          }
+        })
+      }
     })
   })
 })
