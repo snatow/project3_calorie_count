@@ -709,9 +709,20 @@ var MealParentComponent = React.createClass({
 })
 
 var BreakfastComponent = React.createClass({
+  getInitialState: function() {
+    return {calories: 0}
+  },
+  changeInitialCalories: function (){
+    console.log('change initial calories');
+    console.log(this.props.meal);
+    // if (this.props.meal != []) {
+    //   console.log(this.props.meal[0].calories);
+    // }
+  },
   render: function() {
     console.log("in the breakfast component: ");
     console.log(this.props.meal);
+    this.changeInitialCalories();
     var mealList = this.props.meal
     var renderMealList = function(item) {
       return(
@@ -721,6 +732,7 @@ var BreakfastComponent = React.createClass({
       <div className="meal-display">
         <p>Breakfast List</p>
         <ul>{mealList.map(renderMealList)}</ul>
+        <p>Total calories: {this.state.calories}</p>
       </div>)
   }
 })
@@ -736,8 +748,9 @@ var LunchComponent = React.createClass({
     }
     return (
       <div className="meal-display">
-        <p>Breakfast List</p>
+        <p>Lunch List</p>
         <ul>{mealList.map(renderMealList)}</ul>
+        <p>Total calories: </p>
       </div>)
   }
 })
@@ -753,13 +766,17 @@ var DinnerComponent = React.createClass({
     }
     return (
       <div className="meal-display">
-        <p>Breakfast List</p>
+        <p>Dinner List</p>
         <ul>{mealList.map(renderMealList)}</ul>
+        <p>Total calories: </p>
       </div>)
   }
 })
 
 var SnacksComponent = React.createClass({
+  getInitialState: function() {
+    return {calories: 0}
+  },
   render: function() {
     console.log("in the snacks component: ")
     console.log(this.props.meal);
@@ -770,8 +787,9 @@ var SnacksComponent = React.createClass({
     }
     return (
       <div className="meal-display">
-        <p>Breakfast List</p>
+        <p>Snack List</p>
         <ul>{mealList.map(renderMealList)}</ul>
+        <p>Total calories: {this.state.calories}</p>
       </div>)
   }
 })
