@@ -114,10 +114,10 @@ button {
   overflow-x:hidden;
 }
 
-.meals-all {
+/*.meals-all {
   width: 302px;
   margin-top: -150px;
-}
+}*/
 
 .meal-label {
   display: inline-block;
@@ -182,11 +182,11 @@ button {
     overflow-y:scroll; 
     overflow-x:hidden;
   }
-
+/*
   .meals-all {
     width: 357px;
     margin-top: -190px;
-  }
+  }*/
 
   .meal-label {
     display: inline-block;
@@ -262,11 +262,11 @@ button {
     overflow-y:scroll; 
     overflow-x:hidden;
   }
-
+/*
   .meals-all {
     width: 397px;
     margin-top: -215px;
-  }
+  }*/
 
   .meal-label {
     display: inline-block;
@@ -373,11 +373,11 @@ button {
     font-size: 1.5em;
   }
 
-  .meals-all {
+/*  .meals-all {
     width: 750px;
     margin-top: -275px;
     font-size: 1.5em;
-  }
+  }*/
 
   .meal-label {
     display: inline-block;
@@ -484,11 +484,11 @@ button {
     font-size: 1.5em;
   }
 
-  .meals-all {
+/*  .meals-all {
     width: 750px;
     margin-top: -275px;
     font-size: 1.5em;
-  }
+  }*/
 
   .meal-label {
     display: inline-block;
@@ -618,13 +618,13 @@ button {
     font-size: 1.5em;
   }
 
-  .meals-all {
+/*  .meals-all {
     position: fixed;
     width: 440px;
     margin-top: -20px;
     margin-left: -460px;
     font-size: 1.5em;
-  }
+  }*/
 
   .meal-label {
     display: inline-block;
