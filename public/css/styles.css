@@ -6,6 +6,7 @@ body {
 h3 {
   text-align: center;
   margin-top: 0px;
+  margin-bottom: 5px;
 }
 
 h4 {
@@ -16,6 +17,37 @@ img {
   width: 30px;
 /*  margin-top: 30px;*/
   margin-left: 45%;
+}
+
+.log-out-no {
+  display: none;
+}
+
+.edit-link {
+  display: inline-block;
+}
+
+.button {
+  color: white;
+  background-color: #2670B5;
+  border: 1px solid #2629b5;
+}
+
+input {
+  margin: 5px;
+  border: 1px solid #2629b5;
+}
+
+p {
+  margin: 10px;
+}
+
+li {
+  list-style-image: url("../images/fork_button_small.png");
+}
+
+select {
+  border: 1px solid black
 }
 
 .link {
@@ -33,26 +65,13 @@ img {
 
 .log-out {
   display: inline-block;
-  margin-left: 51%;
+  margin-left: 42%;
 }
 
-.log-out-no {
-  display: none;
-}
-
-.edit-link {
-  display: inline-block;
-}
 .name {
   margin-top: 20px;
 }
-
-.button {
-  color: white;
-  background-color: #2670B5;
-  border: 1px solid #2629b5;
-}
-
+/*
 button {
   margin-left: 86%;
 }
@@ -63,26 +82,18 @@ button {
   border: 1px solid #2629b5;
 }
 
-/*.button:hover{
-  background-color: green;
-}*/
-
-input {
-  margin: 5px;
-  border: 1px solid #2629b5;
-}
-
 .search-bar {
   display: block;
   position: fixed;
-  margin-top: 180px;
+  margin-top: 135px;
 }
 
 .first-results{
   border: 1px solid black;
   background-color: white;
   z-index: 1;
-  height: 120px;
+  width: 302px;
+  height: 100px;
   overflow: auto;
   overflow-y:scroll; 
   overflow-x:hidden;
@@ -92,28 +103,22 @@ input {
 .Food-container {
   border: 1px solid black;
   background-color: white;
-  height: 120px;
+  width: 302px;
+  height: 100px;
   overflow: auto;
   overflow-y:scroll; 
   overflow-x:hidden;
 }
 
-p {
-  margin: 10px;
-}
-
-li {
-  list-style-image: url("../images/fork_button_small.png");
-}
-
 .meals-all {
   position: fixed;
-  margin-top: -190px;
+  width: 302px;
+  margin-top: -150px;
 }
 
 .meal-label {
   display: inline-block;
-  margin-right: 53px;
+  margin-right: 34px;
 }
 
 .meal-snacks {
@@ -128,12 +133,375 @@ li {
 .meal-display {
   border: 1px solid black;
   background-color: white;
-  height: 120px;
+  height: 100px;
   overflow: auto;
   overflow-y:scroll; 
   overflow-x:hidden;
+}*/
+
+@media screen and (min-width: 370px) {
+
+  button {
+    margin-left: 86%;
+  }
+
+  .log-out {
+    margin-left: 50%;
+  }
+
+  .search-bar {
+    display: block;
+    position: fixed;
+    margin-top: 180px;
+  }
+
+  .first-results{
+    border: 1px solid black;
+    background-color: white;
+    z-index: 1;
+    width: 357px;
+    height: 120px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+    margin-bottom: 10px;
+  }
+
+  .Food-container {
+    border: 1px solid black;
+    background-color: white;
+    width: 357px;
+    height: 120px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+  }
+
+  .meals-all {
+    position: fixed;
+    width: 357px;
+    margin-top: -190px;
+  }
+
+  .meal-label {
+    display: inline-block;
+    margin-right: 52px;
+  }
+
+  .meal-snacks {
+    display: inline-block;
+  }
+
+  .meal-nav-bar {
+    margin-top: 20px;
+    border: 1px solid black;
+  }
+
+  .meal-display {
+    border: 1px solid black;
+    background-color: white;
+    height: 120px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+  }
 }
 
-select {
-  border: 1px solid black
+@media screen and (min-width: 410px) {
+
+  button {
+    margin-left: 86%;
+  }
+  h3 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .calories {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .log-out {
+    margin-left: 55%;
+  }
+
+  .search-bar {
+    display: block;
+    position: fixed;
+    margin-top: 200px;
+  }
+
+  .first-results{
+    border: 1px solid black;
+    background-color: white;
+    z-index: 1;
+    width: 397px;
+    height: 165px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+    margin-bottom: 10px;
+  }
+
+  .Food-container {
+    border: 1px solid black;
+    background-color: white;
+    width: 397px;
+    height: 165px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+  }
+
+  .meals-all {
+    position: fixed;
+    width: 397px;
+    margin-top: -215px;
+  }
+
+  .meal-label {
+    display: inline-block;
+    margin-right: 52px;
+  }
+
+  .meal-snacks {
+    display: inline-block;
+  }
+
+  .meal-nav-bar {
+    margin-top: 20px;
+    border: 1px solid black;
+  }
+
+  .meal-display {
+    border: 1px solid black;
+    background-color: white;
+    height: 165px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+  }
+}
+
+@media screen and (min-width: 760px) {
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  button {
+    margin-left: 86%;
+  }
+
+  h3 {
+    font-size: 2em;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  select {
+    font-size: 1.2em;
+  }
+
+  input[type="submit"] {
+    font-size: 1em;
+  }
+
+  input[type="text"] {
+    height: 20px;
+    font-size: 1em;
+    width: 200px;
+  }
+
+  label {
+    font-size: 1.5em;
+  }
+
+  .calories {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+  }
+
+  .log-out {
+    margin-left: 65%;
+  }
+
+  .search-bar {
+    display: block;
+    position: fixed;
+    margin-top: 270px;
+  }
+
+  .first-results{
+    border: 1px solid black;
+    background-color: white;
+    z-index: 1;
+    width: 750px;
+    height: 200px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+  }
+
+  .Food-container {
+    border: 1px solid black;
+    background-color: white;
+    width: 750px;
+    height: 200px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+    font-size: 1.5em;
+  }
+
+  .meals-all {
+    position: fixed;
+    width: 750px;
+    margin-top: -275px;
+    font-size: 1.5em;
+  }
+
+  .meal-label {
+    display: inline-block;
+    margin-right: 150px;
+  }
+
+  .meal-snacks {
+    display: inline-block;
+  }
+
+  .meal-nav-bar {
+    margin-top: 20px;
+    border: 1px solid black;
+  }
+
+  .meal-display {
+    border: 1px solid black;
+    background-color: white;
+    height: 200px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+  }
+}
+
+@media screen and (min-width: 900px) {
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  button {
+    margin-left: 86%;
+  }
+
+  h3 {
+    font-size: 2em;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  select {
+    font-size: 1.2em;
+  }
+
+  input[type="submit"] {
+    font-size: 1em;
+  }
+
+  input[type="text"] {
+    height: 20px;
+    font-size: 1em;
+    width: 200px;
+  }
+
+  label {
+    font-size: 1.5em;
+  }
+
+  .edit-link {
+    margin-left: 6%;
+  }
+
+  .calories {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  .log-out {
+    margin-left: 65%;
+  }
+
+  .search-bar {
+    display: block;
+    position: fixed;
+    margin-top: 10px;
+    margin-left: 460px;
+  }
+
+  .first-results{
+    border: 1px solid black;
+    background-color: white;
+    z-index: 1;
+    width: 440px;
+    height: 200px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+  }
+
+  .Food-container {
+    border: 1px solid black;
+    background-color: white;
+    width: 440px;
+    height: 200px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+    font-size: 1.5em;
+  }
+
+  .meals-all {
+    position: fixed;
+    width: 440px;
+    margin-top: -20px;
+    margin-left: -460px;
+    font-size: 1.5em;
+  }
+
+  .meal-label {
+    display: inline-block;
+    margin-right: 46px;
+  }
+
+  .meal-snacks {
+    display: inline-block;
+  }
+
+  .meal-nav-bar {
+    margin-top: 20px;
+    border: 1px solid black;
+  }
+
+  .meal-display {
+    border: 1px solid black;
+    background-color: white;
+    height: 205px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+  }
+
+  .activity-div {
+    width: 900px;
+    margin: 0 auto;
+  }
 }
