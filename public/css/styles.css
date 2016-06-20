@@ -84,8 +84,12 @@ button {
 
 .search-bar {
   display: block;
-  position: fixed;
   margin-top: 135px;
+}
+
+.search-bar-public {
+  display: block;
+  margin-top: 30px;
 }
 
 .first-results{
@@ -111,7 +115,6 @@ button {
 }
 
 .meals-all {
-  position: fixed;
   width: 302px;
   margin-top: -150px;
 }
@@ -155,7 +158,6 @@ button {
 
   .search-bar {
     display: block;
-    position: fixed;
     margin-top: 180px;
   }
 
@@ -182,7 +184,6 @@ button {
   }
 
   .meals-all {
-    position: fixed;
     width: 357px;
     margin-top: -190px;
   }
@@ -237,7 +238,6 @@ button {
 
   .search-bar {
     display: block;
-    position: fixed;
     margin-top: 200px;
   }
 
@@ -264,7 +264,6 @@ button {
   }
 
   .meals-all {
-    position: fixed;
     width: 397px;
     margin-top: -215px;
   }
@@ -293,7 +292,11 @@ button {
   }
 }
 
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 760px) and (min-height: 700px) {
+
+  body {
+    height: 1000px;
+  }
 
   .log-in-link {
     margin-left: 87%;
@@ -343,7 +346,6 @@ button {
 
   .search-bar {
     display: block;
-    position: fixed;
     margin-top: 270px;
   }
 
@@ -372,7 +374,117 @@ button {
   }
 
   .meals-all {
-    position: fixed;
+    width: 750px;
+    margin-top: -275px;
+    font-size: 1.5em;
+  }
+
+  .meal-label {
+    display: inline-block;
+    margin-right: 150px;
+  }
+
+  .meal-snacks {
+    display: inline-block;
+  }
+
+  .meal-nav-bar {
+    margin-top: 20px;
+    border: 1px solid black;
+  }
+
+  .meal-display {
+    border: 1px solid black;
+    background-color: white;
+    height: 200px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+  }
+}
+
+@media screen and (min-width: 760px) and (min-height: 1000px) {
+
+  body {
+    height: 900px;
+  }
+
+  .log-in-link {
+    margin-left: 87%;
+  }
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  button {
+    margin-left: 86%;
+  }
+
+  h3 {
+    font-size: 2em;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  select {
+    font-size: 1.2em;
+  }
+
+  input[type="submit"] {
+    font-size: 1em;
+  }
+
+  input[type="text"] {
+    height: 20px;
+    font-size: 1em;
+    width: 200px;
+  }
+
+  label {
+    font-size: 1.5em;
+  }
+
+  .calories {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+  }
+
+  .log-out {
+    margin-left: 65%;
+  }
+
+  .search-bar {
+    display: block;
+    margin-top: 270px;
+  }
+
+  .first-results{
+    border: 1px solid black;
+    background-color: white;
+    z-index: 1;
+    width: 750px;
+    height: 200px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+  }
+
+  .Food-container {
+    border: 1px solid black;
+    background-color: white;
+    width: 750px;
+    height: 200px;
+    overflow: auto;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+    font-size: 1.5em;
+  }
+
+  .meals-all {
     width: 750px;
     margin-top: -275px;
     font-size: 1.5em;
@@ -403,6 +515,10 @@ button {
 }
 
 @media screen and (min-width: 900px) {
+
+  body {
+    height: 750px;
+  }
 
   .link {
     margin-left: 3%;

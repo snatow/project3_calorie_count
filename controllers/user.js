@@ -172,7 +172,7 @@ router.post('/createdate/:month/:day/:year', function(req, res) {
   })
 })
 
-// Adds food
+// Adds food to individual meals on selected dates
 router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
   console.log('add food route reached');
   // res.send('it works');
@@ -284,7 +284,7 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
   })
 })
 
-//Removes food
+//Removes food from a specific meal on a specific day
 router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
   console.log("inside put route to delete")
   console.log(req.body.food.food);
@@ -297,11 +297,11 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
     user.meals.forEach(function(meal){
       // console.log("meal");
       // console.log(meal);
-      if (mealName == "breakfast") {
+      if (mealName == "breakfast") { 
         meal.breakfast.forEach(function(foodItem) {
           console.log("food Item");
           console.log(foodItem);
-          if (req.body.food.food == foodItem.food && counter === 0) {
+          if (req.body.food.food == foodItem.food && counter === 0) { // if the food item in the request body matches the food item looped through in breakfast on that day
             console.log("inside If statement")
             console.log(foodItem);
             console.log(meal.breakfast);
@@ -309,7 +309,7 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
             var index = meal.breakfast.indexOf(foodItem);
             console.log("this is the index: ");
             console.log(index);
-            meal.breakfast.splice(index, 1)
+            meal.breakfast.splice(index, 1) //removes the food item that matches the one in the request
             user.save();
             counter++;
             res.send(true);

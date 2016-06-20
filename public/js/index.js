@@ -1,10 +1,16 @@
 //=========================================================================
 //  Global Variables
 //=========================================================================
-var month = 'January'
-var day = '1'
-var year = '2016'
+// var month = 'January'
+// var day = '1'
+// var year = '2016'
 var meal = 'breakfast'
+
+var today = new Date();
+//console.log("today: " + today);
+var month = today.getMonth() + 1;
+var day = today.getDate();
+var year = today.getFullYear();
 
 //=========================================================================
   //  Main Component - this will render all of the react classes for the app
@@ -52,7 +58,6 @@ var CalorieApp = React.createClass({
             username={this.state.username}
             logOutShow={this.state.logOutShow}
             logOutSubmit={this.logOutSubmit} />
-          {/*//this is placeholder for now - used homework example*/}
           <h3>The Best Fwoarking Calorie Counting App</h3>
           <Calories username={this.state.username} logOutToggle={this.logOutToggle}/>
           <div className="activity-div">
@@ -60,7 +65,7 @@ var CalorieApp = React.createClass({
           </div>
           {/*<MealParentComponent />*/}
           <div className="activity-div">
-            <SearchBar user={this.state.username} />
+            <SearchBar user={this.state.username} /> 
           </div>
         </div>
       )
@@ -70,12 +75,8 @@ var CalorieApp = React.createClass({
           <LogInSignUp 
             initialLoginCheck={this.state.authenticatedUser} 
             onChange={this.changeLogin} />
-          {/*<SignUpComponent />
-                    <LoginComponent
-                    initialLoginCheck={this.state.authenticatedUser} 
-                    onChange={this.changeLogin} />*/}
           <h3 className="name">The Best Fwoarking Calorie Counting App</h3>
-          {/*<SearchBar user={this.state.username} />*/}
+          <SearchBarPublic />
         </div>
       )
     }
@@ -87,7 +88,7 @@ var CalorieApp = React.createClass({
 //=========================================================================
 var DatePicker = React.createClass({
   getInitialState: function() {
-    return({month: 'January', day: '1', year: '2016'})
+    return({month: month, day: day, year: year})
   },
   handleDateSubmit: function(e) {
     e.preventDefault()
@@ -503,7 +504,7 @@ var EditUser = React.createClass({
         })
       }//.bind(this)
     })
-    this.setState({editForm: true}) //should I put this in the ajax function?
+    this.setState({editForm: true})
   },
   handleSubmit: function() {
     console.log("submit");
@@ -579,7 +580,7 @@ var LogOutComponent = React.createClass({
 })
 
 //=========================================================================
-  //  Thes element will render a user's meals - they are only visable on
+  //  These elements will render a user's meals - they are only visable on
   //if the user is logged in
 //=========================================================================
 
@@ -700,8 +701,6 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <BreakfastComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback}/>
-          <button className="meals-submit">button</button>
-
         </div>)
     } 
     else if (this.state.showLunch) {
@@ -714,7 +713,6 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <LunchComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback} />
-          <button className="meals-submit">button</button>
         </div>)
     } else if (this.state.showDinner) {
       return(
@@ -726,7 +724,6 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <DinnerComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback} />
-          <button className="meals-submit">button</button>
         </div>)
     } else if (this.state.showSnacks) {
       return(
@@ -738,7 +735,6 @@ var MealParentComponent = React.createClass({
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
           <SnacksComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback}/>
-          <button className="meals-submit">button</button>
         </div>)
     }
   }
@@ -908,7 +904,7 @@ var MealList = React.createClass({
 //=========================================================================
 
 
-//Search bar
+//Search bar when you are logged in
 var SearchBar = React.createClass({
   getInitialState: function() {
     return {
@@ -958,9 +954,9 @@ var SearchBar = React.createClass({
     if (this.state.refresher === false) {
       return(
         <div className="search-bar">
-         <button onClick={this.showMealParent}>click this to rerender</button>
+         <MealParentComponent toggle={this.state.refresher}/>
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="search">Search</label>
+            <label htmlFor="search">Search Foods</label>
             <input 
               type="text" 
               placeholder="search term"
@@ -978,7 +974,7 @@ var SearchBar = React.createClass({
         <div className="search-bar">
         <MealParentComponent toggle={this.state.refresher}/>
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="search">Search</label>
+            <label htmlFor="search">Search Foods</label>
             <input 
               type="text" 
               placeholder="search term"
@@ -995,6 +991,86 @@ var SearchBar = React.createClass({
   }
 })
 
+// Search bar when not logged in
+var SearchBarPublic = React.createClass({
+  getInitialState: function() {
+    return {
+      searchTerm: "",
+      data: null,
+      foodList: null,
+      refresher: false,
+    }
+  },
+  foodListStateChange: function(data) {
+    //console.log('hey we made it back to searchbar ');
+    //console.log(data);
+    this.setState({foodList: data})
+  },
+  searchChange: function(e) {
+    this.setState({searchTerm: e.target.value})
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var searchTerm = this.state.searchTerm.trim();
+    console.log(searchTerm);
+    this.searchTermAjax(searchTerm);
+    this.setState({searchTerm: ""})
+  },
+  //ajax to server get request for API
+  searchTermAjax: function(item) {
+    $.ajax({
+      url: "/user/search/" + item,
+      method: "GET",
+      success: function(data) {
+        console.log(data);
+        this.setState({data: data})
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(status, err.toString());
+      }.bind(this)
+    })
+  },
+  render: function() {
+    console.log('props of user ')
+    console.log(this.props.user);
+    //this renders the search bar
+    if (this.state.refresher === false) {
+      return(
+        <div className="search-bar-public">
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="search">Search Foods</label>
+            <input 
+              type="text" 
+              placeholder="search term"
+              value={this.state.searchTerm} 
+              onChange={this.searchChange}/>
+            <input className="button" type="submit"/>
+          </form>
+          <FirstList 
+            data={this.state.data}
+            onSubmit={this.foodListStateChange}/>
+          <RenderFoodContainer data={this.state.foodList} />
+        </div>)
+    } else {
+      return(
+        <div className="search-bar">
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="search">Search Foods</label>
+            <input 
+              type="text" 
+              placeholder="search term"
+              value={this.state.searchTerm} 
+              onChange={this.searchChange}/>
+            <input className="button" type="submit"/>
+          </form>
+          <FirstList 
+            data={this.state.data}
+            onSubmit={this.foodListStateChange}/>
+          <RenderFoodContainer data={this.state.foodList} />
+        </div>)
+    }
+  }
+})
 
 //Div to render initial search results - foods based on search term
 var FirstList = React.createClass({
@@ -1058,9 +1134,6 @@ var NamesItem = React.createClass({
         <div>
         <p onClick={this.handleClick}>{this.props.children}</p>
         </div>
-{/*        <div>
-        <RenderFoodContainer data={this.state.data} />
-        </div>*/}
       </div>)
   }
 })
