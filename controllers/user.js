@@ -91,8 +91,9 @@ router.get('/user/calories', function(req, res) {
       console.log(err);
       res.send('error');
     } else {
-      console.log('it works')
+      console.log('it works in getting calories of user')
       console.log(user.calories);
+      console.log(user);
       res.send({calories: user.calories, username: user.username});
     }
   })
@@ -404,6 +405,31 @@ router.get('/user/meal/:month/:day/:year/:meal', function(req, res) {
     // res.send(user);
     // console.log(user);
     user.meals.forEach(function(meal){ //searches through user meals
+      var totalCalories = 0;
+      var counter = 0;
+      if (meal.date.getTime() == date.getTime() && counter === 0){
+        console.log('this is the meal for the user for that day ' + meal);
+        for (i = 0; i < meal.dinner.length; i++) {
+          // console.log(meal.dinner[i].calories);
+          totalCalories += parseInt(meal.dinner[i].calories)
+        }
+        for (i = 0; i < meal.lunch.length; i++) {
+          // console.log(meal.dinner[i].calories);
+          totalCalories += parseInt(meal.lunch[i].calories)
+        }
+        for (i = 0; i < meal.breakfast.length; i++) {
+          // console.log(meal.dinner[i].calories);
+          totalCalories += parseInt(meal.breakfast[i].calories)
+        }
+        for (i = 0; i < meal.snacks.length; i++) {
+          // console.log(meal.dinner[i].calories);
+          totalCalories += parseInt(meal.snacks[i].calories)
+        }
+        counter++;
+        console.log('this is total calories for the day ' + totalCalories);
+      }
+
+  
       // console.log("this is the meal " + meal);
       // console.log(typeof meal.date);
       // console.log(typeof date);
@@ -416,19 +442,19 @@ router.get('/user/meal/:month/:day/:year/:meal', function(req, res) {
       // console.log(typeof d);
       if(meal.date.getTime() == date.getTime() && mealTime === 'breakfast'){ //compares the date
         console.log('this is breakfast ' + meal.breakfast)
-        res.send(meal.breakfast);
+        res.send({meal: meal.breakfast, totalCalories: totalCalories});
         // console.log(meal);
       } else if(meal.date.getTime() == date.getTime() && mealTime === 'lunch'){ //compares the date
         console.log('this is lunch ' + meal.lunch) 
-        res.send(meal.lunch);
+        res.send({meal: meal.lunch, totalCalories: totalCalories});
         // console.log(meal);
       } else if(meal.date.getTime() == date.getTime() && mealTime === 'dinner'){ //compares the date
         console.log('this is dinner ' + meal.dinner)
-        res.send(meal.dinner); 
+        res.send({meal: meal.dinner, totalCalories: totalCalories}); 
         // console.log(meal);
       } else if (meal.date.getTime() == date.getTime() && mealTime === 'snacks'){ //compares the date
         console.log('this is snack ' + meal.snacks) 
-        res.send(meal.snacks);
+        res.send({meal: meal.snacks, totalCalories: totalCalories});
         // console.log(meal);
       }
     })

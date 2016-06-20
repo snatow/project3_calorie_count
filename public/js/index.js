@@ -16,6 +16,10 @@ var year = today.getFullYear();
   //  Main Component - this will render all of the react classes for the app
 //=========================================================================
 var CalorieApp = React.createClass({
+  // callback: function() {
+  //   var toggler = !(this.state.toggle);
+  //   this.setState({toggle: toggler});
+  // },
   //this is for user auth - it will check for the cookie in the browser
   getInitialState: function() {
     var cookieCheck;
@@ -27,7 +31,8 @@ var CalorieApp = React.createClass({
     return {
       authenticatedUser: cookieCheck,
       username: "",
-      logOutShow: true
+      logOutShow: true,
+      toggle: false
     };
   },
   //brings forward the username for user experience
@@ -53,7 +58,7 @@ var CalorieApp = React.createClass({
     if(this.state.authenticatedUser === true) {
       return (
         <div>
-          <EditUser logOutToggle={this.logOutToggle}/>
+          <EditUser logOutToggle={this.logOutToggle} callback={this.callback}/>
           <LogOutComponent 
             username={this.state.username}
             logOutShow={this.state.logOutShow}
@@ -204,6 +209,9 @@ var Calories = React.createClass({
   changeCalories: function() {
     //need to change the state of calories upon adding a food
   },
+  callback: function() {
+    console.log('calories callback')
+  },
   // test: function() {
   //   console.log('test calories works');
   // },
@@ -232,6 +240,7 @@ var Calories = React.createClass({
       return (
         <div className='calories'>
           Hi {this.state.username}, your total calories are for today are {this.state.calories}. {/*prints out the calories*/}
+          {/*<GetCalories callback={this.callback}/>*/}
         </div>)
     }
     return (
@@ -240,6 +249,21 @@ var Calories = React.createClass({
       </div>)
   }
 })
+
+// var GetCalories = React.createClass({
+//   getCaloriesAJAX: function() {
+//     // console.log('getcalories ajax')
+//     // this.props.callback(2);
+//   },
+//   render: function() {
+//     this.getCaloriesAJAX();
+//     return (
+//       <div> 
+//         your face
+//       </div>)
+//   }
+// })
+
 
 //=========================================================================
   //  These elements will handle user sign up and log in
@@ -465,8 +489,6 @@ var EditUser = React.createClass({
       calories: "",
       editForm: false
     })
-    this.props.onEdit();
-    return false;
   },
   editUserAJAX: function(username, email, calories) {
     $.ajax({
@@ -508,6 +530,7 @@ var EditUser = React.createClass({
   },
   handleSubmit: function() {
     console.log("submit");
+    // this.props.callback();
   },
   render: function() {
     if (this.state.editForm) {
@@ -595,6 +618,13 @@ var MealParentComponent = React.createClass({
     console.log(cals);
     this.setState({calories: cals})
   },
+  // changeTotalCalories: function (){
+  //   console.log('change total calories');
+  //   console.log(this.state.meal);
+   
+  //   console.log(cals);
+  //   this.setState({calories: cals})
+  // },
   callback: function() {
     console.log('meal parent callback')
     // var toggler = !(this.state.toggle);
@@ -613,12 +643,13 @@ var MealParentComponent = React.createClass({
   },
   getInitialState: function() {
     return {
-      showBreakfast: true,
+      showBreakfast: false,
       showLunch: false,
       showDinner: false,
       showSnacks: false,
       meal: [],
       calories: 0,
+      totalCalories: 0,
       toggle: false,
       refreshser: this.props.toggle,
     }
@@ -669,10 +700,12 @@ var MealParentComponent = React.createClass({
       url: '/user/user/meal/' + month + '/' + day + '/' + year + '/' + meal,
       method: "get",
       success: function(data) {
-        console.log(data[0]);
-        this.setState({meal: data})
+        console.log(data);
+        this.setState({meal: data.meal,
+                      totalCalories: data.totalCalories})
         console.log(this.state);
         this.changeInitialCalories();
+        // this.changeTotalCalories();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(status, err.toString());
@@ -700,7 +733,10 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <BreakfastComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback}/>
+          <BreakfastComponent meal={this.state.meal} 
+                          calories={this.state.calories} 
+                          callback={this.callback}
+                          totalCalories={this.state.totalCalories} />
           <SearchBar 
             user={this.props.username}
             callback={this.callback} />
@@ -715,7 +751,10 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <LunchComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback} />
+          <LunchComponent meal={this.state.meal} 
+                    calories={this.state.calories} 
+                    callback={this.callback}
+                    totalCalories={this.state.totalCalories} />
           <SearchBar 
             user={this.props.username}
             callback={this.callback} />
@@ -729,7 +768,10 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <DinnerComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback} />
+          <DinnerComponent meal={this.state.meal} 
+                        calories={this.state.calories} 
+                        callback={this.callback}
+                        totalCalories={this.state.totalCalories} />
           <SearchBar 
             user={this.props.username}
             callback={this.callback} />
@@ -743,7 +785,10 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <SnacksComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback}/>
+          <SnacksComponent meal={this.state.meal} 
+                        calories={this.state.calories} 
+                        callback={this.callback}
+                        totalCalories={this.state.totalCalories} />
           <SearchBar 
             user={this.props.username}
             callback={this.callback} />
@@ -786,7 +831,8 @@ var BreakfastComponent = React.createClass({
       <div className="meal-display">
         <p>Breakfast List</p>
         <ul>{mealList.map(renderMealList)}</ul>
-        <p>Total calories: {this.props.calories}</p>
+        <p>Total calories from breakfast: {this.props.calories}</p>
+        <p>Total calories consumed for the day: {this.props.totalCalories}</p>
       </div>)
   }
 })
@@ -813,7 +859,8 @@ var LunchComponent = React.createClass({
       <div className="meal-display">
         <p>Lunch List</p>
         <ul>{mealList.map(renderMealList)}</ul>
-        <p>Total calories: {this.props.calories}</p>
+        <p>Total calories from lunch: {this.props.calories}</p>
+        <p>Total calories consumed for the day: {this.props.totalCalories}</p>
       </div>)
   }
 })
@@ -841,7 +888,8 @@ var DinnerComponent = React.createClass({
       <div className="meal-display">
         <p>Dinner List</p>
         <ul>{mealList.map(renderMealList)}</ul>
-        <p>Total calories: {this.props.calories}</p>
+        <p>Total calories from dinner: {this.props.calories}</p>
+        <p>Total calories consumed for the day: {this.props.totalCalories}</p>
       </div>)
   }
 })
@@ -871,7 +919,8 @@ var SnacksComponent = React.createClass({
       <div className="meal-display">
         <p>Snacks List</p>
         <ul>{mealList.map(renderMealList)}</ul>
-        <p>Total calories: {this.props.calories}</p>
+        <p>Total calories from snacks: {this.props.calories}</p>
+        <p>Total calories consumed for the day: {this.props.totalCalories}</p>
       </div>)
   }
 })
@@ -904,9 +953,11 @@ var MealList = React.createClass({
   },
   render: function() {
     var foodItem = this.props.children.food;
+    console.log(this.props.children);
     return(
       <div>
-        <li onClick={this.removeFood}>Name: {this.props.children.food} calories: {this.props.children.calories}</li>
+        <li onClick={this.removeFood}> {this.props.children.qty} {this.props.children.measurement} of {this.props.children.food} is {this.props.children.calories} calories
+        </li>
       </div>)
   }
 })
