@@ -580,13 +580,41 @@ var LogOutComponent = React.createClass({
 //=========================================================================
 
 var MealParentComponent = React.createClass({
+  changeInitialCalories: function (){
+    console.log('change initial calories');
+    console.log(this.state.meal);
+    var cals = 0;
+    // this.state.meal.forEach(function(meal) {
+    //   cals += parseInt(meal.calories)
+    // });
+    // console.log(cals);
+    // this.setState({calories: cals})
+  },
+  callback: function() {
+    console.log('meal parent callback')
+    // var toggler = !(this.state.toggle);
+    // console.log(toggler)
+    // this.setState({toggle: toggler})
+    console.log(this.state)
+    if (this.state.showBreakfast == true) {
+      this.showBreakfastToggle();
+    } else if (this.state.showLunch == true){
+       this.showLunchToggle();
+    } else if (this.state.showDinner == true){
+       this.showDinnerToggle();
+    } else if (this.state.showSnacks == true){
+       this.showSnacksToggle();
+    }
+  },
   getInitialState: function() {
     return {
       showBreakfast: true,
       showLunch: false,
       showDinner: false,
       showSnacks: false,
-      meal: []
+      meal: [],
+      calories: 0,
+      toggle: false,
     }
   },
   showBreakfastToggle: function() {
@@ -637,6 +665,8 @@ var MealParentComponent = React.createClass({
       success: function(data) {
         console.log(data[0]);
         this.setState({meal: data})
+        console.log(this.state);
+        this.changeInitialCalories();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(status, err.toString());
@@ -644,18 +674,7 @@ var MealParentComponent = React.createClass({
     });
   },
   render: function() {
-    // if (!this.state.showBreakfast && !this.state.showLunch && !this.state.showDinner && !this.state.showSnacks) {
-    //   return(
-    //     <div className="meals-all">
-    //       <div className="meal-nav-bar">
-    //         <div className="meal-label" onClick={this.showBreakfastToggle}>Breakfast</div>
-    //         <div className="meal-label" onClick={this.showLunchToggle}>Lunch</div>
-    //         <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
-    //         <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
-    //       </div>
-    //     </div>)
-    // } 
-    if (this.state.showBreakfast) {
+    if (!this.state.showBreakfast && !this.state.showLunch && !this.state.showDinner && !this.state.showSnacks) {
       return(
         <div className="meals-all">
           <div className="meal-nav-bar">
@@ -664,7 +683,18 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <BreakfastComponent meal={this.state.meal} />
+        </div>)
+    } 
+    else if (this.state.showBreakfast) {
+      return(
+        <div className="meals-all">
+          <div className="meal-nav-bar">
+            <div className="meal-label" onClick={this.showBreakfastToggle}>Breakfast</div>
+            <div className="meal-label" onClick={this.showLunchToggle}>Lunch</div>
+            <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
+            <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
+          </div>
+          <BreakfastComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback}/>
           <button className="meals-submit">button</button>
         </div>)
     } 
@@ -677,7 +707,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <LunchComponent meal={this.state.meal} />
+          <LunchComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback} />
           <button className="meals-submit">button</button>
         </div>)
     } else if (this.state.showDinner) {
@@ -689,7 +719,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <DinnerComponent meal={this.state.meal} />
+          <DinnerComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback} />
           <button className="meals-submit">button</button>
         </div>)
     } else if (this.state.showSnacks) {
@@ -701,7 +731,7 @@ var MealParentComponent = React.createClass({
             <div className="meal-label" onClick={this.showDinnerToggle}>Dinner</div>
             <div className="meal-snacks" onClick={this.showSnacksToggle}>Snacks</div>
           </div>
-          <SnacksComponent meal={this.state.meal} />
+          <SnacksComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback}/>
           <button className="meals-submit">button</button>
         </div>)
     }
@@ -709,42 +739,61 @@ var MealParentComponent = React.createClass({
 })
 
 var BreakfastComponent = React.createClass({
+  callback: function() {
+    console.log('breakfast callback')
+    // var toggler = !(this.state.toggle);
+    // console.log(toggler)
+    // this.setState({toggle: toggler})
+    // console.log(this.state.toggle)
+    this.props.callback();
+  },
   getInitialState: function() {
-    return {calories: 0}
+    return {calories: 0,
+            toggle: false}
   },
   changeInitialCalories: function (){
     console.log('change initial calories');
     console.log(this.props.meal);
-    // if (this.props.meal != []) {
-    //   console.log(this.props.meal[0].calories);
-    // }
+    this.setState({calories: this.props.calories})
   },
   render: function() {
     console.log("in the breakfast component: ");
     console.log(this.props.meal);
-    this.changeInitialCalories();
+    console.log(this.state)
+    console.log(this.props.calories);
+    var self = this;
+    // this.changeInitialCalories();
     var mealList = this.props.meal
     var renderMealList = function(item) {
       return(
-        <MealList>{item}</MealList>)
+        <MealList callback={self.callback}>{item}</MealList>)
     }
     return (
       <div className="meal-display">
         <p>Breakfast List</p>
         <ul>{mealList.map(renderMealList)}</ul>
-        <p>Total calories: {this.state.calories}</p>
+        <p>Total calories: {/*{this.props.calories}*/}</p>
       </div>)
   }
 })
 
 var LunchComponent = React.createClass({
+  callback: function() {
+    console.log('lunch callback')
+    // var toggler = !(this.state.toggle);
+    // console.log(toggler)
+    // this.setState({toggle: toggler})
+    // console.log(this.state.toggle)
+    this.props.callback();
+  },
   render: function() {
     console.log("in the lunch component: ")
     console.log(this.props.meal);
+    var self = this;
     var mealList = this.props.meal
     var renderMealList = function(item) {
       return(
-        <MealList>{item}</MealList>)
+        <MealList callback={self.callback}>{item}</MealList>)
     }
     return (
       <div className="meal-display">
@@ -756,13 +805,22 @@ var LunchComponent = React.createClass({
 })
 
 var DinnerComponent = React.createClass({
+  callback: function() {
+    console.log('dinner callback')
+    // var toggler = !(this.state.toggle);
+    // console.log(toggler)
+    // this.setState({toggle: toggler})
+    // console.log(this.state.toggle)
+    this.props.callback();
+  },
   render: function() {
     console.log("in the dinner component: ")
     console.log(this.props.meal);
+    var self = this;
     var mealList = this.props.meal
     var renderMealList = function(item) {
       return(
-        <MealList>{item}</MealList>)
+        <MealList callback={self.callback}>{item}</MealList>)
     }
     return (
       <div className="meal-display">
@@ -774,6 +832,14 @@ var DinnerComponent = React.createClass({
 })
 
 var SnacksComponent = React.createClass({
+  callback: function() {
+    console.log('breakfast callback')
+    // var toggler = !(this.state.toggle);
+    // console.log(toggler)
+    // this.setState({toggle: toggler})
+    // console.log(this.state.toggle)
+    this.props.callback();
+  },
   getInitialState: function() {
     return {calories: 0}
   },
@@ -781,29 +847,42 @@ var SnacksComponent = React.createClass({
     console.log("in the snacks component: ")
     console.log(this.props.meal);
     var mealList = this.props.meal
+    var self = this;
     var renderMealList = function(item) {
       return(
-        <MealList>{item}</MealList>)
+        <MealList callback={self.callback}>{item}</MealList>)
     }
     return (
       <div className="meal-display">
         <p>Snack List</p>
         <ul>{mealList.map(renderMealList)}</ul>
-        <p>Total calories: {this.state.calories}</p>
+        <p>Total calories: </p>
       </div>)
   }
 })
 
 var MealList = React.createClass({
+  callback: function() {
+    console.log('meallist callback');
+    // var toggler = !(this.state.toggle);
+    // console.log(toggler)
+    // this.setState({toggle: toggler})
+    this.props.callback();
+  },
+  getInitialState: function() {
+    return {toggle: false}
+  },
   removeFood: function() {
     console.log("removing");
     console.log(this.props.children);
+    var self = this;
     $.ajax({
       url: '/user/removefood/' + month + '/' + day + '/' + year + '/' + meal,
       method: 'put',
       data: {food: this.props.children},
       success: function(){
         console.log('success')
+        self.callback();
       }
     })
   },

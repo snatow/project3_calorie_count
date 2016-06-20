@@ -288,6 +288,7 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
 router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
   console.log("inside put route to delete")
   console.log(req.body.food.food);
+  var counter = 0;
   var mealName = req.params.meal;
   // console.log(mealName);
   User.findById(req.user.id).then(function(user) {
@@ -300,7 +301,7 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
         meal.breakfast.forEach(function(foodItem) {
           console.log("food Item");
           console.log(foodItem);
-          if (req.body.food.food == foodItem.food) {
+          if (req.body.food.food == foodItem.food && counter === 0) {
             console.log("inside If statement")
             console.log(foodItem);
             console.log(meal.breakfast);
@@ -310,13 +311,15 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
             console.log(index);
             meal.breakfast.splice(index, 1)
             user.save();
+            counter++;
+            res.send(true);
           }
         })
       } else if (mealName == "lunch") {
         meal.lunch.forEach(function(foodItem) {
           console.log("food Item");
           console.log(foodItem);
-          if (req.body.food.food == foodItem.food) {
+          if (req.body.food.food == foodItem.food && counter === 0) {
             console.log("inside If statement")
             console.log(foodItem);
             console.log(meal.lunch);
@@ -326,13 +329,15 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
             console.log(index);
             meal.lunch.splice(index, 1)
             user.save();
+            counter++;
+            res.send(true);
           }
         })
       } else if (mealName == "dinner") {
         meal.dinner.forEach(function(foodItem) {
           console.log("food Item");
           console.log(foodItem);
-          if (req.body.food.food == foodItem.food) {
+          if (req.body.food.food == foodItem.food && counter === 0) {
             console.log("inside If statement")
             console.log(foodItem);
             console.log(meal.dinner);
@@ -342,13 +347,15 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
             console.log(index);
             meal.dinner.splice(index, 1)
             user.save();
+            counter++;
+            res.send(true);
           }
         })
       } else if (mealName == "snacks") {
         meal.snacks.forEach(function(foodItem) {
           console.log("food snacks Item");
           console.log(foodItem);
-          if (req.body.food.food == foodItem.food) {
+          if (req.body.food.food == foodItem.food && counter === 0) {
             console.log("inside If snacks statement")
             console.log(foodItem);
             console.log(meal.snacks);
@@ -358,6 +365,8 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
             console.log(index);
             meal.snacks.splice(index, 1)
             user.save();
+            counter++;
+            res.send(true);
           }
         })
       }
