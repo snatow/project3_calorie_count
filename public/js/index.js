@@ -226,7 +226,7 @@ var Calories = React.createClass({
     if (this.state.calories !== null) {
       return (
         <div className='calories'>
-          Hi {this.state.username}, you have {this.state.calories} calories remaining for the day. {/*prints out the calories*/}
+          Hi {this.state.username}, your total calories are for today are {this.state.calories}. {/*prints out the calories*/}
         </div>)
     }
     return (
@@ -584,11 +584,11 @@ var MealParentComponent = React.createClass({
     console.log('change initial calories');
     console.log(this.state.meal);
     var cals = 0;
-    // this.state.meal.forEach(function(meal) {
-    //   cals += parseInt(meal.calories)
-    // });
-    // console.log(cals);
-    // this.setState({calories: cals})
+    this.state.meal.forEach(function(meal) {
+      cals += parseInt(meal.calories)
+    });
+    console.log(cals);
+    this.setState({calories: cals})
   },
   callback: function() {
     console.log('meal parent callback')
@@ -615,6 +615,7 @@ var MealParentComponent = React.createClass({
       meal: [],
       calories: 0,
       toggle: false,
+      refreshser: this.props.toggle,
     }
   },
   showBreakfastToggle: function() {
@@ -772,7 +773,7 @@ var BreakfastComponent = React.createClass({
       <div className="meal-display">
         <p>Breakfast List</p>
         <ul>{mealList.map(renderMealList)}</ul>
-        <p>Total calories: {/*{this.props.calories}*/}</p>
+        <p>Total calories: {this.props.calories}</p>
       </div>)
   }
 })
@@ -799,7 +800,7 @@ var LunchComponent = React.createClass({
       <div className="meal-display">
         <p>Lunch List</p>
         <ul>{mealList.map(renderMealList)}</ul>
-        <p>Total calories: </p>
+        <p>Total calories: {this.props.calories}</p>
       </div>)
   }
 })
@@ -826,7 +827,7 @@ var DinnerComponent = React.createClass({
       <div className="meal-display">
         <p>Dinner List</p>
         <ul>{mealList.map(renderMealList)}</ul>
-        <p>Total calories: </p>
+        <p>Total calories: {this.props.calories}</p>
       </div>)
   }
 })
@@ -856,7 +857,7 @@ var SnacksComponent = React.createClass({
       <div className="meal-display">
         <p>Snack List</p>
         <ul>{mealList.map(renderMealList)}</ul>
-        <p>Total calories: </p>
+        <p>Total calories: {this.props.calories}</p>
       </div>)
   }
 })
@@ -963,12 +964,12 @@ var SearchBar = React.createClass({
           <FirstList 
             data={this.state.data}
             onSubmit={this.foodListStateChange}/>
-          <RenderFoodContainer data={this.state.foodList} />
+          <RenderFoodContainer data={this.state.foodList} callback={this.showMealParent} />
         </div>)
     } else {
       return(
         <div className="search-bar">
-        <MealParentComponent />
+        <MealParentComponent toggle={this.state.refresher}/>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="search">Search</label>
             <input 
@@ -981,7 +982,7 @@ var SearchBar = React.createClass({
           <FirstList 
             data={this.state.data}
             onSubmit={this.foodListStateChange}/>
-          <RenderFoodContainer data={this.state.foodList} />
+          <RenderFoodContainer data={this.state.foodList} callback={this.showMealParent} />
         </div>)
     }
   }
@@ -1059,12 +1060,16 @@ var NamesItem = React.createClass({
 
 //Div to render secondary search results - portions with calories
 var RenderFoodContainer = React.createClass({
+  callback: function() {
+    console.log('RenderFoodContainer callback');
+    this.props.callback();
+  },
   render: function() {
     // console.log(this.props.data);
     if (this.props.data) {
       console.log("inside render food container");
       console.log(this.props.data);
-      return(<div className="Food-container"><RenderFood food={this.props.data} /></div>)
+      return(<div className="Food-container"><RenderFood food={this.props.data} callback={this.callback}/></div>)
     } else {
       return(<div></div>)
     }
@@ -1072,6 +1077,10 @@ var RenderFoodContainer = React.createClass({
 })
 
 var RenderFood = React.createClass({
+  callback: function() {
+    console.log('render food callback')
+    this.props.callback();
+  },
   appendMeal: function(qty) {
     console.log("adding to current meal");
     // console.log(qty, label, calorie)
@@ -1084,7 +1093,7 @@ var RenderFood = React.createClass({
     var calories = this.props.food.calories.map(function(measurement) {
       console.log(measurement)
       return(
-        <RenderFood2 food={measurement} name={self.props.food.name} />)
+        <RenderFood2 food={measurement} name={self.props.food.name} callback={self.callback}/>)
       // return (<li 
       //           data-label={measurement.label} 
       //           onClick={self.appendMeal}
@@ -1099,7 +1108,12 @@ var RenderFood = React.createClass({
 })
 
 var RenderFood2 = React.createClass({
+  callback: function() {
+    console.log('renderfood2 callback');
+    this.props.callback();
+  },
   foodData: function() {
+    var self = this;
     console.log(this.props.food);
     $.ajax({
       url: '/user/addfood/' + month + '/' + day + '/' + year + '/' + meal,
@@ -1109,6 +1123,7 @@ var RenderFood2 = React.createClass({
       success: function(data){
         console.log('success')
         console.log(data);
+        self.callback();
       }
     })
   },
