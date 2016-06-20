@@ -55,9 +55,13 @@ var CalorieApp = React.createClass({
           {/*//this is placeholder for now - used homework example*/}
           <h3>The Best Fwoarking Calorie Counting App</h3>
           <Calories username={this.state.username} logOutToggle={this.logOutToggle}/>
-          <DatePicker />
+          <div className="activity-div">
+            <DatePicker />
+          </div>
           {/*<MealParentComponent />*/}
-          <SearchBar user={this.state.username} />
+          <div className="activity-div">
+            <SearchBar user={this.state.username} />
+          </div>
         </div>
       )
     } else {
@@ -697,6 +701,7 @@ var MealParentComponent = React.createClass({
           </div>
           <BreakfastComponent meal={this.state.meal} calories={this.state.calories} callback={this.callback}/>
           <button className="meals-submit">button</button>
+
         </div>)
     } 
     else if (this.state.showLunch) {
@@ -819,6 +824,7 @@ var DinnerComponent = React.createClass({
     console.log(this.props.meal);
     var self = this;
     var mealList = this.props.meal
+    var self = this;
     var renderMealList = function(item) {
       return(
         <MealList callback={self.callback}>{item}</MealList>)
@@ -855,7 +861,7 @@ var SnacksComponent = React.createClass({
     }
     return (
       <div className="meal-display">
-        <p>Snack List</p>
+        <p>Snacks List</p>
         <ul>{mealList.map(renderMealList)}</ul>
         <p>Total calories: {this.props.calories}</p>
       </div>)
@@ -877,6 +883,7 @@ var MealList = React.createClass({
     console.log("removing");
     console.log(this.props.children);
     var self = this;
+
     $.ajax({
       url: '/user/removefood/' + month + '/' + day + '/' + year + '/' + meal,
       method: 'put',

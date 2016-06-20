@@ -337,8 +337,8 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
         meal.dinner.forEach(function(foodItem) {
           console.log("food Item");
           console.log(foodItem);
-          if (req.body.food.food == foodItem.food && counter === 0) {
-            console.log("inside If statement")
+          if (req.body.food.food == foodItem.food) {
+            console.log("inside If statement snacks")
             console.log(foodItem);
             console.log(meal.dinner);
 
