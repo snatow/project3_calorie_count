@@ -84,7 +84,7 @@ button {
 
 .search-bar {
   display: block;
-  margin-top: 135px;
+  /*margin-top: 135px;*/
 }
 
 .search-bar-public {
@@ -114,10 +114,10 @@ button {
   overflow-x:hidden;
 }
 
-/*.meals-all {
+.meals-all {
   width: 302px;
-  margin-top: -150px;
-}*/
+  /*margin-top: -150px;*/
+}
 
 .meal-label {
   display: inline-block;
@@ -158,7 +158,7 @@ button {
 
   .search-bar {
     display: block;
-    margin-top: 180px;
+    /*margin-top: 180px;*/
   }
 
   .first-results{
@@ -182,11 +182,11 @@ button {
     overflow-y:scroll; 
     overflow-x:hidden;
   }
-/*
+
   .meals-all {
     width: 357px;
-    margin-top: -190px;
-  }*/
+/*    margin-top: -190px;*/
+  }
 
   .meal-label {
     display: inline-block;
@@ -238,7 +238,7 @@ button {
 
   .search-bar {
     display: block;
-    margin-top: 200px;
+    /*margin-top: 200px;*/
   }
 
   .first-results{
@@ -262,11 +262,11 @@ button {
     overflow-y:scroll; 
     overflow-x:hidden;
   }
-/*
+
   .meals-all {
     width: 397px;
-    margin-top: -215px;
-  }*/
+  /*  margin-top: -215px;*/
+  }
 
   .meal-label {
     display: inline-block;
@@ -331,7 +331,7 @@ button {
   }
 
   label {
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
   .calories {
@@ -346,7 +346,7 @@ button {
 
   .search-bar {
     display: block;
-    margin-top: 270px;
+    /*margin-top: 270px;*/
   }
 
   .first-results{
@@ -373,11 +373,11 @@ button {
     font-size: 1.5em;
   }
 
-/*  .meals-all {
+  .meals-all {
     width: 750px;
-    margin-top: -275px;
+/*    margin-top: -275px;*/
     font-size: 1.5em;
-  }*/
+  }
 
   .meal-label {
     display: inline-block;
@@ -442,7 +442,7 @@ button {
   }
 
   label {
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
   .calories {
@@ -457,7 +457,7 @@ button {
 
   .search-bar {
     display: block;
-    margin-top: 270px;
+    /*margin-top: 270px;*/
   }
 
   .first-results{
@@ -484,11 +484,11 @@ button {
     font-size: 1.5em;
   }
 
-/*  .meals-all {
+  .meals-all {
     width: 750px;
-    margin-top: -275px;
+/*    margin-top: -275px;*/
     font-size: 1.5em;
-  }*/
+  }
 
   .meal-label {
     display: inline-block;
@@ -569,7 +569,7 @@ button {
   }
 
   label {
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
   .edit-link {
@@ -590,7 +590,7 @@ button {
   .search-bar {
     display: block;
     position: fixed;
-    margin-top: 10px;
+    margin-top: -244px;
     margin-left: 460px;
   }
 
@@ -618,13 +618,13 @@ button {
     font-size: 1.5em;
   }
 
-/*  .meals-all {
-    position: fixed;
+  .meals-all {
+/*    position: fixed;*/
     width: 440px;
-    margin-top: -20px;
-    margin-left: -460px;
+/*    margin-top: -20px;*/
+    /*margin-left: -460px;*/
     font-size: 1.5em;
-  }*/
+  }
 
   .meal-label {
     display: inline-block;
