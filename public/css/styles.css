@@ -379,6 +379,9 @@ button {
     font-size: 1.5em;
   }
 
+  li {
+    list-style-image: url("../images/fork_button_small2.png");
+  }
   .search-label {
     font-size: 18pt;
   }
@@ -471,6 +474,10 @@ button {
 
   body {
     height: 900px;
+  }
+
+  li {
+    list-style-image: url("../images/fork_button_small2.png");
   }
 
   .log-in-link {
@@ -602,6 +609,10 @@ button {
 
   body {
     height: 750px;
+  }
+
+  li {
+    list-style-image: url("../images/fork_button_small2.png");
   }
 
   .link {
