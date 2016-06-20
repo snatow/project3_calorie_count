@@ -970,7 +970,7 @@ var SearchBar = React.createClass({
         <div className="search-bar">
          {/*<MealParentComponent toggle={this.state.refresher}/>*/}
           <form onSubmit={this.handleSubmit}>
-            <label className="search-label"htmlFor="search">Search Foods</label>
+            <label className="search-label" htmlFor="search">Search Foods</label>
             <input 
               type="text" 
               placeholder="search term"
@@ -991,7 +991,7 @@ var SearchBar = React.createClass({
         <div className="search-bar">
         {/*<MealParentComponent toggle={this.state.refresher}/>*/}
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="search">Search Foods</label>
+            <label className="search-label" htmlFor="search">Search Foods</label>
             <input 
               type="text" 
               placeholder="search term"
@@ -1058,7 +1058,7 @@ var SearchBarPublic = React.createClass({
       return(
         <div className="search-bar-public">
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="search">Search Foods</label>
+            <label className="search-label" htmlFor="search">Search Foods</label>
             <input 
               type="text" 
               placeholder="search term"
@@ -1075,7 +1075,7 @@ var SearchBarPublic = React.createClass({
       return(
         <div className="search-bar">
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="search">Search Foods</label>
+            <label className="search-label" htmlFor="search">Search Foods</label>
             <input 
               type="text" 
               placeholder="search term"
