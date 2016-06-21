@@ -700,19 +700,16 @@ var MealParentComponent = React.createClass({
   getMealsAJAX: function() {
     $.ajax({
       url: '/user/user/meal/' + month + '/' + day + '/' + year + '/' + meal,
-      method: "get",
-      success: function(data) {
+      method: "get"}).done(function(data) {
         console.log(data);
         this.setState({meal: data.meal,
                       totalCalories: data.totalCalories})
         console.log(this.state);
         this.changeInitialCalories();
         // this.changeTotalCalories();
-      }.bind(this),
-      error: function(xhr, status, err) {
+      }.bind(this)).fail(function(xhr, status, err) {
         console.error(status, err.toString());
-      }.bind(this)
-    });
+      }.bind(this))
   },
   render: function() {
     if (!this.state.showBreakfast && !this.state.showLunch && !this.state.showDinner && !this.state.showSnacks) {
@@ -1278,23 +1275,32 @@ var RenderFood2 = React.createClass({
   callback2: function() {
     this.props.callback2();
   },
+  // findUser: function() {
+  //   $.ajax({
+  //     url: '/user/user',
+  //     method: 'get',
+  //     success: function(data){
+  //       console.log('this is the user: ')
+  //       console.log(data);
+  //     }
+  //   })
+  // },
   foodData: function() {
     var self = this;
     console.log(this.props.food);
-    var food = this.props.food
-    var name = this.props.name
-    window.setTimeout(function() {$.ajax({
+
+    $.ajax({
       url: '/user/addfood/' + month + '/' + day + '/' + year + '/' + meal,
       method: 'put',
-      data: {food: food, 
-            name: name},
-      success: function(data){
+      data: {food: this.props.food, 
+            name: this.props.name}
+          }).done(function(data){
         console.log('success')
         console.log(data);
         self.callback();
         self.callback2();
       }
-    })}, 5000)
+    )
   },
   render: function() {
     return(
