@@ -948,7 +948,7 @@ var MealList = React.createClass({
     console.log("removing");
     console.log(this.props.children);
     var self = this;
-
+    //var timeOutId = 0;
     $.ajax({
       url: '/user/removefood/' + month + '/' + day + '/' + year + '/' + meal,
       method: 'put',
@@ -956,7 +956,8 @@ var MealList = React.createClass({
       success: function(){
         console.log('success')
         self.callback();
-      }
+      },
+      timeout: 1
     })
   },
   render: function() {
