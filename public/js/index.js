@@ -99,24 +99,24 @@ var DatePicker = React.createClass({
   },
   handleDateSubmit: function(e) {
     e.preventDefault()
-    // console.log('handling date');
-    // console.log(this.state);
+    console.log('handling date');
+    console.log(this.state);
     day = this.state.day
     month = this.state.month
     year = this.state.year
-    // console.log(day, year, month)
+    console.log(day, year, month)
     this.createDateAJAX();
   },
   handleMonthChange: function(e) {
-    // console.log(e.target.value)
+    console.log(e.target.value)
     this.setState({month: e.target.value})
   },
   handleDayChange: function(e) {
-    // console.log(e.target.value);
+    console.log(e.target.value);
     this.setState({day: e.target.value})
   },
   handleYearChange: function(e) {
-    // console.log(e.target.value)
+    console.log(e.target.value)
     this.setState({year: e.target.value})
   },
   createDateAJAX: function() {
@@ -212,13 +212,13 @@ var Calories = React.createClass({
     //need to change the state of calories upon adding a food
   },
   callback: function() {
-    // console.log('calories callback')
+    console.log('calories callback')
   },
   // test: function() {
   //   console.log('test calories works');
   // },
   editedCalories: function() {
-    // console.log('edited calories works');
+    console.log('edited calories works');
     this.getCaloriesAJAX();
   },
   getCaloriesAJAX: function() { //sets the calories for our user
@@ -227,13 +227,13 @@ var Calories = React.createClass({
       method: "get",
       success: function(data) {
         // console.log('success for getting calories');
-        // console.log(data);
+        console.log(data);
         this.setState({calories: data.calories,
                       username: data.username});
-        // console.log(this.state)
+        console.log(this.state)
       }.bind(this),
       error: function(xhr, status, err) {
-        // console.error(status, err.toString());
+        console.error(status, err.toString());
       }.bind(this)
     });
   },
@@ -346,13 +346,13 @@ var LoginComponent = React.createClass({
         password: password
       },
       success: function(data) {
-        // console.log('Cookie Monster');
+        console.log('Cookie Monster');
         Cookies.set('jwt_token', data.token);
-        // console.log(data);
+        console.log(data);
         this.props.onChange(data)
       }.bind(this),
       error: function(xhr, status, err) {
-        // console.error(status, err.toString());
+        console.error(status, err.toString());
       }.bind(this)
     });
   },
@@ -417,11 +417,11 @@ var SignUpComponent = React.createClass({
         calories: calories
       },
       success: function(data) {
-        // console.log('new user created');
-        // console.log(data);
+        console.log('new user created');
+        console.log(data);
       }.bind(this),
       error: function(xhr, status, err) {
-        // console.error(status, err.toString());
+        console.error(status, err.toString());
       }.bind(this)
     });
   },
@@ -474,13 +474,13 @@ var EditUser = React.createClass({
     var change = {};
     change[stateName] = e.target.value;
     this.setState(change);
-    // console.log(this.state);
+    console.log(this.state);
   },
   handleFormSubmit: function(e) {
     e.preventDefault();
     this.props.logOutToggle();
     var id = this.state.id;
-    // console.log("this is id: " + id)
+    console.log("this is id: " + id)
     var username = this.state.username.trim();
     var email = this.state.email.trim();
     var calories = this.state.calories.trim();
@@ -502,11 +502,11 @@ var EditUser = React.createClass({
         calories: calories
       },
       success: function(data) {
-        // console.log('user updated');
-        // console.log(data);
+        console.log('user updated');
+        console.log(data);
       }.bind(this),
       error: function(xhr, status, err) {
-        // console.error(status, err.toString());
+        console.error(status, err.toString());
       }.bind(this)
     });
   },
@@ -517,9 +517,9 @@ var EditUser = React.createClass({
       url: "/user/user",
       method: "GET",
       success: function(data) {
-        // console.log(data);
+        console.log(data);
         var number = data.calories.toString();
-        // console.log(number);
+        console.log(number);
         self.setState({
           id: data.id,
           username: data.username,
@@ -531,7 +531,7 @@ var EditUser = React.createClass({
     this.setState({editForm: true})
   },
   handleSubmit: function() {
-    // console.log("submit");
+    console.log("submit");
     // this.props.callback();
   },
   render: function() {
@@ -579,7 +579,7 @@ var LogOutComponent = React.createClass({
     }
   },
   logOut: function() {
-    // console.log("logout")
+    console.log("logout")
     Cookies.remove("jwt_token")
     this.setState({
       loggedIn: false
@@ -611,13 +611,13 @@ var LogOutComponent = React.createClass({
 
 var MealParentComponent = React.createClass({
   changeInitialCalories: function (){
-    // console.log('change initial calories');
-    // console.log(this.state.meal);
+    console.log('change initial calories');
+    console.log(this.state.meal);
     var cals = 0;
     this.state.meal.forEach(function(meal) {
       cals += parseInt(meal.calories)
     });
-    // console.log(cals);
+    console.log(cals);
     this.setState({calories: cals})
   },
   // changeTotalCalories: function (){
@@ -628,11 +628,11 @@ var MealParentComponent = React.createClass({
   //   this.setState({calories: cals})
   // },
   callback: function() {
-    // console.log('meal parent callback')
+    console.log('meal parent callback')
     // var toggler = !(this.state.toggle);
     // console.log(toggler)
     // this.setState({toggle: toggler})
-    // console.log(this.state)
+    console.log(this.state)
     if (this.state.showBreakfast == true) {
       this.showBreakfastToggle();
     } else if (this.state.showLunch == true){
@@ -702,15 +702,15 @@ var MealParentComponent = React.createClass({
       url: '/user/user/meal/' + month + '/' + day + '/' + year + '/' + meal,
       method: "get",
       success: function(data) {
-        // console.log(data);
+        console.log(data);
         this.setState({meal: data.meal,
                       totalCalories: data.totalCalories})
-        // console.log(this.state);
+        console.log(this.state);
         this.changeInitialCalories();
         // this.changeTotalCalories();
       }.bind(this),
       error: function(xhr, status, err) {
-        // console.error(status, err.toString());
+        console.error(status, err.toString());
       }.bind(this)
     });
   },
@@ -807,7 +807,7 @@ var MealParentComponent = React.createClass({
 
 var BreakfastComponent = React.createClass({
   callback: function() {
-    // console.log('breakfast callback')
+    console.log('breakfast callback')
     // var toggler = !(this.state.toggle);
     // console.log(toggler)
     // this.setState({toggle: toggler})
@@ -819,8 +819,8 @@ var BreakfastComponent = React.createClass({
             toggle: false}
   },
   changeInitialCalories: function (){
-    // console.log('change initial calories');
-    // console.log(this.props.meal);
+    console.log('change initial calories');
+    console.log(this.props.meal);
     this.setState({calories: this.props.calories})
   },
   render: function() {
@@ -847,7 +847,7 @@ var BreakfastComponent = React.createClass({
 
 var LunchComponent = React.createClass({
   callback: function() {
-    // console.log('lunch callback')
+    console.log('lunch callback')
     // var toggler = !(this.state.toggle);
     // console.log(toggler)
     // this.setState({toggle: toggler})
@@ -855,8 +855,8 @@ var LunchComponent = React.createClass({
     this.props.callback();
   },
   render: function() {
-    // console.log("in the lunch component: ")
-    // console.log(this.props.meal);
+    console.log("in the lunch component: ")
+    console.log(this.props.meal);
     var self = this;
     var mealList = this.props.meal
     var renderMealList = function(item) {
@@ -875,7 +875,7 @@ var LunchComponent = React.createClass({
 
 var DinnerComponent = React.createClass({
   callback: function() {
-    // console.log('dinner callback')
+    console.log('dinner callback')
     // var toggler = !(this.state.toggle);
     // console.log(toggler)
     // this.setState({toggle: toggler})
@@ -883,8 +883,8 @@ var DinnerComponent = React.createClass({
     this.props.callback();
   },
   render: function() {
-    // console.log("in the dinner component: ")
-    // console.log(this.props.meal);
+    console.log("in the dinner component: ")
+    console.log(this.props.meal);
     var self = this;
     var mealList = this.props.meal
     var self = this;
@@ -904,7 +904,7 @@ var DinnerComponent = React.createClass({
 
 var SnacksComponent = React.createClass({
   callback: function() {
-    // console.log('breakfast callback')
+    console.log('breakfast callback')
     // var toggler = !(this.state.toggle);
     // console.log(toggler)
     // this.setState({toggle: toggler})
@@ -915,8 +915,8 @@ var SnacksComponent = React.createClass({
     return {calories: 0}
   },
   render: function() {
-    // console.log("in the snacks component: ")
-    // console.log(this.props.meal);
+    console.log("in the snacks component: ")
+    console.log(this.props.meal);
     var mealList = this.props.meal
     var self = this;
     var renderMealList = function(item) {
@@ -935,7 +935,7 @@ var SnacksComponent = React.createClass({
 
 var MealList = React.createClass({
   callback: function() {
-    // console.log('meallist callback');
+    console.log('meallist callback');
     // var toggler = !(this.state.toggle);
     // console.log(toggler)
     // this.setState({toggle: toggler})
@@ -945,7 +945,7 @@ var MealList = React.createClass({
     return {toggle: false}
   },
   removeFood: function() {
-    // console.log("removing");
+    console.log("removing");
     console.log(this.props.children);
     var self = this;
 
@@ -954,14 +954,14 @@ var MealList = React.createClass({
       method: 'put',
       data: {food: this.props.children},
       success: function(){
-        // console.log('success')
+        console.log('success')
         self.callback();
       }
     })
   },
   render: function() {
     var foodItem = this.props.children.food;
-    // console.log(this.props.children);
+    console.log(this.props.children);
     return(
       <div>
         <li onClick={this.removeFood}> {this.props.children.qty} {this.props.children.measurement} of {this.props.children.food} is {this.props.children.calories} calories
@@ -987,7 +987,7 @@ var SearchBar = React.createClass({
   },
   showMealParent: function() {
     this.setState({refresher: true});
-    // console.log(this.state)
+    console.log(this.state)
   },
   foodListStateChange: function(data) {
     //console.log('hey we made it back to searchbar ');
@@ -1000,7 +1000,7 @@ var SearchBar = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     var searchTerm = this.state.searchTerm.trim();
-    // console.log(searchTerm);
+    console.log(searchTerm);
     this.searchTermAjax(searchTerm);
     this.setState({searchTerm: ""})
   },
@@ -1010,11 +1010,11 @@ var SearchBar = React.createClass({
       url: "/user/search/" + item,
       method: "GET",
       success: function(data) {
-        // console.log(data);
+        console.log(data);
         this.setState({data: data})
       }.bind(this),
       error: function(xhr, status, err) {
-        // console.error(status, err.toString());
+        console.error(status, err.toString());
       }.bind(this)
     })
   },
@@ -1089,7 +1089,7 @@ var SearchBarPublic = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     var searchTerm = this.state.searchTerm.trim();
-    // console.log(searchTerm);
+    console.log(searchTerm);
     this.searchTermAjax(searchTerm);
     this.setState({searchTerm: ""})
   },
@@ -1099,7 +1099,7 @@ var SearchBarPublic = React.createClass({
       url: "/user/search/" + item,
       method: "GET",
       success: function(data) {
-        // console.log(data);
+        console.log(data);
         this.setState({data: data})
       }.bind(this),
       error: function(xhr, status, err) {
@@ -1108,8 +1108,8 @@ var SearchBarPublic = React.createClass({
     })
   },
   render: function() {
-    // console.log('props of user ')
-    // console.log(this.props.user);
+    console.log('props of user ')
+    console.log(this.props.user);
     //this renders the search bar
     if (this.state.refresher === false) {
       return(
@@ -1152,8 +1152,8 @@ var SearchBarPublic = React.createClass({
 //Div to render initial search results - foods based on search term
 var FirstList = React.createClass({
   sendDataToSearchBar: function(data) {
-    // console.log('first list data is:')
-    // console.log(data);
+    console.log('first list data is:')
+    console.log(data);
     this.props.onSubmit(data)
   },
   render: function() {
@@ -1183,12 +1183,12 @@ var NamesItem = React.createClass({
     }
   },
   sendDataToFirstList: function(data) {
-    // console.log(data);
+    console.log(data);
     this.props.onSubmit(data)
   },
   handleClick: function(e) {
     e.preventDefault();
-    // console.log(this.props.ndbno);
+    console.log(this.props.ndbno);
     this.secondAjax(this.props.ndbno);
   },
   secondAjax: function(id) {
@@ -1196,11 +1196,11 @@ var NamesItem = React.createClass({
       url: "/user/search/item/" + id,
       method: "GET",
       success: function(data) {
-        // console.log(data);
-        // console.log(typeof data);
+        console.log(data);
+        console.log(typeof data);
         this.setState({data: data})
         this.sendDataToFirstList(data);
-        // console.log(this.state);
+        console.log(this.state);
       }.bind(this)
       //need error handling
     })
@@ -1218,7 +1218,7 @@ var NamesItem = React.createClass({
 //Div to render secondary search results - portions with calories
 var RenderFoodContainer = React.createClass({
   callback: function() {
-    // console.log('RenderFoodContainer callback');
+    console.log('RenderFoodContainer callback');
     this.props.callback();
   },
   callback2: function() {
@@ -1227,8 +1227,8 @@ var RenderFoodContainer = React.createClass({
   render: function() {
     // console.log(this.props.data);
     if (this.props.data) {
-      // console.log("inside render food container");
-      // console.log(this.props.data);
+      console.log("inside render food container");
+      console.log(this.props.data);
       return(<div className="Food-container"><RenderFood food={this.props.data} callback={this.callback} callback2={this.callback2}/></div>)
     } else {
       return(<div></div>)
@@ -1238,23 +1238,23 @@ var RenderFoodContainer = React.createClass({
 
 var RenderFood = React.createClass({
   callback: function() {
-    // console.log('render food callback')
+    console.log('render food callback')
     this.props.callback();
   },
   callback2: function() {
     this.props.callback2();
   },
   appendMeal: function(qty) {
-    // console.log("adding to current meal");
+    console.log("adding to current meal");
     // console.log(qty, label, calorie)
     //we need to invoke a callback here that goes to meal parent component
   },
   render: function() {
-    // console.log('renderfood works')
-    // console.log(this.props.food);
+    console.log('renderfood works')
+    console.log(this.props.food);
     var self = this;
     var calories = this.props.food.calories.map(function(measurement) {
-      // console.log(measurement)
+      console.log(measurement)
       return(
         <RenderFood2 food={measurement} name={self.props.food.name} callback={self.callback} callback2={self.callback2}/>)
       // return (<li 
@@ -1272,7 +1272,7 @@ var RenderFood = React.createClass({
 
 var RenderFood2 = React.createClass({
   callback: function() {
-    // console.log('renderfood2 callback');
+    console.log('renderfood2 callback');
     this.props.callback();
   },
   callback2: function() {
@@ -1280,15 +1280,15 @@ var RenderFood2 = React.createClass({
   },
   foodData: function() {
     var self = this;
-    // console.log(this.props.food);
+    console.log(this.props.food);
     $.ajax({
       url: '/user/addfood/' + month + '/' + day + '/' + year + '/' + meal,
       method: 'put',
       data: {food: this.props.food, 
             name: this.props.name},
       success: function(data){
-        // console.log('success')
-        // console.log(data);
+        console.log('success')
+        console.log(data);
         self.callback();
         self.callback2();
       }
