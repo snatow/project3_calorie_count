@@ -1,16 +1,16 @@
 //=========================================================================
 //  Global Variables
 //=========================================================================
-// var month = 'January'
-// var day = '1'
-// var year = '2016'
+var month = 'January'
+var day = '1'
+var year = '2016'
 var meal = 'breakfast'
 
-var today = new Date();
+// var today = new Date();
 //console.log("today: " + today);
-var month = today.getMonth() + 1;
-var day = today.getDate();
-var year = today.getFullYear();
+// var month = today.getMonth() + 1;
+// var day = today.getDate();
+// var year = today.getFullYear();
 
 //=========================================================================
   //  Main Component - this will render all of the react classes for the app
