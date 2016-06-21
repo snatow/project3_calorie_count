@@ -1,16 +1,16 @@
 //=========================================================================
 //  Global Variables
 //=========================================================================
-// var month = 'January'
-// var day = '1'
-// var year = '2016'
+var month = 'January'
+var day = '1'
+var year = '2016'
 var meal = 'breakfast'
 
-var today = new Date();
-//console.log("today: " + today);
-var month = today.getMonth() + 1;
-var day = today.getDate();
-var year = today.getFullYear();
+// var today = new Date();
+// //console.log("today: " + today);
+// var month = 'January';
+// var day = '1';
+// var year = 2016;
 
 //=========================================================================
   //  Main Component - this will render all of the react classes for the app
@@ -697,16 +697,30 @@ var MealParentComponent = React.createClass({
     meal = 'snacks';
     this.getMealsAJAX()
   },
+  getTotalCaloriesAJAX: function() {
+    $.ajax({
+      url: '/user/user/mealcalories/' + month + '/' + day + '/' + year + '/' + meal,
+      method: "get"}).done(function(data) {
+        console.log(data);
+        this.setState({totalCalories: data})
+        console.log(this.state);
+        // this.changeInitialCalories();
+        // this.changeTotalCalories();
+        // this.getTotalCaloriesAJAX();
+      }.bind(this)).fail(function(xhr, status, err) {
+        console.error(status, err.toString());
+      }.bind(this))
+  },
   getMealsAJAX: function() {
     $.ajax({
       url: '/user/user/meal/' + month + '/' + day + '/' + year + '/' + meal,
       method: "get"}).done(function(data) {
         console.log(data);
-        this.setState({meal: data.meal,
-                      totalCalories: data.totalCalories})
+        this.setState({meal: data})
         console.log(this.state);
         this.changeInitialCalories();
         // this.changeTotalCalories();
+        this.getTotalCaloriesAJAX();
       }.bind(this)).fail(function(xhr, status, err) {
         console.error(status, err.toString());
       }.bind(this))

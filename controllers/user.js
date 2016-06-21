@@ -180,22 +180,35 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
   // console.log(req.body);
   console.log(req.params.month)
   console.log(req.params.year)
-  var newMeal = {
+ 
+
+  var date = new Date(req.params.month + ' ' + req.params.day + ', ' + req.params.year);
+   var newMeal = {
+            date: date,
             food: req.body.name,
             calories: req.body.food.value,
             qty: req.body.food.qty,
             measurement: req.body.food.label}
 
   console.log(newMeal);
-
-  var date = new Date(req.params.month + ' ' + req.params.day + ', ' + req.params.year);
   // console.log(date);
   // var date1 = new Date("October 13, 2014"); // sample date for testing
   // date1 = Date.parse(d); // parses date to string
   // console.log(d);
   User.findById(req.user.id).then(function(user) { //finds user by ID
     // res.send(user);
-    // console.log(user);
+    console.log('add food user')
+    console.log(user);
+    if (user.meals.length == 0) {
+      user.meals.push(newMeal)
+      if (req.params.meal === 'breakfast') {
+        console.log("meal breakfast")
+        console.log(user);
+      }
+
+    }
+
+
     user.meals.forEach(function(meal){ //searches through user meals
       // console.log("this is the meal " + meal);
       // console.log(typeof meal.date);
@@ -213,17 +226,10 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
         console.log('we hit the breakfast save route')
         meal.breakfast.push(newMeal)
         console.log(meal);
-        meal.save();
+        // meal.save();
         // user.meals.breakfast.push(newMeal);
         console.log(user);
-        user.save(function(err) {
-          if (err) {
-            console.log('there is an error')
-            console.log(err)
-          } else {
-            console.log('user saved')
-          }
-        });
+        user.save()
         res.send(meal.breakfast);
         // console.log(meal);
       } else if(meal.date.getTime() == date.getTime() && mealTime === 'lunch'){ //compares the date
@@ -231,17 +237,10 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
         console.log('we hit the lunch save route')
         meal.lunch.push(newMeal)
         console.log(meal);
-        meal.save();
+        // meal.save();
         // user.meals.breakfast.push(newMeal);
         console.log(user);
-        user.save(function(err) {
-          if (err) {
-            console.log('there is an error')
-            console.log(err)
-          } else {
-            console.log('user saved')
-          }
-        });
+        user.save()
         res.send(meal.lunch);
         // console.log(meal);
       } else if(meal.date.getTime() == date.getTime() && mealTime === 'dinner'){ //compares the date
@@ -249,17 +248,10 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
         console.log('we hit the dinner save route')
         meal.dinner.push(newMeal)
         console.log(meal);
-        meal.save();
+        // meal.save();
         // user.meals.breakfast.push(newMeal);
         console.log(user);
-        user.save(function(err) {
-          if (err) {
-            console.log('there is an error')
-            console.log(err)
-          } else {
-            console.log('user saved')
-          }
-        });
+        user.save()
         res.send(meal.dinner);
         // console.log(meal);
       } else if (meal.date.getTime() == date.getTime() && mealTime === 'snacks'){ //compares the date
@@ -267,20 +259,14 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
         console.log('we hit the snacks save route')
         meal.snacks.push(newMeal)
         console.log(meal);
-        meal.save();
+        // meal.save();
         // user.meals.breakfast.push(newMeal);
         console.log(user);
-        user.save(function(err) {
-          if (err) {
-            console.log('there is an error')
-            console.log(err)
-          } else {
-            console.log('user saved')
-          }
-        });
+        user.save()
         res.send(meal.snacks);
         // console.log(meal);
       }
+
     })
   })
 })
@@ -390,11 +376,12 @@ router.get('/user/:id/meal', function(req, res) {
   User.findById(req.params.id).then(function(user) {
     // console.log(user);
     res.send(user);
+
   })
 })
 
-// Gets user and get the specific meal by the date and mealtime
-router.get('/user/meal/:month/:day/:year/:meal', function(req, res) {
+// get calories of meals
+router.get('/user/mealcalories/:month/:day/:year/:meal', function(req, res) {
   // console.log(req.body)
   var date = new Date(req.params.month + ' ' + req.params.day + ', ' + req.params.year);
   // console.log(date);
@@ -427,7 +414,27 @@ router.get('/user/meal/:month/:day/:year/:meal', function(req, res) {
         }
         counter++;
         console.log('this is total calories for the day ' + totalCalories);
+        res.send(totalCalories)
       }
+    })
+  })
+});
+
+
+
+
+// Gets user and get the specific meal by the date and mealtime
+router.get('/user/meal/:month/:day/:year/:meal', function(req, res) {
+  // console.log(req.body)
+  var date = new Date(req.params.month + ' ' + req.params.day + ', ' + req.params.year);
+  // console.log(date);
+  // var date1 = new Date("October 13, 2014"); // sample date for testing
+  // date1 = Date.parse(d); // parses date to string
+  // console.log(d);
+  User.findById(req.user.id).then(function(user) { //finds user by ID
+    // res.send(user);
+    // console.log(user);
+    user.meals.forEach(function(meal){ //searches through user meals
 
   
       // console.log("this is the meal " + meal);
@@ -442,19 +449,19 @@ router.get('/user/meal/:month/:day/:year/:meal', function(req, res) {
       // console.log(typeof d);
       if(meal.date.getTime() == date.getTime() && mealTime === 'breakfast'){ //compares the date
         console.log('this is breakfast ' + meal.breakfast)
-        res.send({meal: meal.breakfast, totalCalories: totalCalories});
+        res.send(meal.breakfast);
         // console.log(meal);
       } else if(meal.date.getTime() == date.getTime() && mealTime === 'lunch'){ //compares the date
         console.log('this is lunch ' + meal.lunch) 
-        res.send({meal: meal.lunch, totalCalories: totalCalories});
+        res.send(meal.lunch);
         // console.log(meal);
       } else if(meal.date.getTime() == date.getTime() && mealTime === 'dinner'){ //compares the date
         console.log('this is dinner ' + meal.dinner)
-        res.send({meal: meal.dinner, totalCalories: totalCalories}); 
+        res.send(meal.dinner); 
         // console.log(meal);
       } else if (meal.date.getTime() == date.getTime() && mealTime === 'snacks'){ //compares the date
         console.log('this is snack ' + meal.snacks) 
-        res.send({meal: meal.snacks, totalCalories: totalCalories});
+        res.send(meal.snacks);
         // console.log(meal);
       }
     })
