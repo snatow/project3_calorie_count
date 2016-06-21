@@ -701,6 +701,7 @@ var MealParentComponent = React.createClass({
     $.ajax({
       url: '/user/user/mealcalories/' + month + '/' + day + '/' + year + '/' + meal,
       method: "get"}).done(function(data) {
+        console.log('the data for total calories is ' + data);
         console.log(data);
         this.setState({totalCalories: data})
         console.log(this.state);

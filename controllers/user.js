@@ -382,6 +382,7 @@ router.get('/user/:id/meal', function(req, res) {
 
 // get calories of meals
 router.get('/user/mealcalories/:month/:day/:year/:meal', function(req, res) {
+  console.log('inside get calories of meal')
   // console.log(req.body)
   var date = new Date(req.params.month + ' ' + req.params.day + ', ' + req.params.year);
   // console.log(date);
@@ -414,7 +415,7 @@ router.get('/user/mealcalories/:month/:day/:year/:meal', function(req, res) {
         }
         counter++;
         console.log('this is total calories for the day ' + totalCalories);
-        res.send(totalCalories)
+        res.send(totalCalories.toString())
       }
     })
   })
