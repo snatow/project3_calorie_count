@@ -1281,18 +1281,20 @@ var RenderFood2 = React.createClass({
   foodData: function() {
     var self = this;
     console.log(this.props.food);
-    $.ajax({
+    var food = this.props.food
+    var name = this.props.name
+    window.setTimeout(function() {$.ajax({
       url: '/user/addfood/' + month + '/' + day + '/' + year + '/' + meal,
       method: 'put',
-      data: {food: this.props.food, 
-            name: this.props.name},
+      data: {food: food, 
+            name: name},
       success: function(data){
         console.log('success')
         console.log(data);
         self.callback();
         self.callback2();
       }
-    })
+    })}, 5000)
   },
   render: function() {
     return(
