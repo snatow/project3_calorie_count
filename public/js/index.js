@@ -128,6 +128,7 @@ var DatePicker = React.createClass({
         // console.log('success for getting calories');
         // console.log(data);
         // console.log(this.state)
+        console.log("set date");
       }.bind(this),
       error: function(xhr, status, err) {
         // console.error(status, err.toString());
@@ -845,7 +846,7 @@ var BreakfastComponent = React.createClass({
     var mealList = this.props.meal
     var renderMealList = function(item) {
       return(
-        <MealList callback={self.callback}>{item}</MealList>)
+        <BreakfastList callback={self.callback}>{item}</BreakfastList>)
     }
     return (
       <div className="meal-display">
@@ -873,7 +874,7 @@ var LunchComponent = React.createClass({
     var mealList = this.props.meal
     var renderMealList = function(item) {
       return(
-        <MealList callback={self.callback}>{item}</MealList>)
+        <LunchList callback={self.callback}>{item}</LunchList>)
     }
     return (
       <div className="meal-display">
@@ -902,7 +903,7 @@ var DinnerComponent = React.createClass({
     var self = this;
     var renderMealList = function(item) {
       return(
-        <MealList callback={self.callback}>{item}</MealList>)
+        <DinnerList callback={self.callback}>{item}</DinnerList>)
     }
     return (
       <div className="meal-display">
@@ -933,7 +934,7 @@ var SnacksComponent = React.createClass({
     var self = this;
     var renderMealList = function(item) {
       return(
-        <MealList callback={self.callback}>{item}</MealList>)
+        <SnackList callback={self.callback}>{item}</SnackList>)
     }
     return (
       <div className="meal-display">
@@ -945,9 +946,51 @@ var SnacksComponent = React.createClass({
   }
 })
 
-var MealList = React.createClass({
+// var MealList = React.createClass({
+//   callback: function() {
+//     console.log('meallist callback');
+//     // var toggler = !(this.state.toggle);
+//     // console.log(toggler)
+//     // this.setState({toggle: toggler})
+//     this.props.callback();
+//   },
+//   getInitialState: function() {
+//     return {toggle: false}
+//   },
+//   removeFood: function() {
+//     console.log("removing");
+//     console.log(this.props.children);
+//     var self = this;
+//     //var timeOutId = 0;
+//     $.ajax({
+//       url: '/user/removefood/' + month + '/' + day + '/' + year + '/' + meal,
+//       method: 'put',
+//       data: {food: this.props.children},
+//       success: function(){
+//         console.log('success')
+//         self.callback();
+//       },
+//       // timeout: 1
+//     })
+//   },
+//   render: function() {
+//     var foodItem = this.props.children.food;
+//     console.log(this.props.children);
+//     return(
+//       <div>
+//         <li onClick={this.removeFood}> {this.props.children.qty} {this.props.children.measurement} of {this.props.children.food} is {this.props.children.calories} calories
+//         </li>
+//       </div>)
+//   }
+// })
+
+var BreakfastList = React.createClass({
   callback: function() {
+<<<<<<< HEAD
     // console.log('meallist callback');
+=======
+    console.log('breakfast callback');
+>>>>>>> 01ad1ff8dade586f739abe8e12ab5b2a8736a09a
     // var toggler = !(this.state.toggle);
     // console.log(toggler)
     // this.setState({toggle: toggler})
@@ -960,15 +1003,54 @@ var MealList = React.createClass({
     // console.log("removing");
     // console.log(this.props.children);
     var self = this;
-
+    //var timeOutId = 0;
     $.ajax({
-      url: '/user/removefood/' + month + '/' + day + '/' + year + '/' + meal,
+      url: '/user/removefood/' + month + '/' + day + '/' + year + '/breakfast',
+      method: 'put',
+      data: {food: this.props.children},
+      success: function(){
+        console.log('success')
+        self.callback();
+      },
+      // timeout: 1
+    })
+  },
+  render: function() {
+    var foodItem = this.props.children.food;
+    console.log(this.props.children);
+    return(
+      <div>
+        <li onClick={this.removeFood}> {this.props.children.qty} {this.props.children.measurement} of {this.props.children.food} is {this.props.children.calories} calories
+        </li>
+      </div>)
+  }
+})
+
+var LunchList = React.createClass({
+  callback: function() {
+    console.log('lunch callback');
+    // var toggler = !(this.state.toggle);
+    // console.log(toggler)
+    // this.setState({toggle: toggler})
+    this.props.callback();
+  },
+  getInitialState: function() {
+    return {toggle: false}
+  },
+  removeFood: function() {
+    console.log("removing from breakfast");
+    console.log(this.props.children);
+    var self = this;
+    //var timeOutId = 0;
+    $.ajax({
+      url: '/user/removefood/' + month + '/' + day + '/' + year + '/lunch',
       method: 'put',
       data: {food: this.props.children},
       success: function(){
         // console.log('success')
         self.callback();
-      }
+      },
+      // timeout: 1
     })
   },
   render: function() {
@@ -981,6 +1063,84 @@ var MealList = React.createClass({
       </div>)
   }
 })
+
+var DinnerList = React.createClass({
+  callback: function() {
+    console.log('dinner callback');
+    // var toggler = !(this.state.toggle);
+    // console.log(toggler)
+    // this.setState({toggle: toggler})
+    this.props.callback();
+  },
+  getInitialState: function() {
+    return {toggle: false}
+  },
+  removeFood: function() {
+    console.log("removing from breakfast");
+    console.log(this.props.children);
+    var self = this;
+    //var timeOutId = 0;
+    $.ajax({
+      url: '/user/removefood/' + month + '/' + day + '/' + year + '/dinner',
+      method: 'put',
+      data: {food: this.props.children},
+      success: function(){
+        console.log('success')
+        self.callback();
+      },
+      // timeout: 1
+    })
+  },
+  render: function() {
+    var foodItem = this.props.children.food;
+    console.log(this.props.children);
+    return(
+      <div>
+        <li onClick={this.removeFood}> {this.props.children.qty} {this.props.children.measurement} of {this.props.children.food} is {this.props.children.calories} calories
+        </li>
+      </div>)
+  }
+})
+
+
+var SnackList = React.createClass({
+  callback: function() {
+    console.log('snacks callback');
+    // var toggler = !(this.state.toggle);
+    // console.log(toggler)
+    // this.setState({toggle: toggler})
+    this.props.callback();
+  },
+  getInitialState: function() {
+    return {toggle: false}
+  },
+  removeFood: function() {
+    console.log("removing from breakfast");
+    console.log(this.props.children);
+    var self = this;
+    //var timeOutId = 0;
+    $.ajax({
+      url: '/user/removefood/' + month + '/' + day + '/' + year + '/snacks',
+      method: 'put',
+      data: {food: this.props.children},
+      success: function(){
+        console.log('success')
+        self.callback();
+      },
+      // timeout: 1
+    })
+  },
+  render: function() {
+    var foodItem = this.props.children.food;
+    console.log(this.props.children);
+    return(
+      <div>
+        <li onClick={this.removeFood}> {this.props.children.qty} {this.props.children.measurement} of {this.props.children.food} is {this.props.children.calories} calories
+        </li>
+      </div>)
+  }
+})
+
 
 //=========================================================================
   //  These are the search elements

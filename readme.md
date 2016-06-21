@@ -1,7 +1,7 @@
-![alt text](https://github.com/snatow/project3_calorie_count/blob/logout-feature/public/images/fork_logo.png)
+![alt text](https://github.com/snatow/project3_calorie_count/blob/master/public/images/fork_logo_small.png)
 ## The Best Fwarking Calorie Counting App 
 
-[The Best Fwarking Calorie Counting App](add URL here)
+[The Best Fwarking Calorie Counting App](https://fork-calorie-counter-app.herokuapp.com/)
 
 ### Description
 A calorie counting web application that allows users to search through the USDA database for foods and add a food to their meals (breakfast, lunch, dinner, snacks). The application totals the calories of the food and adds them to the users total daily calorie consumption and total calories for their individual meals. 
