@@ -128,6 +128,7 @@ var DatePicker = React.createClass({
         // console.log('success for getting calories');
         // console.log(data);
         // console.log(this.state)
+        console.log("set date");
       }.bind(this),
       error: function(xhr, status, err) {
         // console.error(status, err.toString());
