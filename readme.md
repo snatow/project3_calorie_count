@@ -1,4 +1,4 @@
-![alt text](https://github.com/snatow/project3_calorie_count/blob/logout-feature/public/images/fork_logo_small.png)
+![alt text](https://github.com/snatow/project3_calorie_count/blob/master/public/images/fork_logo_small.png)
 ## The Best Fwarking Calorie Counting App 
 
 [The Best Fwarking Calorie Counting App](https://fork-calorie-counter-app.herokuapp.com/)
