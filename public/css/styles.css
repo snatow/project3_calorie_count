@@ -320,7 +320,7 @@ button {
   }
 }
 
-@media screen and (min-width: 760px) and (min-height: 700px) {
+@media screen and (min-width: 760px) and (min-height: 600px) {
 
   body {
     height: 1000px;
