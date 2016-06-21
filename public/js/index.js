@@ -233,7 +233,7 @@ var Calories = React.createClass({
         // console.log(this.state)
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(status, err.toString());
+        console.log(status, err.toString());
       }.bind(this)
     });
   },
