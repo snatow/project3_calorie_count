@@ -285,7 +285,199 @@ router.put('/addfood/:month/:day/:year/:meal', function(req, res) {
   })
 })
 
-//Removes food from a specific meal on a specific day
+// //Removes food from a specific meal on a specific day
+// router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
+//   console.log("inside put route to delete")
+//   console.log(req.body.food.food);
+//   var counter = 0;
+//   var mealName = req.params.meal;
+//   // console.log(mealName);
+//   User.findById(req.user.id).then(function(user) {
+//     console.log("searching for the user")
+//     // console.log(user);
+//     user.meals.forEach(function(meal){
+//       // console.log("meal");
+//       // console.log(meal);
+//       if (mealName == "breakfast") { 
+//         meal.breakfast.forEach(function(foodItem) {
+//           console.log("food Item");
+//           console.log(foodItem);
+//           if (req.body.food.food == foodItem.food && counter === 0) { // if the food item in the request body matches the food item looped through in breakfast on that day
+//             console.log("inside If statement")
+//             console.log(foodItem);
+//             console.log(meal.breakfast);
+
+//             var index = meal.breakfast.indexOf(foodItem);
+//             console.log("this is the index: ");
+//             console.log(index);
+//             meal.breakfast.splice(index, 1) //removes the food item that matches the one in the request
+//             user.save();
+//             counter++;
+//             res.send(true);
+//           }
+//         })
+//       } else if (mealName == "lunch") {
+//         meal.lunch.forEach(function(foodItem) {
+//           console.log("food Item");
+//           console.log(foodItem);
+//           if (req.body.food.food == foodItem.food && counter === 0) {
+//             console.log("inside If statement")
+//             console.log(foodItem);
+//             console.log(meal.lunch);
+
+//             var index = meal.lunch.indexOf(foodItem);
+//             console.log("this is the index: ");
+//             console.log(index);
+//             meal.lunch.splice(index, 1)
+//             user.save();
+//             counter++;
+//             res.send(true);
+//           }
+//         })
+//       } else if (mealName == "dinner") {
+//         meal.dinner.forEach(function(foodItem) {
+//           console.log("food Item");
+//           console.log(foodItem);
+//           if (req.body.food.food == foodItem.food) {
+//             console.log("inside If statement snacks")
+//             console.log(foodItem);
+//             console.log(meal.dinner);
+
+//             var index = meal.dinner.indexOf(foodItem);
+//             console.log("this is the index: ");
+//             console.log(index);
+//             meal.dinner.splice(index, 1)
+//             user.save();
+//             counter++;
+//             res.send(true);
+//           }
+//         })
+//       } else if (mealName == "snacks") {
+//         meal.snacks.forEach(function(foodItem) {
+//           console.log("food snacks Item");
+//           console.log(foodItem);
+//           if (req.body.food.food == foodItem.food && counter === 0) {
+//             console.log("inside If snacks statement")
+//             console.log(foodItem);
+//             console.log(meal.snacks);
+
+//             var index = meal.snacks.indexOf(foodItem);
+//             console.log("this is the index: ");
+//             console.log(index);
+//             meal.snacks.splice(index, 1)
+//             user.save();
+//             counter++;
+//             res.send(true);
+//           }
+//         })
+//       }
+//     })
+//   })
+// })
+
+//removes from breakfast
+router.put('/removefood/:month/:day/:year/breakfast', function(req, res) {
+  console.log("inside put route to delete")
+  console.log(req.body.food.food);
+  var counter = 0;
+  var mealName = req.params.meal;
+  // console.log(mealName);
+  User.findById(req.user.id).then(function(user) {
+    console.log("searching for the user")
+    // console.log(user);
+    user.meals.forEach(function(meal){
+      // console.log("meal");
+      // console.log(meal);
+      meal.breakfast.forEach(function(foodItem) {
+        console.log("food Item");
+        console.log(foodItem);
+        if (req.body.food.food == foodItem.food && counter === 0) { // if the food item in the request body matches the food item looped through in breakfast on that day
+          console.log("inside If statement")
+          console.log(foodItem);
+          console.log(meal.breakfast);
+
+          var index = meal.breakfast.indexOf(foodItem);
+          console.log("this is the index: ");
+          console.log(index);
+          meal.breakfast.splice(index, 1) //removes the food item that matches the one in the request
+          user.save();
+          counter++;
+          res.send(true);
+          }
+        })
+    })
+  })
+})
+
+//removes from lunch
+router.put('/removefood/:month/:day/:year/lunch', function(req, res) {
+  console.log("inside put route to delete")
+  console.log(req.body.food.food);
+  var counter = 0;
+  var mealName = req.params.meal;
+  // console.log(mealName);
+  User.findById(req.user.id).then(function(user) {
+    console.log("searching for the user")
+    // console.log(user);
+    user.meals.forEach(function(meal){
+      // console.log("meal");
+      // console.log(meal);
+      meal.lunch.forEach(function(foodItem) {
+        console.log("food Item");
+        console.log(foodItem);
+        if (req.body.food.food == foodItem.food && counter === 0) {
+          console.log("inside If statement")
+          console.log(foodItem);
+          console.log(meal.lunch);
+
+          var index = meal.lunch.indexOf(foodItem);
+          console.log("this is the index: ");
+          console.log(index);
+          meal.lunch.splice(index, 1)
+          user.save();
+          counter++;
+          res.send(true);
+        }
+      })
+    })
+  })
+})
+
+//removes from dinner
+router.put('/removefood/:month/:day/:year/dinner', function(req, res) {
+  console.log("inside put route to delete")
+  console.log(req.body.food.food);
+  var counter = 0;
+  var mealName = req.params.meal;
+  // console.log(mealName);
+  User.findById(req.user.id).then(function(user) {
+    console.log("searching for the user")
+    // console.log(user);
+    user.meals.forEach(function(meal){
+      // console.log("meal");
+      // console.log(meal);
+      meal.dinner.forEach(function(foodItem) {
+        console.log("food Item");
+        console.log(foodItem);
+        if (req.body.food.food == foodItem.food) {
+          console.log("inside If statement snacks")
+          console.log(foodItem);
+          console.log(meal.dinner);
+
+          var index = meal.dinner.indexOf(foodItem);
+          console.log("this is the index: ");
+          console.log(index);
+          meal.dinner.splice(index, 1)
+          user.save();
+          counter++;
+          res.send(true);
+        }
+      })
+    })
+  })
+})
+
+//removes from snacks
 router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
   console.log("inside put route to delete")
   console.log(req.body.food.food);
@@ -298,79 +490,23 @@ router.put('/removefood/:month/:day/:year/:meal', function(req, res) {
     user.meals.forEach(function(meal){
       // console.log("meal");
       // console.log(meal);
-      if (mealName == "breakfast") { 
-        meal.breakfast.forEach(function(foodItem) {
-          console.log("food Item");
+      meal.snacks.forEach(function(foodItem) {
+        console.log("food snacks Item");
+        console.log(foodItem);
+        if (req.body.food.food == foodItem.food && counter === 0) {
+          console.log("inside If snacks statement")
           console.log(foodItem);
-          if (req.body.food.food == foodItem.food && counter === 0) { // if the food item in the request body matches the food item looped through in breakfast on that day
-            console.log("inside If statement")
-            console.log(foodItem);
-            console.log(meal.breakfast);
+          console.log(meal.snacks);
 
-            var index = meal.breakfast.indexOf(foodItem);
-            console.log("this is the index: ");
-            console.log(index);
-            meal.breakfast.splice(index, 1) //removes the food item that matches the one in the request
-            user.save();
-            counter++;
-            res.send(true);
-          }
-        })
-      } else if (mealName == "lunch") {
-        meal.lunch.forEach(function(foodItem) {
-          console.log("food Item");
-          console.log(foodItem);
-          if (req.body.food.food == foodItem.food && counter === 0) {
-            console.log("inside If statement")
-            console.log(foodItem);
-            console.log(meal.lunch);
-
-            var index = meal.lunch.indexOf(foodItem);
-            console.log("this is the index: ");
-            console.log(index);
-            meal.lunch.splice(index, 1)
-            user.save();
-            counter++;
-            res.send(true);
-          }
-        })
-      } else if (mealName == "dinner") {
-        meal.dinner.forEach(function(foodItem) {
-          console.log("food Item");
-          console.log(foodItem);
-          if (req.body.food.food == foodItem.food) {
-            console.log("inside If statement snacks")
-            console.log(foodItem);
-            console.log(meal.dinner);
-
-            var index = meal.dinner.indexOf(foodItem);
-            console.log("this is the index: ");
-            console.log(index);
-            meal.dinner.splice(index, 1)
-            user.save();
-            counter++;
-            res.send(true);
-          }
-        })
-      } else if (mealName == "snacks") {
-        meal.snacks.forEach(function(foodItem) {
-          console.log("food snacks Item");
-          console.log(foodItem);
-          if (req.body.food.food == foodItem.food && counter === 0) {
-            console.log("inside If snacks statement")
-            console.log(foodItem);
-            console.log(meal.snacks);
-
-            var index = meal.snacks.indexOf(foodItem);
-            console.log("this is the index: ");
-            console.log(index);
-            meal.snacks.splice(index, 1)
-            user.save();
-            counter++;
-            res.send(true);
-          }
-        })
-      }
+          var index = meal.snacks.indexOf(foodItem);
+          console.log("this is the index: ");
+          console.log(index);
+          meal.snacks.splice(index, 1)
+          user.save();
+          counter++;
+          res.send(true);
+        }
+      })
     })
   })
 })
