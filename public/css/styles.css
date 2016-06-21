@@ -512,6 +512,10 @@ button {
     width: 200px;
   }
 
+  .search-label {
+    font-size: 18pt;
+  }
+
   label {
     font-size: 1em;
   }
@@ -623,8 +627,12 @@ button {
     margin-left: 87%;
   }
 
+  form{
+    width: 440px;
+  }
+  
   label {
-    font-size: 1.5em;
+    font-size: 18pt;
   }
 
   h4 {
@@ -692,7 +700,6 @@ button {
 
   .search-bar {
     display: block;
-    position: fixed;
     margin-top: -460px;
     margin-left: 460px;
   }
