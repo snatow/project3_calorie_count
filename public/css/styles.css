@@ -320,7 +320,7 @@ button {
   }
 }
 
-@media screen and (min-width: 760px) and (min-height: 700px) {
+@media screen and (min-width: 760px) and (min-height: 550px) {
 
   body {
     height: 1000px;
@@ -692,7 +692,7 @@ button {
 
   .search-bar {
     display: block;
-    position: fixed;
+    /*position: fixed;*/
     margin-top: -460px;
     margin-left: 460px;
   }
