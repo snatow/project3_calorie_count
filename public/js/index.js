@@ -957,7 +957,7 @@ var MealList = React.createClass({
         console.log('success')
         self.callback();
       },
-      timeout: 1
+      // timeout: 1
     })
   },
   render: function() {
